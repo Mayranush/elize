@@ -1,0 +1,35 @@
+.bg-dark {
+  background-color: #343a40;
+  background-image: none;
+}
+
+.fa-menu {
+  padding: 0;
+  width: 40px;
+  font-size: 18px;
+}
+
+.header-section {
+  background-color: #e7e7e7;
+  padding: 15px;
+  padding-left: 40px;
+  font-size: 20px;
+  color: #4d4d4d;
+}
+
+.sticky-footer {
+  position: relative !important;
+  height: 30px !important;
+  width: 100% !important;
+  line-height: 30px !important;
+  padding: 2px !important;
+}
+
+#mainNav {
+  position: fixed;
+}
+
+.navbar-nav.navbar-sidenav {
+  height: 100vh !important;
+  background-color: #4d4d4d;
+}

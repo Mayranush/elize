@@ -1,0 +1,65 @@
+.pagination-block {
+
+    width       : 330px;
+    position    : relative;
+    height      : 36px;
+    top         : 10px;
+    float       : right;
+    margin-bottom: 50px;
+
+    &.pagination-to-right {
+
+        padding-left  : 111px;
+        box-sizing    : border-box;
+    }
+
+    .each-page {
+
+        width               : 34px;
+        height              : 100%;
+        float               : left;
+        margin-left         : 3px;
+        cursor              : pointer;
+        background-color    : white;
+        color               : #797777;
+        display             : inline-block;
+        text-align          : center;
+        border              : 1px solid #c1bdbd;
+
+        &:first-child {
+
+            margin-left : 0px;
+        }
+
+        .page-text {
+            font-family : fontRegular;
+            cursor      : pointer;
+            font-size   : 20px;
+            display     : inline-block;
+            margin-top  : 6px;
+            font-weight : bold;
+        }
+
+        &:hover {
+
+            opacity : 0.8;
+        }
+    }
+
+    .page-etc {
+        background-color   : white;
+        color              : #a9a4a4;
+        cursor             : default;
+        pointer-events     : none;
+
+        .page-text {
+            cursor     : default;
+            margin-top : 9px;
+        }
+    }
+
+    .page-active {
+        background-color    : #027041;
+        color               : white;
+    }
+}

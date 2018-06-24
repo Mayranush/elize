@@ -1,0 +1,54 @@
+.general-div {
+	width: 100vw;
+    height: 100vh;
+    background-color: rgba(221, 221, 221, 0.3);
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+
+    .text-block {
+	    width: 300px;
+	    padding: 30px 30px 20px 30px;
+	    background-color: gray;
+	    opacity: 1 !important;
+	    position: relative;
+	    z-index: 10022222;
+	    color: white;
+	    border-radius: 30px;
+    }
+
+    .close-button {
+	    float: right;
+	    cursor: pointer;
+
+	    background-color: white;
+	    color: gray;
+	    padding: 5px;
+		margin: 5px;
+		font-size: 16px;
+	    text-align: center;
+	    border-radius: 8px;
+	}
+	.close-ok{
+		width: 60px;
+	}
+}
+
+.pop-pass-change{
+	background-color: gray;
+	padding: 3%;
+	border-radius: 25px;
+
+
+}
+
+.input-error{
+	border-color: red;
+}
+
+.error-for-input-popup {
+	color: white;
+	margin: 5px;
+}
