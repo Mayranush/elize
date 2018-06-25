@@ -19,7 +19,6 @@ export function errorHandler(error) {
 const updateInputValueFunc = createAction(ActionTypes.updateInputValue);
 export function updateInputValue(event, index, array) {
   return (dispatch) => {
-    console.log(event.target.value, index, array, "=============================");
     let value = event.target.value;
     array[index] = value;
     return dispatch(updateInputValueFunc(array));

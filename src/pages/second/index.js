@@ -40,14 +40,10 @@ class About extends React.Component {
     this.props.data.dataNonCompareProducts.map((item, index) => {
       let each = {};
       let productValue = this.props.data.inputValue[index];
-      let arrayOfId = productValue ? productValue.split(" ") : [];
-      let reg = /^\d+$/;
-      arrayOfId.map(val => {
-        if(reg.test(val)){
-          each = {"elizeId": val, "productId": item.id};
-          obj.push(each);
-        }
-      });
+      if(productValue){
+        each = {"elizeId": productValue, "productId": item.id};
+        obj.push(each);
+      }
     });
     this.props.attachMultiple(obj)
       .then(
@@ -67,12 +63,13 @@ class About extends React.Component {
     console.log(this.props,"props in second--------------");
     return (
       <div className="main-content" >
+        <div className="table-title"> Не Сопоставление Продукты</div>
         {this.props.data.dataNonCompare &&
         <div className="table-body">
           <table className="table">
             <thead className="thead-inverse">
             <tr>
-              <th>Elize-Id</th>
+              <th>Id-Elize</th>
               <th>Uid</th>
               <th>Название-Elize</th>
               <th>Полное Название-Elize</th>
@@ -100,27 +97,27 @@ class About extends React.Component {
                 this.props.data.dataNonCompare.map((item) => {
                   return ( <tr key={item.idElize + " " +item.id}>
                     <th scope="row">{item.idElize}</th>
-                    <td>{item.uid}</td>
-                    <td>{item.titleElize}</td>
-                    <td>{item.fullTitleElize}</td>
-                    <td>{item.brandElize}</td>
-                    <td>{item.priceElize}</td>
-                    <td>{item.price}</td>
-                    <td>{item.title}</td>
-                    <td>{item.fullTitle}</td>
-                    <td>{item.brand}</td>
-                    <td>{item.category}</td>
-                    <td>{item.subCategory}</td>
-                    <td>{item.url}</td>
-                    <td>{item.country}</td>
-                    <td>{item.article}</td>
-                    <td>{item.description}</td>
-                    <td>{item.source}</td>
-                    <td>{item.createdAt}</td>
-                    <td>{item.updatedAt}</td>
-                    <td>{item.inStock && <i className="fa fa-plus"/>}
-                      {!item.inStock && <i className="fa fa-minus"/>}</td>
-                    <td>{item.id}</td>
+                    <td title={item.uid}>{item.uid}</td>
+                    <td title={item.titleElize}>{item.titleElize}</td>
+                    <td title={item.fullTitleElize}>{item.fullTitleElize}</td>
+                    <td title={item.brandElize}>{item.brandElize}</td>
+                    <td title={item.priceElize}>{item.priceElize}</td>
+                    <td title={item.price}>{item.price}</td>
+                    <td title={item.title}>{item.title}</td>
+                    <td title={item.fullTitle}>{item.fullTitle}</td>
+                    <td title={item.brand}>{item.brand}</td>
+                    <td title={item.category}>{item.category}</td>
+                    <td title={item.subCategory}>{item.subCategory}</td>
+                    <td title={item.url}>{item.url}</td>
+                    <td title={item.country}>{item.country}</td>
+                    <td title={item.article}>{item.article}</td>
+                    <td title={item.description}>{item.description}</td>
+                    <td title={item.source}>{item.source}</td>
+                    <td title={item.createdAt}>{item.createdAt}</td>
+                    <td title={item.updatedAt}>{item.updatedAt}</td>
+                    <td>{item.inStock && <i className="fa fa-plus green"/>}
+                      {!item.inStock && <i className="fa fa-minus red"/>}</td>
+                    <td title={item.id}>{item.id}</td>
                   </tr>);
                 })
               }
@@ -133,6 +130,7 @@ class About extends React.Component {
                       currentPage={this.currentPageNonCompare} clickFunction={this.clickFunctionNonCompare}/>}
         </div>
 
+        <div className="table-title"> Не Прикрепление Продукты </div>
         {this.props.data.dataNonCompareProducts &&
         <div className="table-body">
           <table className="table">
@@ -153,51 +151,52 @@ class About extends React.Component {
               <th>Создан</th>
               <th>Обновлен</th>
               <th>В наличии</th>
-              <th></th>
+              <th>Id-Elize</th>
             </tr>
             </thead>
             <tbody>
             {
               this.props.data.dataNonCompareProducts.map((item, index) => {
                 return ( <tr key={item.id}>
-                  <th scope="row">{item.id}</th>
-                  <td>{item.title}</td>
-                  <td>{item.fullTitle}</td>
-                  <td>{item.price}</td>
-                  <td>{item.brand}</td>
-                  <td>{item.category}</td>
-                  <td>{item.subCategory}</td>
-                  <td>{item.url}</td>
-                  <td>{item.country}</td>
-                  <td>{item.article}</td>
-                  <td>{item.description}</td>
-                  <td>{item.source}</td>
-                  <td>{item.createdAt}</td>
-                  <td>{item.updatedAt}</td>
-                  <td>{item.inStock && <i className="fa fa-plus"/>}
-                    {!item.inStock && <i className="fa fa-minus"/>}</td>
-                  <td>
-                    <input onChange={e => this.props.updateInputValue(e, index, this.props.data.inputValue)} />
-                  </td>
-                </tr>);
+                    <th scope="row">{item.id}</th>
+                    <td title={item.title}>{item.title}</td>
+                    <td title={item.fullTitle}>{item.fullTitle}</td>
+                    <td title={item.price}>{item.price}</td>
+                    <td title={item.brand}>{item.brand}</td>
+                    <td title={item.category}>{item.category}</td>
+                    <td title={item.subCategory}>{item.subCategory}</td>
+                    <td title={item.url}>{item.url}</td>
+                    <td title={item.country}>{item.country}</td>
+                    <td title={item.article}>{item.article}</td>
+                    <td title={item.description}>{item.description}</td>
+                    <td title={item.source}>{item.source}</td>
+                    <td title={item.createdAt}>{item.createdAt}</td>
+                    <td title={item.updatedAt}>{item.updatedAt}</td>
+                    <td>{item.inStock && <i className="fa fa-plus green"/>}
+                      {!item.inStock && <i className="fa fa-minus red"/>}</td>
+                    <td>
+                      <input type="number" className="form-control" onChange={e => this.props.updateInputValue(e, index, this.props.data.inputValue)} />
+                    </td>
+                 </tr>);
               })
             }
             </tbody>
           </table>
         </div>}
-        <button onClick={() => this.attachMultiple()}>Прикрепить все</button>
+        <button type="button" className="btn btn-success" onClick={() => this.attachMultiple()}>Прикрепить все</button>
         <div className="pagination-block">
           {this.props.data.countNonCompareProducts > 1 &&
           <Pagination maxPageCount={Math.ceil(this.props.data.countNonCompareProducts / this.itemsInEachPageNonCompareProducts)}
                       currentPage={this.currentPageNonCompareProducts} clickFunction={this.clickFunctionNonCompareProducts}/>}
         </div>
 
+        <div className="table-title">Прикрепление Продукты</div>
         {this.props.data.dataCompare &&
         <div className="table-body">
           <table className="table">
             <thead className="thead-inverse">
             <tr>
-              <th>Elize-Id</th>
+              <th>Id-Elize</th>
               <th>Uid</th>
               <th>Название-Elize</th>
               <th>Полное Название-Elize</th>
@@ -226,29 +225,29 @@ class About extends React.Component {
               this.props.data.dataCompare.map((item) => {
                 return ( <tr key={item.idElize + " " +item.id}>
                   <th scope="row">{item.idElize}</th>
-                  <td>{item.uid}</td>
-                  <td>{item.titleElize}</td>
-                  <td>{item.fullTitleElize}</td>
-                  <td>{item.brandElize}</td>
-                  <td>{item.priceElize}</td>
-                  <td>{item.price}</td>
-                  <td>{item.title}</td>
-                  <td>{item.fullTitle}</td>
-                  <td>{item.brand}</td>
-                  <td>{item.category}</td>
-                  <td>{item.subCategory}</td>
-                  <td>{item.url}</td>
-                  <td>{item.country}</td>
-                  <td>{item.article}</td>
-                  <td>{item.description}</td>
-                  <td>{item.source}</td>
-                  <td>{item.createdAt}</td>
-                  <td>{item.updatedAt}</td>
-                  <td>{item.inStock && <i className="fa fa-plus"/>}
-                    {!item.inStock && <i className="fa fa-minus"/>}</td>
-                  <td>{item.id}</td>
+                  <td title={item.uid}>{item.uid}</td>
+                  <td title={item.titleElize}>{item.titleElize}</td>
+                  <td title={item.fullTitleElize}>{item.fullTitleElize}</td>
+                  <td title={item.brandElize}>{item.brandElize}</td>
+                  <td title={item.priceElize}>{item.priceElize}</td>
+                  <td title={item.price}>{item.price}</td>
+                  <td title={item.title}>{item.title}</td>
+                  <td title={item.fullTitle}>{item.fullTitle}</td>
+                  <td title={item.brand}>{item.brand}</td>
+                  <td title={item.category}>{item.category}</td>
+                  <td title={item.subCategory}>{item.subCategory}</td>
+                  <td title={item.url}>{item.url}</td>
+                  <td title={item.country}>{item.country}</td>
+                  <td title={item.article}>{item.article}</td>
+                  <td title={item.description}>{item.description}</td>
+                  <td title={item.source}>{item.source}</td>
+                  <td title={item.createdAt}>{item.createdAt}</td>
+                  <td title={item.updatedAt}>{item.updatedAt}</td>
+                  <td>{item.inStock && <i className="fa fa-plus green"/>}
+                    {!item.inStock && <i className="fa fa-minus red"/>}</td>
+                  <td title={item.id}>{item.id}</td>
                   <td>
-                    {item.idElize && item.id && <button>
+                    {item.idElize && item.id && <button className="btn">
                       Открепить
                     </button>}
                   </td>

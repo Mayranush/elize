@@ -13,5 +13,10 @@ thead:last-child {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  min-width: 50px;
   max-width: 300px;
+  height: 65px;
+  line-height: 65px;
+  padding: 0;
+  text-align: center;
 }
