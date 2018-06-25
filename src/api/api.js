@@ -12,27 +12,27 @@ api = axios.create({
 });
 
 const compareElize = (page, limit) => {
-  return api.get("/parser/compare-elize?page=" + page +  "&limit=" + limit);
+  return api.get("/compare-elize?page=" + page +  "&limit=" + limit);
 };
 
 const attachedElize = (page, limit) => {
-  return api.get("/parser/attached-elize?page=" + page +  "&limit=" + limit);
+  return api.get("/attached-elize?page=" + page +  "&limit=" + limit);
 };
 
 const attachSingle = (obj) => {
-  return api.post("/parser/attach-single", obj);
+  return api.post("/attach-single", obj);
 };
 
 const nonCompareElize = (page, limit) => {
-  return api.get("/parser/non-compare-elize?page=" + page +  "&limit=" + limit);
+  return api.get("/non-compare-elize?page=" + page +  "&limit=" + limit);
 };
 
 const nonCompareProducts = (page, limit) => {
-  return api.get("/parser/non-compare-products?page=" + page +  "&limit=" + limit);
+  return api.get("/non-compare-products?page=" + page +  "&limit=" + limit);
 };
 
 const attachMultiple = (obj) => {
-  return api.post("/parser/attach-multiple", obj);
+  return api.post("/attach-multiple", obj);
 };
 
 
