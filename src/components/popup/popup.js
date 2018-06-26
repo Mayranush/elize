@@ -41,7 +41,6 @@ export class Popup extends React.Component {
   };
 
   render() {
-    console.log(this.props,"props in popup")
     return (
       <div className="general-div">
         {this.props.popup.text && <div className="text-block">

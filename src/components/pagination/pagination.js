@@ -150,7 +150,6 @@ export class Pagination extends React.Component {
   };
 
   render() {
-    console.log(this.props,"pagination");
     return (
       <div className={this.floatToRight ? "pagination-block pagination-to-right" : "pagination-block"}>
         {

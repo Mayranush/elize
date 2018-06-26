@@ -8,6 +8,8 @@ const defaultState = {
   dataAttached: [],
   countAttached: 0,
   loaderAttached: false,
+  itemsInEachPageCompare: 5,
+  itemsInEachPageAttached: 5
 };
 
 export default handleActions({
@@ -22,5 +24,11 @@ export default handleActions({
     ...state,
     loaderAttached: false,
     dataAttached: payload.data,
-    countAttached: payload.count})
+    countAttached: payload.count}),
+  [ActionTypes.changeItemsInEachPageCompareFunc]: (state, {payload}) => ({
+    ...state,
+    itemsInEachPageCompare: payload}),
+  [ActionTypes.changeItemsInEachPageAttachedFunc]: (state, {payload}) => ({
+    ...state,
+    itemsInEachPageAttached: payload})
 }, defaultState);

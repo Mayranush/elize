@@ -5,6 +5,12 @@ import {tools} from "../resources";
 import api from "../api/api";
 import {changePopup} from "./popupActions";
 
+
+export const changeItemsInEachPageNonCompareFunc = createAction(ActionTypes.changeItemsInEachPageNonCompareFunc);
+export const changeItemsInEachPageNonCompareProductsFunc = createAction(ActionTypes.changeItemsInEachPageNonCompareProductsFunc);
+export const changeItemsInEachPageCompareFuncSec = createAction(ActionTypes.changeItemsInEachPageCompareFuncSec);
+
+
 export function errorHandler(error) {
   return (dispatch) => {
     // if (error.length != 0) {
@@ -37,16 +43,48 @@ export function getDataResponseNonCompareElize(result) {
     let data = [];
     let item = [];
     for(let i=0;i<result.data.length;i++) {
-      item.uid = result.data[i].uid;
-      item.idElize = result.data[i].id;
-      item.titleElize = result.data[i].title;
-      item.fullTitleElize = result.data[i].fullTitle;
-      item.brandElize = result.data[i].brand;
-      item.priceElize = result.data[i].price;
-      data.push(item);
-      item = [];
-        //TODO change to destructuring------id: idElize, title: titleElize, fullTitle: fullTitleElize, brand: brandElize, price: priceElize, foundProducts, url, article} of result.data[i]) {
-      console.log(data, "===========================")
+      if(result.data[i].foundProducts.length > 0) {
+
+        for(let j=0;j<result.data[i].foundProducts.length;j++) {
+          item.uid = result.data[i].uid;
+          item.idElize = result.data[i].id;
+          item.titleElize = result.data[i].title;
+          item.fullTitleElize = result.data[i].fullTitle;
+          item.brandElize = result.data[i].brand;
+          item.priceElize = result.data[i].price;
+          item.urlElize = result.data[i].url;
+          item.url = result.data[i].foundProducts[j].url;
+          item.id = result.data[i].foundProducts[j].id;
+          item.price = result.data[i].foundProducts[j].price;
+          item.title = result.data[i].foundProducts[j].title;
+          item.fullTitle = result.data[i].foundProducts[j].fullTitle;
+          item.brand = result.data[i].foundProducts[j].brand;
+          item.category = result.data[i].foundProducts[j].category;
+          item.subCategory = result.data[i].foundProducts[j].subCategory;
+          item.url = result.data[i].foundProducts[j].url;
+          item.country = result.data[i].foundProducts[j].country;
+          item.article = result.data[i].foundProducts[j].article;
+          item.description = result.data[i].foundProducts[j].description;
+          item.source = result.data[i].foundProducts[j].source;
+          item.createdAt = result.data[i].foundProducts[j].createdAt;
+          item.updatedAt = result.data[i].foundProducts[j].updatedAt;
+          item.inStock = result.data[i].foundProducts[j].inStock;
+          data.push(item);
+          item = [];
+        }
+      } else {
+        item.uid = result.data[i].uid;
+        item.idElize = result.data[i].id;
+        item.titleElize = result.data[i].title;
+        item.fullTitleElize = result.data[i].fullTitle;
+        item.brandElize = result.data[i].brand;
+        item.priceElize = result.data[i].price;
+        item.urlElize = result.data[i].url;
+        data.push(item);
+        item = [];
+      }
+      //TODO change to destructuring------id: idElize, title: titleElize, fullTitle: fullTitleElize, brand: brandElize, price: priceElize, foundProducts, url, article} of result.data[i]) {
+
     }
     let count = result.count;
     return dispatch(responseResponseNonCompareElize({data, count}));
@@ -89,10 +127,10 @@ export function getDataResponseNonCompareProducts(result) {
       item.createdAt = result.data[i].createdAt;
       item.updatedAt = result.data[i].updatedAt;
       item.inStock = result.data[i].inStock;
+      item.url = result.data[i].url;
       data.push(item);
       item = [];
       //TODO change to destructuring------id: idElize, title: titleElize, fullTitle: fullTitleElize, brand: brandElize, price: priceElize, foundProducts, url, article} of result.data[i]) {
-      console.log(data, "===========================")
     }
     let count = result.count;
     return dispatch(responseResponseNonCompareProducts({data, count}));
@@ -109,13 +147,14 @@ export function nonCompareProducts(page, limit) {
 }
 
 
-/////////////////////////////////////////////     compare elize            ////////////////////////////////////////////////
+/////////////////////////////////////////////     attached elize            ////////////////////////////////////////////////
 
-const getDataRequestCompareElizeSecond = createAction(ActionTypes.getDataRequestCompareElizeSecond);
 
-const responseResponseCompareElizeSecond = createAction(ActionTypes.getDataResponseCompareElizeSecond);
+const getDataRequestAttachedElizeSec = createAction(ActionTypes.getDataRequestAttachedElizeSec);
 
-export function getDataResponseCompareElizeSecond(result) {
+const responseResponseAttachedElize = createAction(ActionTypes.getDataResponseAttachedElizeSec);
+
+export function getDataResponseAttachedElizeSec(result) {
   return (dispatch) => {
 
     let data = [];
@@ -132,6 +171,8 @@ export function getDataResponseCompareElizeSecond(result) {
           item.fullTitleElize = result.data[i].fullTitle;
           item.brandElize = result.data[i].brand;
           item.priceElize = result.data[i].price;
+          item.urlElize = result.data[i].url;
+          item.url = result.data[i].foundProducts[j].url;
           item.id = result.data[i].foundProducts[j].id;
           item.price = result.data[i].foundProducts[j].price;
           item.title = result.data[i].foundProducts[j].title;
@@ -157,31 +198,28 @@ export function getDataResponseCompareElizeSecond(result) {
         item.fullTitleElize = result.data[i].fullTitle;
         item.brandElize = result.data[i].brand;
         item.priceElize = result.data[i].price;
+        item.urlElize = result.data[i].url;
         data.push(item);
         item = [];
       }
       //TODO change to destructuring------id: idElize, title: titleElize, fullTitle: fullTitleElize, brand: brandElize, price: priceElize, foundProducts, url, article} of result.data[i]) {
 
-      console.log(data, "===========================")
     }
     let count = result.count;
-    return dispatch(responseResponseCompareElizeSecond({data, count}));
+    return dispatch(responseResponseAttachedElize({data, count}));
   };
 }
 
-export function compareElize(page, limit) {
+export function attachedElize(page, limit) {
   return (dispatch) => {
-    dispatch(getDataRequestCompareElizeSecond());
-    return api.compareElize(page, limit)
-      .then(data => dispatch(getDataResponseCompareElizeSecond(data.data)))
+    dispatch(getDataRequestAttachedElizeSec());
+    return api.attachedElize(page, limit)
+      .then(data => dispatch(getDataResponseAttachedElizeSec(data.data)))
       .catch(error => dispatch(errorHandler(error)));
   };
 }
-
-
 // /////////////////////////////////////////////     attache multiple            ////////////////////////////////////////////////
 export function getDataResponseAttachMultiple(result) {
-
 }
 
 export function attachMultiple(obj) {

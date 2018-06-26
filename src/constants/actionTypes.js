@@ -2,6 +2,12 @@ const ActionTypes = {
 	cleanData: "CLEAN_DATA",
 	changePopup: "CHANGE_POPUP",
   updateInputValue: "UPDATE_INPUT_VALUE",
+  changeItemsInEachPageCompareFunc: "CHANGE_ITEMS_IN_EACH_PAGE_COMPARE_FUNC",
+  changeItemsInEachPageAttachedFunc: "CHANGE_ITEMS_IN_EACH_PAGE_ATTACHED_FUNC",
+
+  changeItemsInEachPageNonCompareFunc: "CHANGE_ITEMS_IN_EACH_PAGE_NON_COMPARE_FUNC",
+  changeItemsInEachPageNonCompareProductsFunc: "CHANGE_ITEMS_IN_EACH_PAGE_NON_COMPARE_PRODUCTS_FUNC",
+  changeItemsInEachPageCompareFuncSec: "CHANGE_ITEMS_IN_EACH_PAGE_COMPARE_FUNC_SEC",
 
   getDataRequestCompareElize: "GET_DATA_REQUEST_COMPARE_ELIZE",
   getDataResponseCompareElize: "GET_DATA_RESPONSE_COMPARE_ELIZE",
@@ -17,8 +23,8 @@ const ActionTypes = {
   getDataRequestNonCompareProducts: "GET_DATA_REQUEST_NON_COMPARE_PRODUCTS",
   getDataResponseNonCompareProducts: "GET_DATA_RESPONSE_NON_COMPARE_PRODUCTSS",
 
-  getDataRequestCompareElizeSecond: "GET_DATA_REQUEST_COMPARE_ELIZE_SECOND",
-  getDataResponseCompareElizeSecond: "GET_DATA_RESPONSE_COMPARE_ELIZE_SECOND",
+  getDataRequestAttachedElizeSec: "GET_DATA_REQUEST_ATTACHED_ELIZE_SEC",
+  getDataResponseAttachedElizeSec: "GET_DATA_RESPONSE_ATTACHED_ELIZE_SEC",
 
   getDataRequestChangePassword: "GET_DATA_REQUEST_CHANGE_PASSWORD",
   getDataResponseChangePassword: "GET_DATA_RESPONSE_CHANGE_PASSWORD",

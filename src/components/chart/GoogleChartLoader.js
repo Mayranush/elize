@@ -17,7 +17,6 @@ const GoogleChartLoader = {
                     window.google.charts.setOnLoadCallback(() => {
                         this.isLoaded = true;
                         this.isLoading = false;
-                        console.log("here in chart loading")
                         resolve();
                     });
                 }

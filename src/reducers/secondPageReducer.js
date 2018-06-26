@@ -8,10 +8,13 @@ const defaultState = {
   dataNonCompareProducts: [],
   countNonCompareProducts: 0,
   loaderNonCompareProducts: false,
-  dataCompare: [],
-  countCompare: 0,
-  loaderCompare: false,
-  inputValue: []
+  dataAttached: [],
+  countAttached: 0,
+  loaderAttached: false,
+  inputValue: [],
+  itemsInEachPageNonCompare: 5,
+  itemsInEachPageNonCompareProducts: 5,
+  itemsInEachPageCompare: 5,
 };
 
 export default handleActions({
@@ -27,13 +30,22 @@ export default handleActions({
     loaderNonCompareProducts: false,
     dataNonCompareProducts: payload.data,
     countNonCompareProducts: payload.count}),
-  [ActionTypes.getDataRequestCompareElizeSecond]: (state) => ({...state, loaderCompare: true}),
-  [ActionTypes.getDataResponseCompareElizeSecond]: (state, {payload}) => ({
+  [ActionTypes.getDataRequestAttachedElizeSec]: (state) => ({...state, loaderAttached: true}),
+  [ActionTypes.getDataResponseAttachedElizeSec]: (state, {payload}) => ({
     ...state,
-    loaderCompare: false,
-    dataCompare: payload.data,
-    countCompare: payload.count}),
+    loaderAttached: false,
+    dataAttached: payload.data,
+    countAttached: payload.count}),
   [ActionTypes.updateInputValue]: (state, {payload}) => ({
     ...state,
-    inputValue: payload})
+    inputValue: payload}),
+  [ActionTypes.changeItemsInEachPageNonCompareFunc]: (state, {payload}) => ({
+    ...state,
+    itemsInEachPageNonCompare: payload}),
+  [ActionTypes.changeItemsInEachPageNonCompareProductsFunc]: (state, {payload}) => ({
+    ...state,
+    itemsInEachPageNonCompareProducts: payload}),
+  [ActionTypes.changeItemsInEachPageCompareFuncSec]: (state, {payload}) => ({
+    ...state,
+    itemsInEachPageCompare: payload})
 }, defaultState);

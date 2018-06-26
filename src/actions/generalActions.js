@@ -6,6 +6,8 @@ import api from "../api/api";
 import {changePopup} from "./popupActions"; 
 
 export const cleanData = createAction(ActionTypes.cleanData);
+export const changeItemsInEachPageCompareFunc = createAction(ActionTypes.changeItemsInEachPageCompareFunc);
+export const changeItemsInEachPageAttachedFunc = createAction(ActionTypes.changeItemsInEachPageAttachedFunc);
 
 
 export function errorHandler(error) {
@@ -42,6 +44,8 @@ export function getDataResponseCompareElize(result) {
           item.fullTitleElize = result.data[i].fullTitle;
           item.brandElize = result.data[i].brand;
           item.priceElize = result.data[i].price;
+          item.urlElize = result.data[i].url;
+          item.url = result.data[i].foundProducts[j].url;
           item.id = result.data[i].foundProducts[j].id;
           item.price = result.data[i].foundProducts[j].price;
           item.title = result.data[i].foundProducts[j].title;
@@ -67,12 +71,11 @@ export function getDataResponseCompareElize(result) {
         item.fullTitleElize = result.data[i].fullTitle;
         item.brandElize = result.data[i].brand;
         item.priceElize = result.data[i].price;
+        item.urlElize = result.data[i].url;
         data.push(item);
         item = [];
       }
       //TODO change to destructuring------id: idElize, title: titleElize, fullTitle: fullTitleElize, brand: brandElize, price: priceElize, foundProducts, url, article} of result.data[i]) {
-
-      console.log(data, "===========================")
     }
     let count = result.count;
     return dispatch(responseResponseCompareElize({data, count}));
@@ -111,6 +114,8 @@ export function getDataResponseAttachedElize(result) {
           item.fullTitleElize = result.data[i].fullTitle;
           item.brandElize = result.data[i].brand;
           item.priceElize = result.data[i].price;
+          item.urlElize = result.data[i].url;
+          item.url = result.data[i].foundProducts[j].url;
           item.id = result.data[i].foundProducts[j].id;
           item.price = result.data[i].foundProducts[j].price;
           item.title = result.data[i].foundProducts[j].title;
@@ -136,12 +141,12 @@ export function getDataResponseAttachedElize(result) {
         item.fullTitleElize = result.data[i].fullTitle;
         item.brandElize = result.data[i].brand;
         item.priceElize = result.data[i].price;
+        item.urlElize = result.data[i].url;
         data.push(item);
         item = [];
       }
       //TODO change to destructuring------id: idElize, title: titleElize, fullTitle: fullTitleElize, brand: brandElize, price: priceElize, foundProducts, url, article} of result.data[i]) {
 
-      console.log(data, "===========================")
     }
     let count = result.count;
     return dispatch(responseResponseAttachedElize({data, count}));

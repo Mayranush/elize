@@ -10,47 +10,60 @@ class Home extends React.Component {
     this.currentPageCompare = {
       value: 1
     };
-    this.itemsInEachPageCompare = 5;
     this.currentPageAttached = {
       value: 1
     };
-    this.itemsInEachPageAttached = 5;
   }
 
   clickFunctionCompare = (item) => {
-    this.props.compareElize(item - 1, this.itemsInEachPageCompare);
+    this.props.compareElize(item - 1, this.props.data.itemsInEachPageCompare);
   };
 
   clickFunctionAttached = (item) => {
-    this.props.compareElize(item - 1, this.itemsInEachPageAttached);
+    this.props.compareElize(item - 1, this.props.data.itemsInEachPageAttached);
   };
 
   attachSingle = (idElize, id) => {
     this.props.attachSingle(idElize, id)
-      .then(
-        this.props.compareElize(this.currentPageCompare.value - 1, this.itemsInEachPageCompare),
-        this.props.attachedElize(this.currentPageAttached.value - 1, this.itemsInEachPageAttached)
-      );
+      .then( () => {
+          this.props.compareElize(this.currentPageCompare.value - 1, this.props.data.itemsInEachPageCompare);
+          this.props.attachedElize(this.currentPageAttached.value - 1, this.props.data.itemsInEachPageAttached)
+      });
+  };
+
+  changeItemsInEachPageCompare = (e) => {
+    this.props.changeItemsInEachPageCompareFunc(e.target.value);
+    if(e.target.value > 0) {
+      this.props.compareElize(this.currentPageCompare.value - 1, e.target.value);
+    }
+  };
+
+  changeItemsInEachPageAttached =(e) => {
+    this.props.changeItemsInEachPageAttachedFunc(e.target.value);
+    if(e.target.value > 0) {
+      this.props.attachedElize(this.currentPageAttached.value - 1, e.target.value);
+    }
   };
 
   componentDidMount() {
-    this.props.compareElize(this.currentPageCompare.value - 1, this.itemsInEachPageCompare);
-    this.props.attachedElize(this.currentPageAttached.value - 1, this.itemsInEachPageAttached);
+    this.props.compareElize(this.currentPageCompare.value - 1, this.props.data.itemsInEachPageCompare);
+    this.props.attachedElize(this.currentPageAttached.value - 1, this.props.data.itemsInEachPageAttached);
   }
 
   render() {
-    console.log(this.props,"props in home-------------");
     return (
       <div className="main-content" >
         <div className="table-title">Сопоставление Продукты</div>
+        <div className="form-group pull-right">
+          <input type="text" className="search form-control" placeholder="What you looking for?" />
+        </div>
         {this.props.data.dataCompare &&
         <div className="table-body">
           <table className="table">
             <thead className="thead-inverse">
             <tr>
+              <th></th>
               <th>Id-Elize</th>
-              <th>Uid</th>
-              <th>Название-Elize</th>
               <th>Полное Название-Elize</th>
               <th>Бренд-Elize</th>
               <th>Цена-Elize</th>
@@ -69,21 +82,27 @@ class Home extends React.Component {
               <th>Обновлен</th>
               <th>В наличии</th>
               <th>Id</th>
-              <th></th>
             </tr>
             </thead>
             <tbody>
             {
               this.props.data.dataCompare.map((item) => {
                 return ( <tr key={item.idElize + " " +item.id}>
+                  <td>
+                    {item.idElize && item.id && <button type="button" className="btn btn-success" onClick={() => this.attachSingle({elizeId: item.idElize, productId: item.id})}>
+                      Прикрепить
+                    </button>}
+                  </td>
                   <th scope="row">{item.idElize}</th>
-                  <td title={item.uid}>{item.uid}</td>
-                  <td title={item.titleElize}>{item.titleElize}</td>
-                  <td title={item.fullTitleElize}>{item.fullTitleElize}</td>
+                  <td title={item.fullTitleElize}>
+                    <a href={item.urlElize} target="_blank">{item.fullTitleElize}</a>
+                  </td>
                   <td title={item.brandElize}>{item.brandElize}</td>
                   <td title={item.priceElize}>{item.priceElize}</td>
                   <td title={item.price}>{item.price}</td>
-                  <td title={item.title}>{item.title}</td>
+                  <td title={item.title}>
+                    <a href={item.url} target="_blank">{item.title}</a>
+                  </td>
                   <td title={item.fullTitle}>{item.fullTitle}</td>
                   <td title={item.brand}>{item.brand}</td>
                   <td title={item.category}>{item.category}</td>
@@ -98,20 +117,23 @@ class Home extends React.Component {
                   <td>{item.inStock && <i className="fa fa-plus green"/>}
                     {!item.inStock && <i className="fa fa-minus red"/>}</td>
                   <td title={item.id}>{item.id}</td>
-                  <td>
-                    {item.idElize && item.id && <button type="button" className="btn btn-success" onClick={() => this.attachSingle({elizeId: item.idElize, productId: item.id})}>
-                      Прикрепить
-                    </button>}
-                  </td>
                 </tr>);
               })
             }
             </tbody>
           </table>
         </div>}
+        <div>
+          <span className="desc-text">Сопоставление Продукты: </span>
+          <span className="count-val">{this.props.data.countCompare}</span>
+        </div>
+        <div>
+          <span className="desc-text">Б каждом странице: </span>
+          <input type="number" className="count-input" defaultValue={this.props.data.itemsInEachPageCompare} onChange={this.changeItemsInEachPageCompare}/>
+        </div>
         <div className="pagination-block">
           {this.props.data.countCompare > 1 &&
-          <Pagination maxPageCount={Math.ceil(this.props.data.countCompare / this.itemsInEachPageCompare)}
+          <Pagination maxPageCount={Math.ceil(this.props.data.countCompare / this.props.data.itemsInEachPageCompare)}
                       currentPage={this.currentPageCompare} clickFunction={this.clickFunctionCompare}/>}
         </div>
         <div className="table-title">Прикрепление Продукты</div>
@@ -120,9 +142,8 @@ class Home extends React.Component {
           <table className="table">
             <thead className="thead-inverse">
             <tr>
+              <th></th>
               <th>Id-Elize</th>
-              <th>Uid</th>
-              <th>Название-Elize</th>
               <th>Полное Название-Elize</th>
               <th>Бренд-Elize</th>
               <th>Цена-Elize</th>
@@ -141,21 +162,27 @@ class Home extends React.Component {
               <th>Обновлен</th>
               <th>В наличии</th>
               <th>Id</th>
-              <th></th>
             </tr>
             </thead>
             <tbody>
             {
               this.props.data.dataAttached.map((item) => {
                 return ( <tr key={item.idElize + " " +item.id}>
+                  <td>
+                    {item.idElize && item.id && <button className="btn">
+                      Открепить
+                    </button>}
+                  </td>
                   <th scope="row">{item.idElize}</th>
-                  <td title={item.uid}>{item.uid}</td>
-                  <td title={item.titleElize}>{item.titleElize}</td>
-                  <td title={item.fullTitleElize}>{item.fullTitleElize}</td>
+                  <td title={item.fullTitleElize}>
+                    <a href={item.urlElize} target="_blank">{item.fullTitleElize}</a>
+                  </td>
                   <td title={item.brandElize}>{item.brandElize}</td>
                   <td title={item.priceElize}>{item.priceElize}</td>
                   <td title={item.price}>{item.price}</td>
-                  <td title={item.title}>{item.title}</td>
+                  <td title={item.title}>
+                    <a href={item.url} target="_blank">{item.title}</a>
+                  </td>
                   <td title={item.fullTitle}>{item.fullTitle}</td>
                   <td title={item.brand}>{item.brand}</td>
                   <td title={item.category}>{item.category}</td>
@@ -170,20 +197,23 @@ class Home extends React.Component {
                   <td>{item.inStock && <i className="fa fa-plus green"/>}
                     {!item.inStock && <i className="fa fa-minus red"/>}</td>
                   <td title={item.id}>{item.id}</td>
-                  <td>
-                    {item.idElize && item.id && <button className="btn">
-                      Открепить
-                    </button>}
-                  </td>
                 </tr>);
               })
             }
             </tbody>
           </table>
         </div>}
+        <div>
+          <span className="desc-text">Прикрепление Продукты: </span>
+          <span className="count-val">{this.props.data.countAttached}</span>
+        </div>
+        <div>
+          <span className="desc-text">Б каждом странице: </span>
+          <input type="number" className="count-input" defaultValue={this.props.data.itemsInEachPageAttached} onChange={this.changeItemsInEachPageAttached}/>
+        </div>
         <div className="pagination-block">
           {this.props.data.countAttached > 1 &&
-          <Pagination maxPageCount={Math.ceil(this.props.data.countAttached / this.itemsInEachPageAttached)}
+          <Pagination maxPageCount={Math.ceil(this.props.data.countAttached / this.props.data.itemsInEachPageAttached)}
                       currentPage={this.currentPageAttached} clickFunction={this.clickFunctionAttached}/>}
         </div>
       </div>
