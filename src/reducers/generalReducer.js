@@ -9,7 +9,9 @@ const defaultState = {
   countAttached: 0,
   loaderAttached: false,
   itemsInEachPageCompare: 5,
-  itemsInEachPageAttached: 5
+  itemsInEachPageAttached: 5,
+  searchText: "",
+  searchTextAttached: ""
 };
 
 export default handleActions({
@@ -30,5 +32,12 @@ export default handleActions({
     itemsInEachPageCompare: payload}),
   [ActionTypes.changeItemsInEachPageAttachedFunc]: (state, {payload}) => ({
     ...state,
-    itemsInEachPageAttached: payload})
+    itemsInEachPageAttached: payload}),
+  [ActionTypes.changeSearchText]: (state, {payload}) => ({
+    ...state,
+    searchText: payload}),
+  [ActionTypes.changeSearchTextAttached]: (state, {payload}) => ({
+    ...state,
+    searchTextAttached: payload})
 }, defaultState);
+

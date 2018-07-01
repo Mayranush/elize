@@ -23,6 +23,10 @@ const attachSingle = (obj) => {
   return api.post("/attach-single", obj);
 };
 
+const detachSingle = (obj) => {
+  return api.post("/detach-single", obj);
+};
+
 const nonCompareElize = (page, limit) => {
   return api.get("/non-compare-elize?page=" + page +  "&limit=" + limit);
 };
@@ -35,8 +39,7 @@ const attachMultiple = (obj) => {
   return api.post("/attach-multiple", obj);
 };
 
-
 export default {
-  compareElize, attachedElize, attachSingle, nonCompareElize, nonCompareProducts, attachMultiple
+  compareElize, attachedElize, attachSingle, detachSingle, nonCompareElize, nonCompareProducts, attachMultiple
 };
 

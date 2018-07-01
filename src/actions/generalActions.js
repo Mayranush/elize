@@ -9,6 +9,8 @@ export const cleanData = createAction(ActionTypes.cleanData);
 export const changeItemsInEachPageCompareFunc = createAction(ActionTypes.changeItemsInEachPageCompareFunc);
 export const changeItemsInEachPageAttachedFunc = createAction(ActionTypes.changeItemsInEachPageAttachedFunc);
 
+export const changeSearchText = createAction(ActionTypes.changeSearchText);
+export const changeSearchTextAttached = createAction(ActionTypes.changeSearchTextAttached);
 
 export function errorHandler(error) {
   return (dispatch) => {
@@ -175,3 +177,18 @@ export function attachSingle(obj) {
       .catch(error => dispatch(errorHandler(error)));
   };
 }
+
+/////////////////////////////////////////////     detached single            ////////////////////////////////////////////////
+export function getDataResponseDetachSingle(result) {
+
+}
+
+export function detachSingle(obj) {
+  return (dispatch) => {
+    return api.detachSingle(obj)
+      .then(data => dispatch(getDataResponseDetachSingle(data.data)))
+      .catch(error => dispatch(errorHandler(error)));
+  };
+}
+
+

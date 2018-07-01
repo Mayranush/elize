@@ -5,6 +5,13 @@ const ActionTypes = {
   changeItemsInEachPageCompareFunc: "CHANGE_ITEMS_IN_EACH_PAGE_COMPARE_FUNC",
   changeItemsInEachPageAttachedFunc: "CHANGE_ITEMS_IN_EACH_PAGE_ATTACHED_FUNC",
 
+  changeSearchText: "CHANGE_SEARCH_TEXT",
+  changeSearchTextAttached: "CHANGE_SEARCH_TEXT_ATTACHED",
+
+  changeSearchTextNonCompare: "CHANGE_SEARCH_TEXT_NON_COMPARE",
+  changeSearchTextNonCompareProducts: "CHANGE_SEARCH_TEXT_NON_COMPARE_PRODUCTS",
+  changeSearchTextAttachedSec: "CHANGE_SEARCH_TEXT_ATTACHED_SEC",
+
   changeItemsInEachPageNonCompareFunc: "CHANGE_ITEMS_IN_EACH_PAGE_NON_COMPARE_FUNC",
   changeItemsInEachPageNonCompareProductsFunc: "CHANGE_ITEMS_IN_EACH_PAGE_NON_COMPARE_PRODUCTS_FUNC",
   changeItemsInEachPageCompareFuncSec: "CHANGE_ITEMS_IN_EACH_PAGE_COMPARE_FUNC_SEC",

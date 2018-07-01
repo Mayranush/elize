@@ -387,6 +387,7 @@ footer{
 }
 
 .table-title {
+  clear: both;
   font-size: 20px;
   position: relative;
   margin: 70px 0 20px 0;
@@ -427,4 +428,32 @@ footer{
   height: 36px;
   padding: 10px;
   color: green;
+}
+
+.search-container {
+  width: 200px;
+  height: 50px;
+  margin: 20px 10px;
+  float: left;
+
+  input {
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+  }
+}
+
+.first-tbl {
+  width: 60%;
+  float: left;
+}
+
+.second-tbl {
+  width: 40%;
+  float: left;
+}
+
+.export-to-excel {
+  margin: 25px;
+  float: left;
 }

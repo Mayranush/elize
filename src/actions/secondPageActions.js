@@ -10,6 +10,9 @@ export const changeItemsInEachPageNonCompareFunc = createAction(ActionTypes.chan
 export const changeItemsInEachPageNonCompareProductsFunc = createAction(ActionTypes.changeItemsInEachPageNonCompareProductsFunc);
 export const changeItemsInEachPageCompareFuncSec = createAction(ActionTypes.changeItemsInEachPageCompareFuncSec);
 
+export const changeSearchTextNonCompare = createAction(ActionTypes.changeSearchTextNonCompare);
+export const changeSearchTextNonCompareProducts = createAction(ActionTypes.changeSearchTextNonCompareProducts);
+export const changeSearchTextAttachedSec = createAction(ActionTypes.changeSearchTextAttachedSec);
 
 export function errorHandler(error) {
   return (dispatch) => {
@@ -226,6 +229,19 @@ export function attachMultiple(obj) {
   return (dispatch) => {
     return api.attachMultiple(obj)
       .then(data => dispatch(getDataResponseAttachMultiple(data.data)))
+      .catch(error => dispatch(errorHandler(error)));
+  };
+}
+
+/////////////////////////////////////////////     detached single            ////////////////////////////////////////////////
+export function getDataResponseDetachSingle(result) {
+
+}
+
+export function detachSingle(obj) {
+  return (dispatch) => {
+    return api.detachSingle(obj)
+      .then(data => dispatch(getDataResponseDetachSingle(data.data)))
       .catch(error => dispatch(errorHandler(error)));
   };
 }

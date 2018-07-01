@@ -15,6 +15,9 @@ const defaultState = {
   itemsInEachPageNonCompare: 5,
   itemsInEachPageNonCompareProducts: 5,
   itemsInEachPageCompare: 5,
+  searchTextNonCompare: "",
+  searchTextNonCompareProducts: "",
+  searchTextAttached: ""
 };
 
 export default handleActions({
@@ -47,5 +50,14 @@ export default handleActions({
     itemsInEachPageNonCompareProducts: payload}),
   [ActionTypes.changeItemsInEachPageCompareFuncSec]: (state, {payload}) => ({
     ...state,
-    itemsInEachPageCompare: payload})
+    itemsInEachPageCompare: payload}),
+  [ActionTypes.changeSearchTextNonCompare]: (state, {payload}) => ({
+    ...state,
+    searchTextNonCompare: payload}),
+  [ActionTypes.changeSearchTextNonCompareProducts]: (state, {payload}) => ({
+    ...state,
+    searchTextNonCompareProducts: payload}),
+  [ActionTypes.changeSearchTextAttachedSec]: (state, {payload}) => ({
+    ...state,
+    searchTextAttached: payload})
 }, defaultState);
