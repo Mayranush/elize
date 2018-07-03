@@ -191,4 +191,18 @@ export function detachSingle(obj) {
   };
 }
 
+/////////////////////////////////////////////     detached single            ////////////////////////////////////////////////
+export function getDataResponseUnsimilar(result) {
+
+}
+
+export function unsimilar(obj) {
+  return (dispatch) => {
+    return api.unsimilar(obj)
+      .then(data => dispatch(getDataResponseUnsimilar(data.data)))
+      .catch(error => dispatch(errorHandler(error)));
+  };
+}
+
+
 

@@ -40,6 +40,14 @@ class Home extends React.Component {
       });
   };
 
+  unsimilar = (idElize, id) => {
+    this.props.unsimilar(idElize, id)
+      .then( () => {
+        this.props.compareElize(this.currentPageCompare.value - 1, this.props.data.itemsInEachPageCompare);
+        this.props.attachedElize(this.currentPageAttached.value - 1, this.props.data.itemsInEachPageAttached)
+      });
+  };
+
   changeItemsInEachPageCompare = (e) => {
     this.props.changeItemsInEachPageCompareFunc(e.target.value);
     if(e.target.value > 0) {
@@ -84,6 +92,7 @@ class Home extends React.Component {
               <th>Название-Elize</th>
               <th>Название</th>
               <th>Бренд</th>
+              <th></th>
             </tr>
             </thead>
             <tbody>
@@ -103,6 +112,11 @@ class Home extends React.Component {
                     <a href={item.url} target="_blank">{item.fullTitle}</a>
                   </td>
                   <td title={item.brand}>{item.brand}</td>
+                  <td>
+                    {item.idElize && item.id && <button className="btn" onClick={() => this.unsimilar({elizeId: item.idElize, productId: item.id})}>
+                      Открепить
+                    </button>}
+                  </td>
                 </tr>);
               })
             }

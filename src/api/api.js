@@ -39,7 +39,11 @@ const attachMultiple = (obj) => {
   return api.post("/attach-multiple", obj);
 };
 
+const unsimilar = (obj) => {
+  return api.post("/unsimilar", obj);
+};
+
 export default {
-  compareElize, attachedElize, attachSingle, detachSingle, nonCompareElize, nonCompareProducts, attachMultiple
+  compareElize, attachedElize, attachSingle, detachSingle, nonCompareElize, nonCompareProducts, attachMultiple, unsimilar
 };
 

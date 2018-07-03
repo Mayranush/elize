@@ -99,7 +99,7 @@ class About extends React.Component {
   render() {
     return (
       <div className="main-content" >
-        <div className="first-tbl">
+        <div className="half">
           <div className="table-title"> Не Сопоставление Продукты - Elize</div>
           <div className="search-container">
             <input type="text" placeholder="Search by name" value={this.props.data.searchTextNonCompare} onChange={(e) => this.props.changeSearchTextNonCompare(e.target.value)}/>
@@ -113,8 +113,6 @@ class About extends React.Component {
                 <th>Id-Elize</th>
                 <th>Название-Elize</th>
                 <th>Бренд-Elize</th>
-                <th>Название</th>
-                <th>Бренд</th>
               </tr>
               </thead>
               <tbody>
@@ -126,10 +124,6 @@ class About extends React.Component {
                         <a href={item.urlElize} target="_blank">{item.fullTitleElize}</a>
                       </td>
                       <td title={item.brandElize}>{item.brandElize}</td>
-                      <td title={item.fullTitle}>
-                        <a href={item.url} target="_blank">{item.fullTitle}</a>
-                      </td>
-                      <td title={item.brand}>{item.brand}</td>
                     </tr>);
                   })
                 }
@@ -151,8 +145,8 @@ class About extends React.Component {
           </div>
         </div>
 
-        <div className="second-tbl">
-          <div className="table-title"> Не Прикрепление Продукты - Конкурент</div>
+        <div className="half">
+          <div className="table-title"> Не Сопоставление Продукты - Конкурент</div>
           <div className="search-container">
             <input type="text" placeholder="Search by name" value={this.props.data.searchTextNonCompareProducts} onChange={(e) => this.props.changeSearchTextNonCompareProducts(e.target.value)}/>
           </div>
