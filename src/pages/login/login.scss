@@ -1,0 +1,59 @@
+.fa-login {
+  padding: 10px;
+  font-size: 24px;
+  width: 174px;
+  text-decoration: none;
+  margin: 5px 2px;
+  border-radius: 25px;
+  text-align: center;
+}
+
+.fa:hover {
+  opacity: 0.7;
+}
+
+.fb-login {
+  background: #3B5998;
+  color: white;
+}
+.fb-login:hover {
+  color: white;
+}
+.tw-login:hover {
+  color: white;
+}
+.tw-login {
+  background: #55ACEE;
+  color: white;
+}
+
+
+.card {
+  width: 40%;
+  margin: 0 auto;
+}
+
+.bg-dark-login {
+
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.input-error {
+  border: 1px solid red;
+}
+
+.error-for-input {
+  color: red;
+  margin-left: 10px;
+}
+
+.disabled-button {
+  background-color: gray;
+  user-select: none;
+}
+
+
+
+
+

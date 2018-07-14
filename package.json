@@ -24,7 +24,7 @@
     "extract-text-webpack-plugin": "2.0.0-beta.5",
     "file-loader": "^0.8.5",
     "html-webpack-plugin": "2.26.0",
-    "node-sass": "3.12.2",
+    "node-sass": "^4.9.1",
     "sass-loader": "3.2.3",
     "style-loader": "^0.13.1",
     "url-loader": "^0.6.2",

@@ -6,7 +6,7 @@ const Header = (...props) => {
   return(
     <nav className="navbar" role="navigation">
       <Link to="">Home</Link>
-      <Link to="second">Second</Link>
+      <Link to="non-compared">Non Compared</Link>
     </nav>
   )  
 };

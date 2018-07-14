@@ -17,7 +17,25 @@ const defaultState = {
   itemsInEachPageCompare: 5,
   searchTextNonCompare: "",
   searchTextNonCompareProducts: "",
-  searchTextAttached: ""
+  searchTextAttached: "",
+  filterBrandConElize: "",
+  filterTitleConElize: "",
+  filterBrandConElizeData: [],
+  filterTitleConElizeData: [],
+  compareSortByConElize: "id",
+  compareSortDirConElize: "asc",
+  filterBrandCon: "",
+  filterTitleCon: "",
+  filterBrandConData: [],
+  filterTitleConData: [],
+  compareSortByCon: "id",
+  compareSortDirCon: "asc",
+  filterBrandConAttached: "",
+  filterTitleConAttached: "",
+  filterBrandConAttachedData: [],
+  filterTitleConAttachedData: [],
+  compareSortByConAttached: "id",
+  compareSortDirConAttached: "asc",
 };
 
 export default handleActions({
@@ -26,38 +44,124 @@ export default handleActions({
     ...state,
     loaderNonCompare: false,
     dataNonCompare: payload.data,
-    countNonCompare: payload.count}),
+    countNonCompare: payload.count
+  }),
   [ActionTypes.getDataRequestNonCompareProducts]: (state) => ({...state, loaderNonCompareProducts: true}),
   [ActionTypes.getDataResponseNonCompareProducts]: (state, {payload}) => ({
     ...state,
     loaderNonCompareProducts: false,
     dataNonCompareProducts: payload.data,
-    countNonCompareProducts: payload.count}),
+    countNonCompareProducts: payload.count
+  }),
   [ActionTypes.getDataRequestAttachedElizeSec]: (state) => ({...state, loaderAttached: true}),
   [ActionTypes.getDataResponseAttachedElizeSec]: (state, {payload}) => ({
     ...state,
     loaderAttached: false,
     dataAttached: payload.data,
-    countAttached: payload.count}),
+    countAttached: payload.count
+  }),
   [ActionTypes.updateInputValue]: (state, {payload}) => ({
     ...state,
-    inputValue: payload}),
+    inputValue: payload
+  }),
   [ActionTypes.changeItemsInEachPageNonCompareFunc]: (state, {payload}) => ({
     ...state,
-    itemsInEachPageNonCompare: payload}),
+    itemsInEachPageNonCompare: payload
+  }),
   [ActionTypes.changeItemsInEachPageNonCompareProductsFunc]: (state, {payload}) => ({
     ...state,
-    itemsInEachPageNonCompareProducts: payload}),
+    itemsInEachPageNonCompareProducts: payload
+  }),
   [ActionTypes.changeItemsInEachPageCompareFuncSec]: (state, {payload}) => ({
     ...state,
-    itemsInEachPageCompare: payload}),
+    itemsInEachPageCompare: payload
+  }),
   [ActionTypes.changeSearchTextNonCompare]: (state, {payload}) => ({
     ...state,
-    searchTextNonCompare: payload}),
+    searchTextNonCompare: payload
+  }),
   [ActionTypes.changeSearchTextNonCompareProducts]: (state, {payload}) => ({
     ...state,
-    searchTextNonCompareProducts: payload}),
+    searchTextNonCompareProducts: payload
+  }),
   [ActionTypes.changeSearchTextAttachedSec]: (state, {payload}) => ({
     ...state,
-    searchTextAttached: payload})
+    searchTextAttached: payload
+  }),
+
+  [ActionTypes.getDataRequestBrandElizeConElize]: (state) => ({...state, loaderAttached: true}),
+  [ActionTypes.getDataResponseBrandElizeConElize]: (state, {payload}) => ({
+    ...state,
+    loaderAttached: false,
+    filterBrandConElizeData: payload.data
+  }),
+  [ActionTypes.getDataRequestBrandElizeTitleConElize]: (state) => ({...state, loaderAttached: true}),
+  [ActionTypes.getDataResponseBrandElizeTitleConElize]: (state, {payload}) => ({
+    ...state,
+    loaderAttached: false,
+    filterTitleConElizeData: payload.data
+  }),
+  [ActionTypes.filterByBrandConElize]: (state, {payload}) => ({
+    ...state,
+    filterBrandConElize: payload
+  }),
+  [ActionTypes.filterByTitleConElize]: (state, {payload}) => ({
+    ...state,
+    filterTitleConElize: payload
+  }),
+
+
+  [ActionTypes.getDataRequestBrandElizeCon]: (state) => ({...state, loaderAttached: true}),
+  [ActionTypes.getDataResponseBrandElizeCon]: (state, {payload}) => ({
+    ...state,
+    loaderAttached: false,
+    filterBrandConData: payload.data
+  }),
+  [ActionTypes.getDataRequestBrandElizeTitleCon]: (state) => ({...state, loaderAttached: true}),
+  [ActionTypes.getDataResponseBrandElizeTitleCon]: (state, {payload}) => ({
+    ...state,
+    loaderAttached: false,
+    filterTitleConData: payload.data
+  }),
+  [ActionTypes.filterByBrandCon]: (state, {payload}) => ({
+    ...state,
+    filterBrandCon: payload
+  }),
+  [ActionTypes.filterByTitleCon]: (state, {payload}) => ({
+    ...state,
+    filterTitleCon: payload
+  }),
+  [ActionTypes.getDataRequestBrandElizeConAttached]: (state) => ({...state, loaderAttached: true}),
+  [ActionTypes.getDataResponseBrandElizeConAttached]: (state, {payload}) => ({
+    ...state,
+    loaderAttached: false,
+    filterBrandConAttachedData: payload.data
+  }),
+  [ActionTypes.getDataRequestBrandElizeTitleConAttached]: (state) => ({...state, loaderAttached: true}),
+  [ActionTypes.getDataResponseBrandElizeTitleConAttached]: (state, {payload}) => ({
+    ...state,
+    loaderAttached: false,
+    filterTitleConAttachedData: payload.data
+  }),
+  [ActionTypes.filterByBrandConAttached]: (state, {payload}) => ({
+    ...state,
+    filterBrandConAttached: payload
+  }),
+  [ActionTypes.filterByTitleConAttached]: (state, {payload}) => ({
+    ...state,
+    filterTitleConAttached: payload
+  }),
+  [ActionTypes.changeSortDirConElize]: (state, {payload}) => ({
+    ...state,
+    compareSortDirConElize: payload
+  }),
+  [ActionTypes.changeSortDirCon]: (state, {payload}) => ({
+    ...state,
+    compareSortDirCon: payload
+  }),
+  [ActionTypes.changeSortDirConAttached]: (state, {payload}) => ({
+    ...state,
+    compareSortDirConAttached: payload
+  }),
+
 }, defaultState);

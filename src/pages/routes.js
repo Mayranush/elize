@@ -11,24 +11,24 @@ function loadRoute(cb) {
   return (module) => cb(null, module.default);
 }
 
-// function requireAuth (nextState, replace, callback) {
-//   const token = store.getState().general.token || window.sessionStorage.getItem("token");
-//   if (!token) replace('/login');
-//   return callback()
-// }
+function requireAuth (nextState, replace, callback) {
+  const token = store.getState().general.token || window.sessionStorage.getItem("token");
+  if (!token) replace('/login');
+  return callback()
+}
 
-// function dontRequireAuth(nextState, replace, callback) {
-//   const token = store.getState().general.token || window.sessionStorage.getItem("token");
-//   if (token) replace('/dashboard');
-//   return callback()
-// }
+function dontRequireAuth(nextState, replace, callback) {
+  const token = store.getState().general.token || window.sessionStorage.getItem("token");
+  if (token) replace('/');
+  return callback()
+}
 
 const routes = {
   component: MainLayout,
   childRoutes: [
     {
       path: '/',
-      //onEnter: dontRequireAuth,
+      onEnter: requireAuth,
       getComponent(location, cb) {
         System.import('pages/home')
           .then(loadRoute(cb))
@@ -36,10 +36,19 @@ const routes = {
       }
     },
     {
-      path: 'second',
-      //onEnter: dontRequireAuth,
+      path: 'non-compared',
+      onEnter: requireAuth,
       getComponent(location, cb) {
         System.import('pages/second')
+          .then(loadRoute(cb))
+          .catch(errorLoading);
+      }
+    },
+    {
+      path: 'login',
+      onEnter: dontRequireAuth,
+      getComponent(location, cb) {
+        System.import('pages/login')
           .then(loadRoute(cb))
           .catch(errorLoading);
       }

@@ -8,7 +8,6 @@ thead:last-child {
   margin-bottom: 15px;
 }
 
-
 .table th, .table td {
   white-space: nowrap;
   overflow: hidden;
@@ -19,4 +18,21 @@ thead:last-child {
   line-height: 65px;
   padding: 0;
   text-align: center;
+}
+
+.dropdown-filter {
+  background-color: white;
+  width: 200px;
+  height: 110px;
+  overflow: scroll;
+}
+
+.search-button {
+  float: left;
+  margin-top: 25px;
+  //margin-left: -56px;
+}
+
+.thead-inverse th{
+  cursor: pointer;
 }

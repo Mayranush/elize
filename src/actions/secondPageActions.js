@@ -14,6 +14,19 @@ export const changeSearchTextNonCompare = createAction(ActionTypes.changeSearchT
 export const changeSearchTextNonCompareProducts = createAction(ActionTypes.changeSearchTextNonCompareProducts);
 export const changeSearchTextAttachedSec = createAction(ActionTypes.changeSearchTextAttachedSec);
 
+export const filterByBrandConElize = createAction(ActionTypes.filterByBrandConElize);
+export const filterByTitleConElize = createAction(ActionTypes.filterByTitleConElize);
+
+export const filterByBrandCon = createAction(ActionTypes.filterByBrandCon);
+export const filterByTitleCon = createAction(ActionTypes.filterByTitleCon);
+
+export const filterByBrandConAttached = createAction(ActionTypes.filterByBrandConAttached);
+export const filterByTitleConAttached = createAction(ActionTypes.filterByTitleConAttached);
+
+export const changeSortDirConElize = createAction(ActionTypes.changeSortDirConElize);
+export const changeSortDirCon = createAction(ActionTypes.changeSortDirCon);
+export const changeSortDirConAttached = createAction(ActionTypes.changeSortDirConAttached);
+
 export function errorHandler(error) {
   return (dispatch) => {
     // if (error.length != 0) {
@@ -26,6 +39,7 @@ export function errorHandler(error) {
 }
 
 const updateInputValueFunc = createAction(ActionTypes.updateInputValue);
+
 export function updateInputValue(event, index, array) {
   return (dispatch) => {
     let value = event.target.value;
@@ -45,10 +59,10 @@ export function getDataResponseNonCompareElize(result) {
 
     let data = [];
     let item = [];
-    for(let i=0;i<result.data.length;i++) {
-      if(result.data[i].foundProducts.length > 0) {
+    for (let i = 0; i < result.data.length; i++) {
+      if (result.data[i].foundProducts.length > 0) {
 
-        for(let j=0;j<result.data[i].foundProducts.length;j++) {
+        for (let j = 0; j < result.data[i].foundProducts.length; j++) {
           item.uid = result.data[i].uid;
           item.idElize = result.data[i].id;
           item.titleElize = result.data[i].title;
@@ -94,10 +108,10 @@ export function getDataResponseNonCompareElize(result) {
   };
 }
 
-export function nonCompareElize(page, limit) {
+export function nonCompareElize(brand, title, sortBy, sortDir, page, limit) {
   return (dispatch) => {
     dispatch(getDataRequestNonCompareElize());
-    return api.nonCompareElize(page, limit)
+    return api.nonCompareElize(brand, title, sortBy, sortDir, page, limit)
       .then(data => dispatch(getDataResponseNonCompareElize(data.data)))
       .catch(error => dispatch(errorHandler(error)));
   };
@@ -114,7 +128,7 @@ export function getDataResponseNonCompareProducts(result) {
 
     let data = [];
     let item = [];
-    for(let i=0;i<result.data.length;i++) {
+    for (let i = 0; i < result.data.length; i++) {
       item.id = result.data[i].id;
       item.price = result.data[i].price;
       item.title = result.data[i].title;
@@ -140,10 +154,10 @@ export function getDataResponseNonCompareProducts(result) {
   };
 }
 
-export function nonCompareProducts(page, limit) {
+export function nonCompareProducts(brand, title, sortBy, sortDir, page, limit) {
   return (dispatch) => {
     dispatch(getDataRequestNonCompareProducts());
-    return api.nonCompareProducts(page, limit)
+    return api.nonCompareProducts(brand, title, sortBy, sortDir, page, limit)
       .then(data => dispatch(getDataResponseNonCompareProducts(data.data)))
       .catch(error => dispatch(errorHandler(error)));
   };
@@ -162,12 +176,12 @@ export function getDataResponseAttachedElizeSec(result) {
 
     let data = [];
     let item = [];
-    for(let i=0;i<result.data.length;i++) {
+    for (let i = 0; i < result.data.length; i++) {
 
 
-      if(result.data[i].foundProducts.length > 0) {
+      if (result.data[i].foundProducts.length > 0) {
 
-        for(let j=0;j<result.data[i].foundProducts.length;j++) {
+        for (let j = 0; j < result.data[i].foundProducts.length; j++) {
           item.uid = result.data[i].uid;
           item.idElize = result.data[i].id;
           item.titleElize = result.data[i].title;
@@ -213,14 +227,15 @@ export function getDataResponseAttachedElizeSec(result) {
   };
 }
 
-export function attachedElize(page, limit) {
+export function attachedElize(brand, title, sortBy, sortDir,page, limit) {
   return (dispatch) => {
     dispatch(getDataRequestAttachedElizeSec());
-    return api.attachedElize(page, limit)
+    return api.attachedElize(brand, title, sortBy, sortDir,page, limit)
       .then(data => dispatch(getDataResponseAttachedElizeSec(data.data)))
       .catch(error => dispatch(errorHandler(error)));
   };
 }
+
 // /////////////////////////////////////////////     attache multiple            ////////////////////////////////////////////////
 export function getDataResponseAttachMultiple(result) {
 }
@@ -242,6 +257,151 @@ export function detachSingle(obj) {
   return (dispatch) => {
     return api.detachSingle(obj)
       .then(data => dispatch(getDataResponseDetachSingle(data.data)))
+      .catch(error => dispatch(errorHandler(error)));
+  };
+}
+
+/////////////////////////////////////////////     brand products            ////////////////////////////////////////////////
+
+const getDataRequestBrandProducts = createAction(ActionTypes.getDataRequestBrandProducts);
+
+const responseResponseBrandProducts = createAction(ActionTypes.getDataResponseBrandProducts);
+
+export function getDataResponseBrandProducts(data) {
+  return (dispatch) => {
+    return dispatch(responseResponseBrandProducts({data}));
+  };
+}
+
+export function brandsProducts(brand) {
+  return (dispatch) => {
+    dispatch(getDataRequestBrandElize());
+    return api.brandsProducts(brand)
+      .then(data => dispatch(getDataResponseBrandProducts(data.data )))
+      .catch(error => dispatch(errorHandler(error)));
+  };
+}
+////////////////////////////////////////////     brand elize      Con      ////////////////////////////////////////////////
+
+const getDataRequestBrandElizeConElize = createAction(ActionTypes.getDataRequestBrandElizeConElize);
+
+const responseResponseBrandElizeConElize = createAction(ActionTypes.getDataResponseBrandElizeConElize);
+
+export function getDataResponseBrandElizeConElize(data) {
+  return (dispatch) => {
+    return dispatch(responseResponseBrandElizeConElize({data}));
+  };
+}
+
+export function brandsElizeConElize(brand) {
+  return (dispatch) => {
+    dispatch(getDataRequestBrandElizeConElize());
+    return api.brandsElizeConElize(brand)
+      .then(data => dispatch(getDataResponseBrandElizeConElize(data.data )))
+      .catch(error => dispatch(errorHandler(error)));
+  };
+}
+
+/////////////////////////////////////////////     titles elize      Con     Elize ////////////////////////////////////////////////
+
+const getDataRequestBrandElizeTitleConElize= createAction(ActionTypes.getDataRequestBrandElizeTitleConElize);
+
+const responseResponseBrandElizeTitleConElize = createAction(ActionTypes.getDataResponseBrandElizeTitleConElize);
+
+export function getDataResponseBrandElizeTitleConElize(data) {
+  return (dispatch) => {
+    return dispatch(responseResponseBrandElizeTitleConElize({data}));
+  };
+}
+
+export function titleElizeConElize(brand,title) {
+  return (dispatch) => {
+    dispatch(getDataRequestBrandElizeConElize());
+    return api.titleElizeConElize(brand,title)
+      .then(data => dispatch(getDataResponseBrandElizeTitleConElize(data.data )))
+      .catch(error => dispatch(errorHandler(error)));
+  };
+}
+/////////////////////////////////////////////     brand elize      Con      ////////////////////////////////////////////////
+
+const getDataRequestBrandElizeCon = createAction(ActionTypes.getDataRequestBrandElizeCon);
+
+const responseResponseBrandElizeCon = createAction(ActionTypes.getDataResponseBrandElizeCon);
+
+export function getDataResponseBrandElizeCon(data) {
+  return (dispatch) => {
+    return dispatch(responseResponseBrandElizeCon({data}));
+  };
+}
+
+export function brandsElizeCon(brand) {
+  return (dispatch) => {
+    dispatch(getDataRequestBrandElizeCon());
+    return api.brandsElizeCon(brand)
+      .then(data => dispatch(getDataResponseBrandElizeCon(data.data )))
+      .catch(error => dispatch(errorHandler(error)));
+  };
+}
+
+/////////////////////////////////////////////     titles elize      Con      ////////////////////////////////////////////////
+
+const getDataRequestBrandElizeTitleCon= createAction(ActionTypes.getDataRequestBrandElizeTitleCon);
+
+const responseResponseBrandElizeTitleCon = createAction(ActionTypes.getDataResponseBrandElizeTitleCon);
+
+export function getDataResponseBrandElizeTitleCon(data) {
+  return (dispatch) => {
+    return dispatch(responseResponseBrandElizeTitleCon({data}));
+  };
+}
+
+export function titleElizeCon(brand,title) {
+  return (dispatch) => {
+    dispatch(getDataRequestBrandElizeCon());
+    return api.titleElizeCon(brand,title)
+      .then(data => dispatch(getDataResponseBrandElizeTitleCon(data.data )))
+      .catch(error => dispatch(errorHandler(error)));
+  };
+}
+
+/////////////////////////////////////////////     brand elize      Attached      ////////////////////////////////////////////////
+
+const getDataRequestBrandElizeConAttached = createAction(ActionTypes.getDataRequestBrandElizeConAttached);
+
+const responseResponseBrandElizeConAttached = createAction(ActionTypes.getDataResponseBrandElizeConAttached);
+
+export function getDataResponseBrandElizeConAttached(data) {
+  return (dispatch) => {
+    return dispatch(responseResponseBrandElizeConAttached({data}));
+  };
+}
+
+export function brandsElizeConAttached(brand) {
+  return (dispatch) => {
+    dispatch(getDataRequestBrandElizeConAttached());
+    return api.brandsElizeConAttached(brand)
+      .then(data => dispatch(getDataResponseBrandElizeConAttached(data.data )))
+      .catch(error => dispatch(errorHandler(error)));
+  };
+}
+
+/////////////////////////////////////////////     titles elize      Con  Attached    ////////////////////////////////////////////////
+
+const getDataRequestBrandElizeTitleConAttached= createAction(ActionTypes.getDataRequestBrandElizeTitleConAttached);
+
+const responseResponseBrandElizeTitleConAttached = createAction(ActionTypes.getDataResponseBrandElizeTitleConAttached);
+
+export function getDataResponseBrandElizeTitleConAttached(data) {
+  return (dispatch) => {
+    return dispatch(responseResponseBrandElizeTitleConAttached({data}));
+  };
+}
+
+export function titleElizeConAttached(brand,title) {
+  return (dispatch) => {
+    dispatch(getDataRequestBrandElizeConAttached());
+    return api.titleElizeConAttached(brand,title)
+      .then(data => dispatch(getDataResponseBrandElizeTitleConAttached(data.data )))
       .catch(error => dispatch(errorHandler(error)));
   };
 }
