@@ -1,0 +1,78 @@
+.thead-inverse {
+  background-color: #4d4d4d;
+  color: white;
+  font-size: larger;
+}
+
+thead:last-child {
+  margin-bottom: 15px;
+}
+
+.table th, .table td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 50px;
+  max-width: 300px;
+  text-align: center;
+  height: 65px;
+  line-height: 27px;
+  padding: 0;
+}
+
+.form-control {
+  margin-top: 10px;
+  width: 100px !important;
+  margin-left: 20%;
+}
+
+.attach-btn {
+  margin-bottom: 10px;
+  float: right;
+  margin-right: 10px;
+}
+
+.select-title {
+  margin-left: 25px;
+  margin-top: 30px !important;
+  font-weight: 800;
+  float: left;
+}
+
+.form-control.export{
+  width: 250px !important;
+  margin-left: 25px !important;
+  clear: both;
+  float: left;
+}
+
+.form-group {
+  width: 500px;
+  float: left;
+}
+
+.export-to-excel {
+  float: left;
+  margin: 9px !important;
+}
+
+.update {
+
+  margin: 9px !important;
+}
+
+.status-all {
+  width: calc(100% - 500px);
+  float: left;
+  height: 170px;
+  padding: 57px 30px;
+}
+
+form {
+  float: left;
+  width: 500px;
+  height: 170px;
+}
+.percentage{
+  width: 40px;
+}

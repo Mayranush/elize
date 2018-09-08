@@ -1,10 +1,11 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {generalActions} from "../../actions";
+import {generalActions, secondPageActions} from "../../actions";
 import {Pagination} from "../../components/pagination/pagination";
 import {selectDataCompare, selectDataCompareAttached} from "../../selectors/general";
 import "./home.scss";
 
+//hr_el_!!_**-&&    password
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -16,17 +17,24 @@ class Home extends React.Component {
     };
   }
 
+  changeImageZoom(e) {
+    this.props.changeImageZoom(e.target.src);
+  }
+
   clickFunctionCompare = (item) => {
+    this.props.statusAll();
     this.props.compareElize((this.props.data.filterBrand),
       (this.props.data.filterTitle),
       this.props.data.compareSortBy,
       this.props.data.compareSortDir,
       item - 1,
-      this.props.data.itemsInEachPageCompare);
+      this.props.data.itemsInEachPageCompare,
+      this.props.data.filterSource);
   };
 
   clickFunctionAttached = (item) => {
-    this.props.attachedElize((this.props.data.attachedBrandElize),
+    this.props.statusAll();
+    this.props.attachedElize((this.props.data.filterBrandAttached),
       (this.props.data.attachedTitleElize),
       this.props.data.attachedSortBy,
       this.props.data.attachedSortDir,
@@ -35,6 +43,7 @@ class Home extends React.Component {
   };
 
   attachSingle = (idElize, id) => {
+    this.props.statusAll();
     this.props.attachSingle(idElize, id)
       .then(() => {
         this.props.compareElize((this.props.data.filterBrand),
@@ -42,8 +51,9 @@ class Home extends React.Component {
           this.props.data.compareSortBy,
           this.props.data.compareSortDir,
           this.currentPageCompare.value - 1,
-          this.props.data.itemsInEachPageCompare);
-        this.props.attachedElize((this.props.data.attachedBrandElize),
+          this.props.data.itemsInEachPageCompare,
+          this.props.data.filterSource);
+        this.props.attachedElize((this.props.data.filterBrandAttached),
           (this.props.data.attachedTitleElize),
           this.props.data.attachedSortBy,
           this.props.data.attachedSortDir,
@@ -53,13 +63,17 @@ class Home extends React.Component {
   };
 
   detachSingle = (idElize, id) => {
+    this.props.statusAll();
     this.props.detachSingle(idElize, id)
       .then(() => {
         this.props.compareElize((this.props.data.filterBrand),
           (this.props.data.filterTitle),
           this.props.data.compareSortBy,
-          this.props.data.compareSortDir, this.currentPageCompare.value - 1, this.props.data.itemsInEachPageCompare);
-        this.props.attachedElize((this.props.data.attachedBrandElize),
+          this.props.data.compareSortDir,
+          this.currentPageCompare.value - 1,
+          this.props.data.itemsInEachPageCompare,
+          this.props.data.filterSource);
+        this.props.attachedElize((this.props.data.filterBrandAttached),
           (this.props.data.attachedTitleElize),
           this.props.data.attachedSortBy,
           this.props.data.attachedSortDir,
@@ -69,13 +83,17 @@ class Home extends React.Component {
   };
 
   unsimilar = (idElize, id) => {
+    this.props.statusAll();
     this.props.unsimilar(idElize, id)
       .then(() => {
         this.props.compareElize((this.props.data.filterBrand),
-          ( this.props.data.filterTitle),
+          (this.props.data.filterTitle),
           this.props.data.compareSortBy,
-          this.props.data.compareSortDir, this.currentPageCompare.value - 1, this.props.data.itemsInEachPageCompare);
-        this.props.attachedElize((this.props.data.attachedBrandElize),
+          this.props.data.compareSortDir,
+          this.currentPageCompare.value - 1,
+          this.props.data.itemsInEachPageCompare,
+          this.props.data.filterSource);
+        this.props.attachedElize((this.props.data.filterBrandAttached),
           (this.props.data.attachedTitleElize),
           this.props.data.attachedSortBy,
           this.props.data.attachedSortDir,
@@ -85,19 +103,24 @@ class Home extends React.Component {
   };
 
   changeItemsInEachPageCompare = (e) => {
+    this.props.statusAll();
     this.props.changeItemsInEachPageCompareFunc(e.target.value);
     if (e.target.value > 0) {
       this.props.compareElize((this.props.data.filterBrand),
         (this.props.data.filterTitle),
         this.props.data.compareSortBy,
-        this.props.data.compareSortDir, this.currentPageCompare.value - 1, e.target.value);
+        this.props.data.compareSortDir,
+        this.currentPageCompare.value - 1,
+        e.target.value,
+        this.props.data.filterSource);
     }
   };
 
   changeItemsInEachPageAttached = (e) => {
+    this.props.statusAll();
     this.props.changeItemsInEachPageAttachedFunc(e.target.value);
     if (e.target.value > 0) {
-      this.props.attachedElize((this.props.data.attachedBrandElize),
+      this.props.attachedElize((this.props.data.filterBrandAttached),
         (this.props.data.attachedTitleElize),
         this.props.data.attachedSortBy,
         this.props.data.attachedSortDir,
@@ -107,38 +130,61 @@ class Home extends React.Component {
   };
 
   filterByBrandFunc = (e) => {
+    this.props.statusAll();
     let brand = (e.target.value);
     this.props.filterByBrand(brand);
     this.props.brandsElize(brand);
   };
+
   filterByTitleFunc = (e) => {
+    this.props.statusAll();
     let title = (e.target.value);
     this.props.filterByTitle(title);
     this.props.titleElize(this.props.data.filterBrand, title);
   };
 
   filterByBrandAttachedFunc = (e) => {
+    this.props.statusAll();
     let brand = (e.target.value);
     this.props.filterByBrandAttached(brand);
+    console.log(this.props.data.filterBrandAttached,"llllllllllllll");
+    console.log(brand,"uuuuu");
+
+
     this.props.brandsElizeAttached(brand);
   };
 
   filterByTitleAttachedFunc = (e) => {
+    this.props.statusAll();
     let title = (e.target.value);
     this.props.filterByTitleAttached(title);
     this.props.titleElizeAttached(this.props.data.filterBrandAttached, title);
   };
 
-
+  searchElizeOnEnter = (e) => {
+    this.props.statusAll();
+    if (e.keyCode === 13) {
+      this.searchElize();
+    }
+  };
   searchElize = () => {
+    this.props.statusAll();
     this.props.compareElize((this.props.data.filterBrand),
       (this.props.data.filterTitle),
       this.props.data.compareSortBy,
       this.props.data.compareSortDir,
       this.currentPageCompare.value - 1,
-      this.props.data.itemsInEachPageCompare);
+      this.props.data.itemsInEachPageCompare,
+      this.props.data.filterSource);
+  };
+  searchElizeAttachedOnEnter = (e) => {
+    this.props.statusAll();
+    if (e.keyCode === 13) {
+      this.searchElizeAttached();
+    }
   };
   searchElizeAttached = () => {
+    this.props.statusAll();
     this.props.attachedElize((this.props.data.filterBrandAttached),
       (this.props.data.filterTitleAttached),
       this.props.data.compareSortBy,
@@ -147,6 +193,7 @@ class Home extends React.Component {
       this.props.data.itemsInEachPageAttached);
   };
   setSortBy = (sortCol) => {
+    this.props.statusAll();
     if (this.props.data.compareSortDir === "asc") {
       this.props.changeSortDir("desc");
       this.props.compareElize((this.props.data.filterBrand),
@@ -154,7 +201,8 @@ class Home extends React.Component {
         sortCol,
         "desc",
         this.currentPageCompare.value - 1,
-        this.props.data.itemsInEachPageCompare);
+        this.props.data.itemsInEachPageCompare,
+        this.props.data.filterSource);
     } else {
       this.props.changeSortDir("asc");
       this.props.compareElize((this.props.data.filterBrand),
@@ -162,23 +210,24 @@ class Home extends React.Component {
         sortCol,
         "asc",
         this.currentPageCompare.value - 1,
-        this.props.data.itemsInEachPageCompare);
+        this.props.data.itemsInEachPageCompare,
+        this.props.data.filterSource);
     }
 
   };
   setSortByAttached = (sortCol) => {
-
+    this.props.statusAll();
     if (this.props.data.compareSortDir === "asc") {
       this.props.changeSortDir("desc");
-      this.props.attachedElize((this.props.data.attachedBrandElize),
+      this.props.attachedElize((this.props.data.filterBrandAttached),
         (this.props.data.attachedTitleElize),
         sortCol,
-        "asc",
+        "desc",
         this.currentPageAttached.value - 1,
         this.props.data.itemsInEachPageAttached);
     } else {
       this.props.changeSortDir("asc");
-      this.props.attachedElize((this.props.data.attachedBrandElize),
+      this.props.attachedElize((this.props.data.filterBrandAttached),
         (this.props.data.attachedTitleElize),
         sortCol,
         "asc",
@@ -189,28 +238,43 @@ class Home extends React.Component {
   };
 
   componentDidMount() {
+    // this.props.statusAll();
     this.props.compareElize((this.props.data.filterBrand),
       (this.props.data.filterTitle),
       this.props.data.compareSortBy,
       this.props.data.compareSortDir,
       this.currentPageCompare.value - 1,
-      this.props.data.itemsInEachPageCompare);
-    this.props.attachedElize((this.props.data.attachedBrandElize),
+      this.props.data.itemsInEachPageCompare,
+      this.props.data.filterSource);
+    this.props.attachedElize((this.props.data.filterBrandAttached),
       (this.props.data.attachedTitleElize),
       this.props.data.attachedSortBy,
       this.props.data.attachedSortDir,
       this.currentPageAttached.value - 1,
       this.props.data.itemsInEachPageAttached);
   }
-
-  exportData = () => {
-    window.open("http://63.142.251.65:8888/api/compare-elize-export");
-
+  filterBySourceElizeFunc = (e) => {
+    this.props.statusAll();
+    let source = (e.target.value);
+    this.props.filterBySourceElize(source);
+    this.props.sourceElize();
   };
-  exportDataAttached = () => {
-    window.open("http://63.142.251.65:8888/attached-elize-export");
+  searchElizeOnEnter = (e) => {
+    this.props.statusAll();
+    if (e.keyCode === 13) {
+      this.searchElize();
+    }
   };
-
+  searchElize = () => {
+    this.props.statusAll();
+    this.props.compareElize((this.props.data.filterBrand),
+      (this.props.data.filterTitle),
+      this.props.data.compareSortBy,
+      this.props.data.compareSortDir,
+      this.currentPageCompare.value - 1,
+      this.props.data.itemsInEachPageCompare,
+      this.props.data.filterSource);
+  };
   render() {
     return (
       <div className="main-content">
@@ -219,7 +283,8 @@ class Home extends React.Component {
           {/*/!*<input type="text" placeholder= "Search by n ame" value={this.props.data.searchText}*!/*/}
           {/*/!*onChange={(e) => this.props.changeSearchText(e.target.value)}/>*!/*/}
           <input type="text" list="brands" placeholder="Filter by brand" value={this.props.data.filterBrand}
-                 onChange={(e) => this.filterByBrandFunc(e)}/>
+                 onChange={(e) => this.filterByBrandFunc(e)} onKeyUp={(e) => this.searchElizeOnEnter(e)}
+                 onClick={(e) => this.filterByBrandFunc(e)}/>
           <datalist id="brands" className={this.props.data.filterBrandData.length > 0 ? "dropdown-filter" : ""}>
             {this.props.data.filterBrandData &&
             this.props.data.filterBrandData.map((item) => {
@@ -230,10 +295,25 @@ class Home extends React.Component {
         </div>
         <div className="search-container">
           <input type="text" list="titles" placeholder="Filter by title" value={this.props.data.filterTitle}
-                 onChange={(e) => this.filterByTitleFunc(e)}/>
+                 onChange={(e) => this.filterByTitleFunc(e)} onKeyUp={(e) => this.searchElizeOnEnter(e)}/>
           <datalist id="titles" className={this.props.data.filterTitleData.length > 0 ? "dropdown-filter" : ""}>
             {this.props.data.filterTitleData &&
             this.props.data.filterTitleData.map((item) => {
+              return (<option value={item}> {item} </option>);
+            })
+            }
+          </datalist>
+        </div>
+        <div className="search-container">
+          <input type="text" list="sources" placeholder="Filter by source"
+                 value={this.props.data.filterSource}
+                 onChange={(e) => this.filterBySourceElizeFunc(e)}
+                 onClick={(e) => this.filterBySourceElizeFunc(e)}
+                 onKeyUp={(e) => this.searchElizeElizeOnEnter(e)}/>
+          <datalist id="sources"
+                    className={this.props.data.filterSourceData.length > 0 ? "dropdown-filter" : ""}>
+            {this.props.data.filterSourceData &&
+            this.props.data.filterSourceData.map((item) => {
               return (<option value={item}> {item} </option>);
             })
             }
@@ -244,7 +324,7 @@ class Home extends React.Component {
             className="fa fa-search"></i></button>
         </div>
 
-        <button className="btn  btn-primary export-to-excel" type="button" onClick={this.exportData}>Export</button>
+        {/*<button className="btn  btn-primary export-to-excel" type="button" onClick={this.exportData}>Export</button>*/}
         {this.props.dataFiltered &&
         <div className="table-body">
           <table className="table">
@@ -253,6 +333,8 @@ class Home extends React.Component {
               <th></th>
               <th onClick={() => this.setSortBy("brand")}>Бренд-Elize</th>
               <th onClick={() => this.setSortBy("fullTitle")}>Название-Elize</th>
+              <th>Фото-Elize</th>
+              <th>Фото</th>
               <th onClick={() => this.setSortBy("fullTitle")}>Название</th>
               <th onClick={() => this.setSortBy("brand")}>Бренд</th>
               <th></th>
@@ -261,55 +343,84 @@ class Home extends React.Component {
             <tbody>
             {
               this.props.dataFiltered.map((item) => {
-                return (<tr key={item.idElize + " " + item.id}>
+                return (
 
-                  <td>
-                    {item.idElize && item.id &&
-                    <button className="btn" onClick={() => this.unsimilar({elizeId: item.idElize, productId: item.id})}>
-                      Открепить
-                    </button>}
-                  </td>
-                  <td title={item.brandElize}>{item.brandElize}</td>
-                  <td title={item.fullTitleElize}>
-                    <a href={item.urlElize} target="_blank">{item.fullTitleElize}</a>
-                  </td>
-                  <td title={item.fullTitle}>
-                    <a href={item.url} target="_blank">{item.fullTitle}</a>
-                  </td>
-                  <td title={item.brand}>{item.brand}</td>
-                  <td>
-                    {item.idElize && item.id && <button type="button" className="btn btn-success"
-                                                        onClick={() => this.attachSingle({
-                                                          elizeId: item.idElize,
-                                                          productId: item.id
-                                                        })}>
-                      Прикрепить
-                    </button>}
-                  </td>
-                </tr>);
+                  <tr key={item.idElize + " " + item.id}>
+
+                    <td>
+                      {item.idElize && item.id &&
+                      <button className={(this.props.second.statusAll === 'IDLE') ? "btn " : "btn disabled-btn"}
+                              onClick={() => this.unsimilar({elizeId: item.idElize, productId: item.id})}>
+                        Открепить
+                      </button>}
+                      <div className="lightbox-target" id="image">
+                        <img src={this.props.second.imageZoom}/>
+                        <a className="lightbox-close" href="#"></a>
+                      </div>
+
+                    </td>
+                    <td title={item.brandElize}>{item.brandElize}</td>
+                    <td title={item.fullTitleElize} className="wraped-tbl ">
+                      <a href={item.urlElize} target="_blank">
+                        {item.fullTitleElize}</a>
+                    </td>
+                    <td><a className="image-size lightbox" href="#image">
+                      <img className="image-size" onMouseOver={(e) => this.changeImageZoom(e)} src={item.imageElize}/>
+                    </a>
+                    </td>
+                    <td><a className="image-size lightbox" href="#image">
+                      <img className="image-size" onMouseOver={(e) => this.changeImageZoom(e)} src={item.image}/>
+                    </a>
+                    </td>
+
+                    <td className="wraped-tbl ">
+                      <a href={item.url} target="_blank">
+                        <div className="image-hover"></div>
+                        {item.fullTitle}</a>
+                    </td>
+                    <td title={item.brand}>{item.brand}</td>
+
+                    <td>
+                      {item.idElize && item.id &&
+                      <button type="button"
+                              className={(this.props.second.statusAll === 'IDLE') ? "btn btn-success" : "btn btn-success disabled-btn"}
+                              onClick={() => this.attachSingle({
+                                elizeId: item.idElize,
+                                productId: item.id
+                              })}>
+                        Прикрепить
+                      </button>}
+
+                    </td>
+
+                  </tr>);
               })
             }
+
             </tbody>
           </table>
+
         </div>}
-        <div>
-          <span className="desc-text">Продукты: </span>
-          <span className="count-val">{this.props.data.countCompare}</span>
-        </div>
-        <div>
-          <span className="desc-text">В каждом странице: </span>
-          <select className="count-input" defaultValue={this.props.data.itemsInEachPageCompare}
-                  onChange={this.changeItemsInEachPageCompare}>
-            <option value="5">5</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-            <option value="200">200</option>
-          </select>
-        </div>
-        <div className="pagination-block">
-          {Math.ceil(this.props.data.countCompare / this.props.data.itemsInEachPageCompare) > 1 &&
-          <Pagination maxPageCount={Math.ceil(this.props.data.countCompare / this.props.data.itemsInEachPageCompare)}
-                      currentPage={this.currentPageCompare} clickFunction={this.clickFunctionCompare}/>}
+        <div className="pagination-block-all">
+          <div className="products-count-first-page">
+            <span className="desc-text">Продукты: </span>
+            <span className="count-val">{this.props.data.countCompare}</span>
+          </div>
+          <div className="in-any-page">
+            <span className="desc-text">В каждом странице: </span>
+            <select className="count-input" defaultValue={this.props.data.itemsInEachPageCompare}
+                    onChange={this.changeItemsInEachPageCompare}>
+              <option value="5">5</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="200">200</option>
+            </select>
+          </div>
+          <div className="pagination-block">
+            {Math.ceil(this.props.data.countCompare / this.props.data.itemsInEachPageCompare) > 1 &&
+            <Pagination maxPageCount={Math.ceil(this.props.data.countCompare / this.props.data.itemsInEachPageCompare)}
+                        currentPage={this.currentPageCompare} clickFunction={this.clickFunctionCompare}/>}
+          </div>
         </div>
         <div className="table-title">Прикрепление Продукты</div>
         {/*<div className="search-container">*/}
@@ -319,7 +430,8 @@ class Home extends React.Component {
         <div className="search-container">
           <input type="text" list="brandsAttached" placeholder="Filter by brand"
                  value={this.props.data.filterBrandAttached}
-                 onChange={(e) => this.filterByBrandAttachedFunc(e)}/>
+                 onChange={(e) => this.filterByBrandAttachedFunc(e)}
+                 onKeyUp={(e) => this.searchElizeAttachedOnEnter(e)}/>
           <datalist id="brandsAttached"
                     className={this.props.data.filterBrandAttachedData.length > 0 ? "dropdown-filter" : ""}>
             {this.props.data.filterBrandAttachedData &&
@@ -332,7 +444,8 @@ class Home extends React.Component {
         <div className="search-container">
           <input type="text" list="titlesAttached" placeholder="Filter by title"
                  value={this.props.data.filterTitleAttached}
-                 onChange={(e) => this.filterByTitleAttachedFunc(e)}/>
+                 onChange={(e) => this.filterByTitleAttachedFunc(e)}
+                 onKeyUp={(e) => this.searchElizeAttachedOnEnter(e)}/>
           <datalist id="titlesAttached"
                     className={this.props.data.filterTitleAttachedData.length > 0 ? "dropdown-filter" : ""}>
             {this.props.data.filterTitleAttachedData &&
@@ -346,8 +459,8 @@ class Home extends React.Component {
           <button className="btn btn-primary " type="button" onClick={this.searchElizeAttached}><i
             className="fa fa-search"></i></button>
         </div>
-        <button className="btn btn-primary export-to-excel" type="button" onClick={this.exportDataAttached}>Export
-        </button>
+        {/*<button className="btn btn-primary export-to-excel" type="button" onClick={this.exportDataAttached}>Export*/}
+        {/*</button>*/}
         {this.props.dataFilteredAttached &&
         <div className="table-body">
           <table className="table">
@@ -365,12 +478,16 @@ class Home extends React.Component {
             <tbody>
             {
               this.props.dataFilteredAttached.map((item) => {
+
                 return (<tr key={item.idElize + " " + item.id}>
                   <td>
-                    {item.idElize && item.id && <button className="btn" onClick={() => this.detachSingle({
-                      elizeId: item.idElize,
-                      productId: item.id
-                    })}>
+
+                    {item.idElize && item.id &&
+                    <button className={(this.props.second.statusAll === 'IDLE') ? "btn " : "btn disabled-btn"}
+                            onClick={() => this.detachSingle({
+                              elizeId: item.idElize,
+                              productId: item.id
+                            })}>
                       Открепить
                     </button>}
                   </td>
@@ -391,23 +508,26 @@ class Home extends React.Component {
           </table>
         </div>}
         <div>
-          <span className="desc-text">Продукты: </span>
-          <span className="count-val">{this.props.data.countAttached}</span>
-        </div>
-        <div>
-          <span className="desc-text">В каждом странице: </span>
-          <select className="count-input" defaultValue={this.props.data.itemsInEachPageAttached}
-                  onChange={this.changeItemsInEachPageAttached}>
-            <option value="5">5</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-            <option value="200">200</option>
-          </select>
-        </div>
-        <div className="pagination-block">
-          {Math.ceil(this.props.data.countAttached / this.props.data.itemsInEachPageAttached) > 1 &&
-          <Pagination maxPageCount={Math.ceil(this.props.data.countAttached / this.props.data.itemsInEachPageAttached)}
-                      currentPage={this.currentPageAttached} clickFunction={this.clickFunctionAttached}/>}
+          <div className="products-count-first-page">
+            <span className="desc-text">Продукты: </span>
+            <span className="count-val">{this.props.data.countAttached}</span>
+          </div>
+          <div className="in-any-page">
+            <span className="desc-text">В каждом странице: </span>
+            <select className="count-input" defaultValue={this.props.data.itemsInEachPageAttached}
+                    onChange={this.changeItemsInEachPageAttached}>
+              <option value="5">5</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="200">200</option>
+            </select>
+          </div>
+          <div className="pagination-block">
+            {Math.ceil(this.props.data.countAttached / this.props.data.itemsInEachPageAttached) > 1 &&
+            <Pagination
+              maxPageCount={Math.ceil(this.props.data.countAttached / this.props.data.itemsInEachPageAttached)}
+              currentPage={this.currentPageAttached} clickFunction={this.clickFunctionAttached}/>}
+          </div>
         </div>
       </div>
     )
@@ -417,8 +537,9 @@ class Home extends React.Component {
 export default connect(
   state => ({
     data: state.general,
+    second: state.secondPage,
     dataFiltered: selectDataCompare(state),
     dataFilteredAttached: selectDataCompareAttached(state)
   }),
-  {...generalActions}
+  {...generalActions, ...secondPageActions}
 )(Home);

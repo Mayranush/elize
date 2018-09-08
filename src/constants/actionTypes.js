@@ -22,7 +22,7 @@ const ActionTypes = {
   changeSortDirCon:"CHANGE_SORT_DIR_CON",
   changeSortDirConAttached:"CHANGE_SORT_DIR_CON_ATTACHED",
 
-
+  changeImageZoom:"CHANGE_IMAGE_ZOOM",
 
   changeSearchTextNonCompare: "CHANGE_SEARCH_TEXT_NON_COMPARE",
   changeSearchTextNonCompareProducts: "CHANGE_SEARCH_TEXT_NON_COMPARE_PRODUCTS",
@@ -52,9 +52,12 @@ const ActionTypes = {
 
   filterByBrandConElize:"FILTER_BY_BRAND_CON_ELIZE",
   filterByTitleConElize:"FILTER_BY_TITLE_CON_ELIZE",
+  filterBySourceConElize:"FILTER_BY_SOURCE_CON_ELIZE",
+  filterBySourceElize:"FILTER_BY_SOURCE_ELIZE",
 
   filterByBrandCon:"FILTER_BY_BRAND_CON",
   filterByTitleCon:"FILTER_BY_TITLE_CON",
+  filterBySourceCon:"FILTER_BY_SOURCE_CON",
 
   filterByBrandConAttached:"FILTER_BY_BRAND_CON_ATTACHED",
   filterByTitleConAttached:"FILTER_BY_TITLE_CON_ATTACHED",
@@ -70,6 +73,15 @@ const ActionTypes = {
 
   getDataRequestBrandElizeTitleCon: "GET_DATA_REQUEST_BRAND_ELIZE_TITLE_CON",
   getDataResponseBrandElizeTitleCon: "GET_DATA_RESPONSE_BRAND_ELIZE_TITLE_CON",
+
+  getDataRequestElizeSourceCon: "GET_DATA_REQUEST_ELIZE_SOURCE_CON",
+  getDataResponseElizeSourceCon: "GET_DATA_RESPONSE_ELIZE_SOURCE_CON",
+
+  getDataRequestElizeSourceConElize: "GET_DATA_REQUEST_ELIZE_SOURCE_CON_ELIZE",
+  getDataResponseElizeSourceConElize: "GET_DATA_RESPONSE_ELIZE_SOURCE_CON_ELIZE",
+
+  getDataRequestElizeSource: "GET_DATA_REQUEST_ELIZE_SOURCE",
+  getDataResponseElizeSource: "GET_DATA_RESPONSE_ELIZE_SOURCE",
 
   getDataRequestBrandElizeConAttached: "GET_DATA_REQUEST_BRAND_ELIZE_CON_ATTACHED",
   getDataResponseBrandElizeConAttached: "GET_DATA_RESPONSE_BRAND_ELIZE_CON_ATTACHED",
@@ -88,9 +100,9 @@ const ActionTypes = {
   getDataRequestNonCompareProducts: "GET_DATA_REQUEST_NON_COMPARE_PRODUCTS",
   getDataResponseNonCompareProducts: "GET_DATA_RESPONSE_NON_COMPARE_PRODUCTSS",
 
-  getDataRequestAttachedElizeSec: "GET_DATA_REQUEST_ATTACHED_ELIZE_SEC",
+ /* getDataRequestAttachedElizeSec: "GET_DATA_REQUEST_ATTACHED_ELIZE_SEC",
   getDataResponseAttachedElizeSec: "GET_DATA_RESPONSE_ATTACHED_ELIZE_SEC",
-
+*/
   getDataRequestChangePassword: "GET_DATA_REQUEST_CHANGE_PASSWORD",
   getDataResponseChangePassword: "GET_DATA_RESPONSE_CHANGE_PASSWORD",
   getDataResponseErrorChangePassword: "GET_DATA_RESPONSE_ERROR_CHANGE_PASSWORD",
@@ -98,7 +110,23 @@ const ActionTypes = {
   getDataRequestSignIn: "GET_DATA_REQUEST_SIGN_IN",
   getDataResponseSignIn: "GET_DATA_RESPONSE_SIGN_IN",
   emailChange: "EMAIL_CHANGE",
-  passwordChange: "PASSWORD_CHANGE"
+  passwordChange: "PASSWORD_CHANGE",
+
+
+  exportType:"EXPORT_TYPE",
+  getDataRequestStatus: "GET_DATA_REQUEST_STATUS",
+  getDataResponseStatus: "GET_DATA_RESPONSE_STATUS",
+  getDataRequestStatusAll: "GET_DATA_REQUEST_STATUS_ALL",
+  getDataResponseStatusAll: "GET_DATA_RESPONSE_STATUS_ALL",
+
+  getDataRequestCompare: "GET_DATA_REQUEST_COMPARE",
+  getDataResponseCompare: "GET_DATA_RESPONSE_COMPARE",
+  getDataRequestStopCompareElize: "GET_DATA_REQUEST_STOP_COMPARE_ELIZE",
+  getDataResponseStopCompareElize: "GET_DATA_RESPONSE_STOP_COMPARE_ELIZE",
+  getDataRequestStartElize: "GET_DATA_REQUEST_START_ELIZE",
+  getDataResponseStartElize: "GET_DATA_RESPONSE_START_ELIZE",
+  getDataRequestStopElize: "GET_DATA_REQUEST_STOP_ELIZE",
+  getDataResponseStopElize: "GET_DATA_RESPONSE_STOP_ELIZE",
 };
 
 export default ActionTypes;

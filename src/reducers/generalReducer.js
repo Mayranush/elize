@@ -13,12 +13,14 @@ const defaultState = {
   searchText: "",
   filterBrand: "",
   filterBrandData: [],
-  filterTitle:"",
-  filterTitleData:[],
-  filterBrandAttached:"",
-  filterTitleAttached:"",
-  filterBrandAttachedData:[],
-  filterTitleAttachedData:[],
+  filterTitle: "",
+  filterTitleData: [],
+  filterBrandAttached: "",
+  filterTitleAttached: "",
+  filterBrandAttachedData: [],
+  filterTitleAttachedData: [],
+  filterSourceData: [],
+  filterSource: "",
   compareSortBy: "id",
   compareSortDir: "asc",
   attachedBrandElize: "",
@@ -27,10 +29,20 @@ const defaultState = {
   attachedSortDir: "asc",
 
   searchTextAttached: "",
-  token:""
+  token: ""
 };
 
 export default handleActions({
+  [ActionTypes.filterBySourceElize]: (state, {payload}) => ({
+    ...state,
+    filterSource: payload
+  }),
+  [ActionTypes.getDataRequestElizeSource]: (state) => ({...state, loaderAttached: true}),
+  [ActionTypes.getDataResponseElizeSource]: (state, {payload}) => ({
+    ...state,
+    loaderAttached: false,
+    filterSourceData: payload.data
+  }),
   [ActionTypes.getDataRequestCompareElize]: (state) => ({...state, loaderCompare: true}),
   [ActionTypes.getDataResponseCompareElize]: (state, {payload}) => ({
     ...state,

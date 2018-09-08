@@ -13,21 +13,21 @@ let addHeaders = (token) => {
 
   if (token) {
     api = axios.create({
-      baseURL: "http://63.142.251.65:8888",
+      baseURL: "http://63.142.251.65:8080", //63.142.251.65
       headers: {"Authorization": tokenFromStore}
     });
   } else {
     api = axios.create({
-      baseURL: "http://63.142.251.65:8888"
+      baseURL: "http://63.142.251.65:8080"
     });
   }
 
   return api;
 };
 
-const compareElize = (brand, title, sortBy, sortDir, page, limit) => {
+const compareElize = (brand, title, sortBy, sortDir, page, limit, src) => {
   addHeaders(true);
-  return api.get("/api/compare-elize?brand=" + encodeURIComponent(brand) + "&title=" + encodeURIComponent(title) + "&sortBy=" + sortBy + "&sortDir=" + sortDir + "&page=" + page + "&limit=" + limit);
+  return api.get("/api/compare-elize?brand=" + encodeURIComponent(brand) + "&title=" + encodeURIComponent(title) + "&sortBy=" + sortBy + "&sortDir=" + sortDir + "&page=" + page + "&limit=" + limit + "&src=" + src);
 };
 
 const attachedElize = (brand, title, sortBy, sortDir, page, limit) => {
@@ -42,13 +42,13 @@ const brandsElizeAttached = (brand) => {
   addHeaders(true);
   return api.get("/api/attached-elize/brands?brand=" + encodeURIComponent(brand));
 };
-const brandsElizeConElize = (brand) => {
+const brandsElizeConElize = (brand, src) => {
   addHeaders(true);
-  return api.get("/api/non-compare-elize/brands?brand=" + encodeURIComponent(brand));
+  return api.get("/api/non-compare-elize/brands?brand=" + encodeURIComponent(brand) + "&src=" + src);
 };
-const brandsElizeCon = (brand) => {
+const brandsElizeCon = (brand,src) => {
   addHeaders(true);
-  return api.get("/api/non-compare-products/brands?brand=" + encodeURIComponent(brand));
+  return api.get("/api/non-compare-products/brands?brand=" + encodeURIComponent(brand) + "&src=" + src);
 };
 const brandsElizeConAttached = (brand) => {
   addHeaders(true);
@@ -72,7 +72,7 @@ const titleElizeCon = (brand, title) => {
 };
 const titleElizeConAttached = (brand, title) => {
   addHeaders(true);
-  return api.get("/api/attached-elize/titles?brand=" +encodeURIComponent(brand) + "&title=" + encodeURIComponent(title));
+  return api.get("/api/attached-elize/titles?brand=" + encodeURIComponent(brand) + "&title=" + encodeURIComponent(title));
 };
 const brandsProducts = (brand) => {
   addHeaders(true);
@@ -88,14 +88,14 @@ const detachSingle = (obj) => {
   return api.post("/api/detach-single", obj);
 };
 
-const nonCompareElize = (brand, title, sortBy, sortDir, page, limit) => {
+const nonCompareElize = (brand, title, src, sortBy, sortDir, page, limit) => {
   addHeaders(true);
-  return api.get("/api/non-compare-elize?brand=" +encodeURIComponent(brand) + "&title=" + encodeURIComponent(title)+ "&sortBy=" + sortBy + "&sortDir=" + sortDir + "&page=" + page + "&limit=" + limit);
+  return api.get("/api/non-compare-elize?brand=" + encodeURIComponent(brand) + "&title=" + encodeURIComponent(title) + "&src=" + src + "&sortBy=" + sortBy + "&sortDir=" + sortDir + "&page=" + page + "&limit=" + limit);
 };
 
-const nonCompareProducts = (brand, title, sortBy, sortDir, page, limit) => {
+const nonCompareProducts = (brand, title, src, sortBy, sortDir, page, limit) => {
   addHeaders(true);
-  return api.get("/api/non-compare-products?brand=" + encodeURIComponent(brand) + "&title=" + encodeURIComponent(title) + "&sortBy=" + sortBy + "&sortDir=" + sortDir + "&page=" + page + "&limit=" + limit);
+  return api.get("/api/non-compare-products?brand=" + encodeURIComponent(brand) + "&title=" + encodeURIComponent(title) + "&src=" + src + "&sortBy=" + sortBy + "&sortDir=" + sortDir + "&page=" + page + "&limit=" + limit);
 };
 
 const attachMultiple = (obj) => {
@@ -112,11 +112,53 @@ const signIn = (user) => {
   return api.post("/sign-in", user);
 };
 
-
-
+const sourceElizeCon = () => {
+  addHeaders(true);
+  return api.get("/api/src");
+};
+const sourceElizeConElize = () => {
+  addHeaders(true);
+  return api.get("/api/src");
+};
+const sourceElize = () => {
+  addHeaders(true);
+  return api.get("/api/src");
+};
+const statusMe = () => {
+  addHeaders(false);
+  return api.get("/status");
+};
+const statusAll = () => {
+  addHeaders(false);
+  return api.get("/status-all");
+};
+const compareElizeStart = (percent) => {
+  addHeaders(false);
+  return api.post("/compare?perc=" + percent);
+};
+const stopCompareElize = () => {
+  addHeaders(false);
+  return api.get("/compare-stop");
+};
+const startElize = () => {
+  addHeaders(false);
+  return api.post("/start");
+};
+const stopElize = () => {
+  addHeaders(false);
+  return api.get("/stop");
+};
 
 export default {
-
+  compareElizeStart,
+  stopCompareElize,
+  startElize,
+  stopElize,
+  statusMe,
+  statusAll,
+  sourceElizeCon,
+  sourceElizeConElize,
+  sourceElize,
   signIn,
   compareElize,
   attachedElize,

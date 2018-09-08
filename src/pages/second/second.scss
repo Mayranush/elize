@@ -9,6 +9,13 @@ thead:last-child {
 }
 
 
+.wraped-tbl {
+  white-space: normal !important;
+
+}
+.table th{
+   line-height: 65px !important;
+ }
 .table th, .table td {
   white-space: nowrap;
   overflow: hidden;
@@ -16,11 +23,21 @@ thead:last-child {
   min-width: 50px;
   max-width: 300px;
   text-align: center;
-  height: 65px;
-  line-height: 65px;
+  vertical-align: middle;
+  height: 60px;
+  line-height: 27px;
   padding: 0;
 }
+.image-hover {
+  display: none;
+}
 
+a:hover >.image-hover {
+  display: block;
+}
+.image-hover img{
+  max-height: 300px;
+}
 .form-control {
   margin-top: 10px;
   width: 100px!important;
@@ -31,4 +48,172 @@ thead:last-child {
   margin-bottom: 10px;
   float: right;
   margin-right: 10px;
+}
+.disabled-btn{
+  pointer-events: none;
+  color: grey;
+}
+.dis-all{
+  background-color: #e6e6e6;
+}
+.image-size{
+  max-height: 100px;
+  max-width: 100px !important;
+}
+
+
+
+
+/*Eliminates padding, centers the thumbnail */
+
+body, html {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+/* Styles the thumbnail */
+
+a.lightbox img {
+  height: 150px;
+  border: 3px solid white;
+  box-shadow: 0px 0px 8px rgba(0,0,0,.3);
+  //margin: 94px 20px 20px 20px;
+}
+
+/* Styles the lightbox, removes it from sight and adds the fade-in transition */
+
+.lightbox-target {
+  z-index: 11111;
+  position: fixed;
+  top: -100%;
+  width: 100%;
+  background: rgba(0,0,0,.7);
+  width: 100%;
+  opacity: 0;
+  -webkit-transition: opacity .5s ease-in-out;
+  -moz-transition: opacity .5s ease-in-out;
+  -o-transition: opacity .5s ease-in-out;
+  transition: opacity .5s ease-in-out;
+  overflow: hidden;
+}
+
+/* Styles the lightbox image, centers it vertically and horizontally, adds the zoom-in transition and makes it responsive using a combination of margin and absolute positioning */
+
+.lightbox-target img {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left:0;
+  right:0;
+  bottom: 0;
+  max-height: 0%;
+  max-width: 0%;
+  border: 3px solid white;
+  box-shadow: 0px 0px 8px rgba(0,0,0,.3);
+  box-sizing: border-box;
+  -webkit-transition: .5s ease-in-out;
+  -moz-transition: .5s ease-in-out;
+  -o-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
+}
+
+/* Styles the close link, adds the slide down transition */
+
+a.lightbox-close {
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0);
+  /* color: black; */
+  text-decoration: none;
+  position: absolute;
+  /* top: 24px; */
+  right: 0;
+  z-index: -1000;
+  -webkit-transition: .5s ease-in-out;
+  -moz-transition: .5s ease-in-out;
+  -o-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
+}
+
+/* Provides part of the "X" to eliminate an image from the close link */
+
+a.lightbox-close:before {
+  content: "";
+  display: block;
+  height: 30px;
+  width: 1px;
+  background: black;
+  position: absolute;
+  left: 26px;
+  top:10px;
+  -webkit-transform:rotate(45deg);
+  -moz-transform:rotate(45deg);
+  -o-transform:rotate(45deg);
+  transform:rotate(45deg);
+}
+
+/* Provides part of the "X" to eliminate an image from the close link */
+
+a.lightbox-close:after {
+  content: "";
+  display: block;
+  height: 30px;
+  width: 1px;
+  background: black;
+  position: absolute;
+  left: 26px;
+  top:10px;
+  -webkit-transform:rotate(-45deg);
+  -moz-transform:rotate(-45deg);
+  -o-transform:rotate(-45deg);
+  transform:rotate(-45deg);
+}
+
+/* Uses the :target pseudo-class to perform the animations upon clicking the .lightbox-target anchor */
+
+.lightbox-target:target {
+  opacity: 1;
+  top: 0;
+  bottom: 0;
+}
+
+.lightbox-target:target img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.lightbox-target:target a.lightbox-close {
+  top: 55px;
+}
+.products-count{
+  float: left;
+  position: relative;
+  top: 40px;
+}
+.products-count-first{
+  float: left;
+  position: relative;
+  top: 13px;
+}
+.in-any-page{
+  clear: both;
+  float: left;
+  position: relative;
+  top: 18px;
+}
+.first-pagination{
+  position: relative;
+  top: 23px;
+}
+.only-th{
+  font-weight: normal !important;
+}
+.input-id{
+  max-width: 60px !important;
+}
+.input-id-header{
+  max-width: 60px !important;
 }

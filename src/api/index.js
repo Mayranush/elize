@@ -1,1 +1,1 @@
-xport test from "./api"
+export test from "./api"

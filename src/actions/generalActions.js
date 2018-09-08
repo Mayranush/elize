@@ -4,6 +4,7 @@ import store from "store";
 import {tools} from "../resources";
 import api from "../api/api";
 import {changePopup} from "./popupActions";
+import {statusAll} from "./secondPageActions";
 
 export const cleanData = createAction(ActionTypes.cleanData);
 export const changeItemsInEachPageCompareFunc = createAction(ActionTypes.changeItemsInEachPageCompareFunc);
@@ -18,6 +19,7 @@ export const filterByTitle = createAction(ActionTypes.filterByTitle);
 export const filterByBrandAttached = createAction(ActionTypes.filterByBrandAttached);
 export const filterByTitleAttached = createAction(ActionTypes.filterByTitleAttached);
 export const changeSearchTextAttached = createAction(ActionTypes.changeSearchTextAttached);
+export const filterBySourceElize = createAction(ActionTypes.filterBySourceElize);
 
 export const emailChange = createAction(ActionTypes.emailChange);
 export const passwordChange = createAction(ActionTypes.passwordChange);
@@ -33,6 +35,8 @@ export function errorHandler(error) {
   };
 }
 
+
+
 /////////////////////////////////////////////     compare elize            ////////////////////////////////////////////////
 
 const getDataRequestCompareElize = createAction(ActionTypes.getDataRequestCompareElize);
@@ -41,7 +45,6 @@ const responseResponseCompareElize = createAction(ActionTypes.getDataResponseCom
 
 export function getDataResponseCompareElize(result) {
   return (dispatch) => {
-
     let data = [];
     let item = [];
     for (let i = 0; i < result.data.length; i++) {
@@ -55,6 +58,7 @@ export function getDataResponseCompareElize(result) {
           item.titleElize = result.data[i].title;
           item.fullTitleElize = result.data[i].fullTitle;
           item.brandElize = result.data[i].brand;
+          item.imageElize = result.data[i].image;
           item.priceElize = result.data[i].price;
           item.urlElize = result.data[i].url;
           item.url = result.data[i].foundProducts[j].url;
@@ -63,6 +67,7 @@ export function getDataResponseCompareElize(result) {
           item.title = result.data[i].foundProducts[j].title;
           item.fullTitle = result.data[i].foundProducts[j].fullTitle;
           item.brand = result.data[i].foundProducts[j].brand;
+          item.image = result.data[i].foundProducts[j].image;
           item.category = result.data[i].foundProducts[j].category;
           item.subCategory = result.data[i].foundProducts[j].subCategory;
           item.url = result.data[i].foundProducts[j].url;
@@ -82,6 +87,7 @@ export function getDataResponseCompareElize(result) {
         item.titleElize = result.data[i].title;
         item.fullTitleElize = result.data[i].fullTitle;
         item.brandElize = result.data[i].brand;
+        item.imageElize = result.data[i].image;
         item.priceElize = result.data[i].price;
         item.urlElize = result.data[i].url;
         data.push(item);
@@ -94,10 +100,10 @@ export function getDataResponseCompareElize(result) {
   };
 }
 
-export function compareElize(brand, title, sortBy, sortDir,page, limit) {
+export function compareElize(brand, title, sortBy, sortDir, page, limit,src) {
   return (dispatch) => {
     dispatch(getDataRequestCompareElize());
-    return api.compareElize(brand, title, sortBy, sortDir,page, limit)
+    return api.compareElize(brand, title, sortBy, sortDir, page, limit,src)
       .then(data => dispatch(getDataResponseCompareElize(data.data)))
       .catch(error => dispatch(errorHandler(error)));
   };
@@ -111,7 +117,6 @@ const responseResponseAttachedElize = createAction(ActionTypes.getDataResponseAt
 
 export function getDataResponseAttachedElize(result) {
   return (dispatch) => {
-
     let data = [];
     let item = [];
     for (let i = 0; i < result.data.length; i++) {
@@ -133,6 +138,7 @@ export function getDataResponseAttachedElize(result) {
           item.title = result.data[i].foundProducts[j].title;
           item.fullTitle = result.data[i].foundProducts[j].fullTitle;
           item.brand = result.data[i].foundProducts[j].brand;
+          item.image = result.data[i].foundProducts[j].image;
           item.category = result.data[i].foundProducts[j].category;
           item.subCategory = result.data[i].foundProducts[j].subCategory;
           item.url = result.data[i].foundProducts[j].url;
@@ -152,6 +158,7 @@ export function getDataResponseAttachedElize(result) {
         item.titleElize = result.data[i].title;
         item.fullTitleElize = result.data[i].fullTitle;
         item.brandElize = result.data[i].brand;
+        item.imageElize = result.data[i].image;
         item.priceElize = result.data[i].price;
         item.urlElize = result.data[i].url;
         data.push(item);
@@ -165,10 +172,10 @@ export function getDataResponseAttachedElize(result) {
   };
 }
 
-export function attachedElize(brand, title, sortBy, sortDir,page, limit) {
+export function attachedElize(brand, title, sortBy, sortDir, page, limit) {
   return (dispatch) => {
     dispatch(getDataRequestAttachedElize());
-    return api.attachedElize(brand, title, sortBy, sortDir,page, limit)
+    return api.attachedElize(brand, title, sortBy, sortDir, page, limit)
       .then(data => dispatch(getDataResponseAttachedElize(data.data)))
       .catch(error => dispatch(errorHandler(error)));
   };
@@ -190,7 +197,7 @@ export function brandsElize(brand) {
   return (dispatch) => {
     dispatch(getDataRequestBrandElize());
     return api.brandsElize(brand)
-      .then(data => dispatch(getDataResponseBrandElize(data.data )))
+      .then(data => dispatch(getDataResponseBrandElize(data.data)))
       .catch(error => dispatch(errorHandler(error)));
   };
 }
@@ -207,11 +214,11 @@ export function getDataResponseBrandElizeTitle(data) {
   };
 }
 
-export function titleElize(brand,title) {
+export function titleElize(brand, title) {
   return (dispatch) => {
     dispatch(getDataRequestBrandElize());
-    return api.titleElize(brand,title)
-      .then(data => dispatch(getDataResponseBrandElizeTitle(data.data )))
+    return api.titleElize(brand, title)
+      .then(data => dispatch(getDataResponseBrandElizeTitle(data.data)))
       .catch(error => dispatch(errorHandler(error)));
   };
 }
@@ -233,7 +240,7 @@ export function brandsElizeAttached(brand) {
   return (dispatch) => {
     dispatch(getDataRequestBrandElizeAttached());
     return api.brandsElizeAttached(brand)
-      .then(data => dispatch(getDataResponseBrandElizeAttached(data.data )))
+      .then(data => dispatch(getDataResponseBrandElizeAttached(data.data)))
       .catch(error => dispatch(errorHandler(error)));
   };
 }
@@ -250,11 +257,11 @@ export function getDataResponseBrandElizeTitleAttached(data) {
   };
 }
 
-export function titleElizeAttached(brand,title) {
+export function titleElizeAttached(brand, title) {
   return (dispatch) => {
     dispatch(getDataRequestBrandElizeAttached());
-    return api.titleElizeAttached(brand,title)
-      .then(data => dispatch(getDataResponseBrandElizeTitleAttached(data.data )))
+    return api.titleElizeAttached(brand, title)
+      .then(data => dispatch(getDataResponseBrandElizeTitleAttached(data.data)))
       .catch(error => dispatch(errorHandler(error)));
   };
 }
@@ -299,3 +306,23 @@ export function unsimilar(obj) {
 }
 
 
+/////////////////////////////////////////////     Source elize       ////////////////////////////////////////////////
+
+const getDataRequestElizeSource = createAction(ActionTypes.getDataRequestElizeSource);
+
+const responseResponseElizeSource = createAction(ActionTypes.getDataResponseElizeSource);
+
+export function getDataResponseElizeSource(data) {
+  return (dispatch) => {
+    return dispatch(responseResponseElizeSource({data}));
+  };
+}
+
+export function sourceElize() {
+  return (dispatch) => {
+    dispatch(getDataRequestElizeSource());
+    return api.sourceElize()
+      .then(data => dispatch(getDataResponseElizeSource(data.data)))
+      .catch(error => dispatch(errorHandler(error)));
+  };
+}

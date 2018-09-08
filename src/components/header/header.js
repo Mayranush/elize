@@ -7,6 +7,7 @@ const Header = (...props) => {
     <nav className="navbar" role="navigation">
       <Link to="">Home</Link>
       <Link to="non-compared">Non Compared</Link>
+      <Link to="export">Export/Status</Link>
     </nav>
   )  
 };

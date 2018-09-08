@@ -1,15 +1,15 @@
-import { combineReducers } from "redux";
+import {combineReducers} from "redux";
 import general from "./generalReducer";
 import secondPage from "./secondPageReducer";
 import popup from "./popupReducer";
 
 const appReducer = combineReducers({
-    general,
-    secondPage,
-    popup
+  general,
+  secondPage,
+  popup
 });
 
-const  rootReducer = (state, action) => {
+const rootReducer = (state, action) => {
   if (action.type === 'CLEAN_DATA') {
     state = undefined
   }

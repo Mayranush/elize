@@ -31,8 +31,6 @@ export class Login extends React.Component {
   loginUser(e) {
     e.stopPropagation();
     e.preventDefault();
-    console.log(username,"slslsls");
-    console.log(password,"slslsls");
     let obj = {
       username: username,
       password: password,

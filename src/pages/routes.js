@@ -45,6 +45,15 @@ const routes = {
       }
     },
     {
+      path: 'export',
+      onEnter: requireAuth,
+      getComponent(location, cb) {
+        System.import('pages/export')
+          .then(loadRoute(cb))
+          .catch(errorLoading);
+      }
+    },
+    {
       path: 'login',
       onEnter: dontRequireAuth,
       getComponent(location, cb) {
