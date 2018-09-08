@@ -316,7 +316,6 @@ class About extends React.Component {
   }
 
   render() {
-    console.log(this.props.data.dataNonCompareElize, "stegh");
     return (
       <div className="main-content">
         <div className="half">
@@ -379,7 +378,7 @@ class About extends React.Component {
           </div>
           {/*<button className="btn btn-primary export-to-excel" type="button" onClick={this.exportDataNonCompare}>Export
           </button>*/}
-          {this.props.data.dataNonCompareElize &&
+          {this.props.dataFilteredNoneCompare &&
           <div className="table-body">
             <table className="table">
               <thead className="thead-inverse">
@@ -392,18 +391,18 @@ class About extends React.Component {
               </thead>
               <tbody>
               {
-                this.props.data.dataNonCompareElize.map((item) => {
-                  return (<tr key={item.id + " " + item.id}>
-                    <th title={item.brand} className="only-th">{item.brand}</th>
+                this.props.dataFilteredNoneCompare.map((item) => {
+                  return (<tr key={item.idElize + " " + item.id}>
+                    <th title={item.brandElize} className="only-th">{item.brandElize}</th>
 
                     <td className="wraped-tbl">
-                      <a href={item.url} target="_blank">{item.fullTitle}</a>
+                      <a href={item.urlElize} target="_blank">{item.fullTitleElize}</a>
                     </td>
                     <td><a className="image-size lightbox" href="#image">
-                      <img className="image-size" onMouseOver={(e) => this.changeImageZoom(e)} src={item.image}/>
+                      <img className="image-size" onMouseOver={(e) => this.changeImageZoom(e)} src={item.imageElize}/>
                     </a>
                     </td>
-                    <td scope="row">{item.id}</td>
+                    <td scope="row">{item.idElize}</td>
                   </tr>);
                 })
               }
