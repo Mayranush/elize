@@ -602,6 +602,8 @@ class About extends React.Component {
               <th></th>
               <th onClick={() => this.setSortByConAttached("brand")}>Бренд-Elize</th>
               <th onClick={() => this.setSortByConAttached("fullTitle")}>Название-Elize</th>
+              <th>Фото-Elize</th>
+              <th>Фото</th>
               <th onClick={() => this.setSortByConAttached("fullTitle")}>Название</th>
               <th onClick={() => this.setSortByConAttached("brand")}>Бренд</th>
               <th onClick={() => this.setSortByConAttached("price")}>Цена-Elize</th>
@@ -626,6 +628,14 @@ class About extends React.Component {
                   <td title={item.brandElize}>{item.brandElize}</td>
                   <td title={item.fullTitleElize}>
                     <a href={item.urlElize} target="_blank">{item.fullTitleElize}</a>
+                  </td>
+                  <td><a className="image-size lightbox" href="#image">
+                    <img className="image-size" onMouseOver={(e) => this.changeImageZoom(e)} src={item.imageElize}/>
+                  </a>
+                  </td>
+                  <td><a className="image-size lightbox" href="#image">
+                    <img className="image-size" onMouseOver={(e) => this.changeImageZoom(e)} src={item.image}/>
+                  </a>
                   </td>
                   <td title={item.fullTitle}>
                     <a href={item.url} target="_blank">{item.fullTitle}</a>

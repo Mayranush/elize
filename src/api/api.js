@@ -13,12 +13,12 @@ let addHeaders = (token) => {
 
   if (token) {
     api = axios.create({
-      baseURL: "http://63.142.251.65:8080", //63.142.251.65
+      baseURL: "http://localhost:8888", //63.142.251.65
       headers: {"Authorization": tokenFromStore}
     });
   } else {
     api = axios.create({
-      baseURL: "http://63.142.251.65:8080"
+      baseURL: "http://localhost:8888"
     });
   }
 

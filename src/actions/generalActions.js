@@ -139,6 +139,7 @@ export function getDataResponseAttachedElize(result) {
           item.fullTitle = result.data[i].foundProducts[j].fullTitle;
           item.brand = result.data[i].foundProducts[j].brand;
           item.image = result.data[i].foundProducts[j].image;
+          item.imageElize = result.data[i].image;
           item.category = result.data[i].foundProducts[j].category;
           item.subCategory = result.data[i].foundProducts[j].subCategory;
           item.url = result.data[i].foundProducts[j].url;
