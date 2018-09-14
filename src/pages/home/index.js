@@ -495,6 +495,7 @@ class Home extends React.Component {
                   <td title={item.fullTitleElize}>
                     <a href={item.urlElize} target="_blank">{item.fullTitleElize}</a>
                   </td>
+<<<<<<< HEAD
                   <td>
                     <a className="image-size lightbox" href="#image">
                       <img className="image-size" onMouseOver={(e) => this.changeImageZoom(e)} src={item.imageElize}/>
@@ -504,6 +505,15 @@ class Home extends React.Component {
                     <a className="image-size lightbox" href="#image">
                       <img className="image-size" onMouseOver={(e) => this.changeImageZoom(e)} src={item.image}/>
                     </a>
+=======
+                  <td><a className="image-size lightbox" href="#image">
+                    <img className="image-size" onMouseOver={(e) => this.changeImageZoom(e)} src={item.imageElize}/>
+                  </a>
+                  </td>
+                  <td><a className="image-size lightbox" href="#image">
+                    <img className="image-size" onMouseOver={(e) => this.changeImageZoom(e)} src={item.image}/>
+                  </a>
+>>>>>>> 8c13c222a37344ccde9078c559520976819cf222
                   </td>
                   <td title={item.fullTitle}>
                     <a href={item.url} target="_blank">{item.fullTitle}</a>
