@@ -130,6 +130,7 @@ export function getDataResponseAttachedElize(result) {
           item.titleElize = result.data[i].title;
           item.fullTitleElize = result.data[i].fullTitle;
           item.brandElize = result.data[i].brand;
+          item.imageElize = result.data[i].image;
           item.priceElize = result.data[i].price;
           item.urlElize = result.data[i].url;
           item.url = result.data[i].foundProducts[j].url;

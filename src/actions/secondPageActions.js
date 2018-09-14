@@ -113,7 +113,7 @@ export function getDataResponseNonCompareElize(result) {
 
     }
     let count = result.count;
-    return dispatch(responseResponseNonCompareElize({data, count, result}));
+    return dispatch(responseResponseNonCompareElize({data, count}));
   };
 }
 

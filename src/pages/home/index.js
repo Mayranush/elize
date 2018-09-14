@@ -147,10 +147,6 @@ class Home extends React.Component {
     this.props.statusAll();
     let brand = (e.target.value);
     this.props.filterByBrandAttached(brand);
-    console.log(this.props.data.filterBrandAttached,"llllllllllllll");
-    console.log(brand,"uuuuu");
-
-
     this.props.brandsElizeAttached(brand);
   };
 
@@ -167,6 +163,7 @@ class Home extends React.Component {
       this.searchElize();
     }
   };
+
   searchElize = () => {
     this.props.statusAll();
     this.props.compareElize((this.props.data.filterBrand),
@@ -176,7 +173,9 @@ class Home extends React.Component {
       this.currentPageCompare.value - 1,
       this.props.data.itemsInEachPageCompare,
       this.props.data.filterSource);
+      this.currentPageCompare.value = 1;
   };
+
   searchElizeAttachedOnEnter = (e) => {
     this.props.statusAll();
     if (e.keyCode === 13) {
@@ -186,11 +185,12 @@ class Home extends React.Component {
   searchElizeAttached = () => {
     this.props.statusAll();
     this.props.attachedElize((this.props.data.filterBrandAttached),
-      (this.props.data.filterTitleAttached),
-      this.props.data.compareSortBy,
-      this.props.data.compareSortDir,
-      this.currentPageAttached.value - 1,
-      this.props.data.itemsInEachPageAttached);
+    (this.props.data.filterTitleAttached),
+    this.props.data.compareSortBy,
+    this.props.data.compareSortDir,
+    this.currentPageAttached.value - 1,
+    this.props.data.itemsInEachPageAttached);
+    this.currentPageAttached.value = 1;
   };
   setSortBy = (sortCol) => {
     this.props.statusAll();
@@ -259,47 +259,42 @@ class Home extends React.Component {
     this.props.filterBySourceElize(source);
     this.props.sourceElize();
   };
-  searchElizeOnEnter = (e) => {
-    this.props.statusAll();
-    if (e.keyCode === 13) {
-      this.searchElize();
-    }
-  };
-  searchElize = () => {
-    this.props.statusAll();
-    this.props.compareElize((this.props.data.filterBrand),
-      (this.props.data.filterTitle),
-      this.props.data.compareSortBy,
-      this.props.data.compareSortDir,
-      this.currentPageCompare.value - 1,
-      this.props.data.itemsInEachPageCompare,
-      this.props.data.filterSource);
-  };
+ 
   render() {
     return (
       <div className="main-content">
         <div className="table-title">Сопоставление Продукты</div>
         <div className="search-container">
-          {/*/!*<input type="text" placeholder= "Search by n ame" value={this.props.data.searchText}*!/*/}
-          {/*/!*onChange={(e) => this.props.changeSearchText(e.target.value)}/>*!/*/}
-          <input type="text" list="brands" placeholder="Filter by brand" value={this.props.data.filterBrand}
-                 onChange={(e) => this.filterByBrandFunc(e)} onKeyUp={(e) => this.searchElizeOnEnter(e)}
-                 onClick={(e) => this.filterByBrandFunc(e)}/>
+          <input
+            type="text" 
+            list="brands"
+            placeholder="Filter by brand" 
+            value={this.props.data.filterBrand}
+            onChange={(e) => this.filterByBrandFunc(e)} 
+            onKeyUp={(e) => this.searchElizeOnEnter(e)}
+            onClick={(e) => this.filterByBrandFunc(e)}
+          />
           <datalist id="brands" className={this.props.data.filterBrandData.length > 0 ? "dropdown-filter" : ""}>
             {this.props.data.filterBrandData &&
-            this.props.data.filterBrandData.map((item) => {
-              return (<option value={item}> {item} </option>);
+            this.props.data.filterBrandData.map((item, index) => {
+              return (<option key={index} value={item}> {item} </option>);
             })
             }
           </datalist>
         </div>
         <div className="search-container">
-          <input type="text" list="titles" placeholder="Filter by title" value={this.props.data.filterTitle}
-                 onChange={(e) => this.filterByTitleFunc(e)} onKeyUp={(e) => this.searchElizeOnEnter(e)}/>
+          <input 
+            type="text"
+            list="titles" 
+            placeholder="Filter by title" 
+            value={this.props.data.filterTitle}
+            onChange={(e) => this.filterByTitleFunc(e)}
+            onKeyUp={(e) => this.searchElizeOnEnter(e)}
+          />
           <datalist id="titles" className={this.props.data.filterTitleData.length > 0 ? "dropdown-filter" : ""}>
             {this.props.data.filterTitleData &&
-            this.props.data.filterTitleData.map((item) => {
-              return (<option value={item}> {item} </option>);
+            this.props.data.filterTitleData.map((item, index) => {
+              return (<option key={index} value={item}> {item} </option>);
             })
             }
           </datalist>
@@ -309,12 +304,12 @@ class Home extends React.Component {
                  value={this.props.data.filterSource}
                  onChange={(e) => this.filterBySourceElizeFunc(e)}
                  onClick={(e) => this.filterBySourceElizeFunc(e)}
-                 onKeyUp={(e) => this.searchElizeElizeOnEnter(e)}/>
+                 onKeyUp={(e) => this.searchElizeOnEnter(e)}/>
           <datalist id="sources"
                     className={this.props.data.filterSourceData.length > 0 ? "dropdown-filter" : ""}>
             {this.props.data.filterSourceData &&
-            this.props.data.filterSourceData.map((item) => {
-              return (<option value={item}> {item} </option>);
+            this.props.data.filterSourceData.map((item, index) => {
+              return (<option key={index} value={item}> {item} </option>);
             })
             }
           </datalist>
@@ -418,8 +413,12 @@ class Home extends React.Component {
           </div>
           <div className="pagination-block">
             {Math.ceil(this.props.data.countCompare / this.props.data.itemsInEachPageCompare) > 1 &&
-            <Pagination maxPageCount={Math.ceil(this.props.data.countCompare / this.props.data.itemsInEachPageCompare)}
-                        currentPage={this.currentPageCompare} clickFunction={this.clickFunctionCompare}/>}
+            <Pagination 
+              maxPageCount={Math.ceil(this.props.data.countCompare / this.props.data.itemsInEachPageCompare)}
+              currentPage={this.currentPageCompare}
+              clickFunction={this.clickFunctionCompare}
+              isProduct={false}
+            />}
           </div>
         </div>
         <div className="table-title">Прикрепление Продукты</div>
@@ -435,8 +434,8 @@ class Home extends React.Component {
           <datalist id="brandsAttached"
                     className={this.props.data.filterBrandAttachedData.length > 0 ? "dropdown-filter" : ""}>
             {this.props.data.filterBrandAttachedData &&
-            this.props.data.filterBrandAttachedData.map((item) => {
-              return (<option value={item}> {item} </option>);
+            this.props.data.filterBrandAttachedData.map((item, index) => {
+              return (<option key={index} value={item}> {item} </option>);
             })
             }
           </datalist>
@@ -449,8 +448,8 @@ class Home extends React.Component {
           <datalist id="titlesAttached"
                     className={this.props.data.filterTitleAttachedData.length > 0 ? "dropdown-filter" : ""}>
             {this.props.data.filterTitleAttachedData &&
-            this.props.data.filterTitleAttachedData.map((item) => {
-              return (<option value={item}> {item} </option>);
+            this.props.data.filterTitleAttachedData.map((item, index) => {
+              return (<option key={index} value={item}> {item} </option>);
             })
             }
           </datalist>
@@ -469,6 +468,8 @@ class Home extends React.Component {
               <th></th>
               <th onClick={() => this.setSortByAttached("brand")}>Бренд-Elize</th>
               <th onClick={() => this.setSortByAttached("fullTitle")}>Название-Elize</th>
+              <th>Фото-Elize</th>
+              <th>Фото</th>
               <th onClick={() => this.setSortByAttached("fullTitle")}>Название</th>
               <th onClick={() => this.setSortByAttached("brand")}>Бренд</th>
               <th onClick={() => this.setSortByAttached("price")}>Цена-Elize</th>
@@ -478,7 +479,6 @@ class Home extends React.Component {
             <tbody>
             {
               this.props.dataFilteredAttached.map((item) => {
-
                 return (<tr key={item.idElize + " " + item.id}>
                   <td>
 
@@ -494,6 +494,16 @@ class Home extends React.Component {
                   <td title={item.brandElize}>{item.brandElize}</td>
                   <td title={item.fullTitleElize}>
                     <a href={item.urlElize} target="_blank">{item.fullTitleElize}</a>
+                  </td>
+                  <td>
+                    <a className="image-size lightbox" href="#image">
+                      <img className="image-size" onMouseOver={(e) => this.changeImageZoom(e)} src={item.imageElize}/>
+                    </a>
+                  </td>
+                  <td>
+                    <a className="image-size lightbox" href="#image">
+                      <img className="image-size" onMouseOver={(e) => this.changeImageZoom(e)} src={item.image}/>
+                    </a>
                   </td>
                   <td title={item.fullTitle}>
                     <a href={item.url} target="_blank">{item.fullTitle}</a>
@@ -526,7 +536,10 @@ class Home extends React.Component {
             {Math.ceil(this.props.data.countAttached / this.props.data.itemsInEachPageAttached) > 1 &&
             <Pagination
               maxPageCount={Math.ceil(this.props.data.countAttached / this.props.data.itemsInEachPageAttached)}
-              currentPage={this.currentPageAttached} clickFunction={this.clickFunctionAttached}/>}
+              currentPage={this.currentPageAttached}
+              clickFunction={this.clickFunctionAttached}
+              isProduct={true}
+            />}
           </div>
         </div>
       </div>

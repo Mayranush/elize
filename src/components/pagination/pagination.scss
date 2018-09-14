@@ -62,4 +62,9 @@
         background-color    : #027041;
         color               : white;
     }
+
+    .page-hide, .page-hide:hover {
+        opacity: 0;
+        pointer-events: none;
+    }
 }

@@ -28,13 +28,19 @@ export class Pagination extends React.Component {
   static propTypes = {
     maxPageCount: PropTypes.number,
     currentPage: PropTypes.object,
-    clickFunction: PropTypes.func
+    clickFunction: PropTypes.func,
+    isProduct: PropTypes.bool
   };
 
   componentDidMount() {
     this.choosedPageFromTable(this.props.currentPage);
   }
 
+  componentWillUpdate() {
+    if(this.props.currentPage.value !== this.currentPage && this.currentPage) {
+      this.choosedPageFromTable(this.props.currentPage);
+    }
+  }
 
   changingState = () => {
     let pageArr = [];
@@ -83,6 +89,7 @@ export class Pagination extends React.Component {
       item = {}
     }
     this.setState({pages: arrToReturn});
+    this.props.currentPage.value = this.currentPage;
   };
 
   checkingForState = () => {
@@ -156,7 +163,8 @@ export class Pagination extends React.Component {
           this.state.pages && this.state.pages.map((item, i) => {
             let className = classNames('each-page', {
               'page-active':   item.model,
-              'page-etc': item.value == '...'
+              'page-etc': item.value == '...',
+              'page-hide': item.value == '>>' && this.props.isProduct
             });
             return (
               <div key={i}  className={className}

@@ -429,7 +429,10 @@ class About extends React.Component {
               {Math.ceil(this.props.data.countNonCompare / this.props.data.itemsInEachPageNonCompare) > 1 &&
               <Pagination
                 maxPageCount={Math.ceil(this.props.data.countNonCompare / this.props.data.itemsInEachPageNonCompare)}
-                currentPage={this.currentPageNonCompare} clickFunction={this.clickFunctionNonCompare}/>}
+                currentPage={this.currentPageNonCompare}
+                clickFunction={this.clickFunctionNonCompare}
+                isProduct={false}
+              />}
             </div>
           </div>
         </div>
@@ -550,7 +553,10 @@ class About extends React.Component {
               {Math.ceil(this.props.data.countNonCompareProducts / this.props.data.itemsInEachPageNonCompareProducts) > 1 &&
               <Pagination
                 maxPageCount={Math.ceil(this.props.data.countNonCompareProducts / this.props.data.itemsInEachPageNonCompareProducts)}
-                currentPage={this.currentPageNonCompareProducts} clickFunction={this.clickFunctionNonCompareProducts}/>}
+                currentPage={this.currentPageNonCompareProducts} 
+                clickFunction={this.clickFunctionNonCompareProducts}
+                isProduct={false}
+              />}
             </div>
           </div>
         </div>
@@ -658,8 +664,12 @@ class About extends React.Component {
           </div>
           <div className="pagination-block">
             {Math.ceil(this.props.data.countAttached / this.props.data.itemsInEachPageCompare) > 1 &&
-            <Pagination maxPageCount={Math.ceil(this.props.data.countAttached / this.props.data.itemsInEachPageCompare)}
-                        currentPage={this.currentPageAttached} clickFunction={this.clickFunctionCompare}/>}
+            <Pagination
+              maxPageCount={Math.ceil(this.props.data.countAttached / this.props.data.itemsInEachPageCompare)}
+              currentPage={this.currentPageAttached}
+              clickFunction={this.clickFunctionCompare}
+              isProduct={true}
+            />}
           </div>
         </div>
       </div>

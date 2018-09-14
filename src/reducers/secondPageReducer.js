@@ -51,7 +51,6 @@ export default handleActions({
   [ActionTypes.getDataResponseNonCompareElize]: (state, {payload}) => ({
     ...state,
     loaderNonCompare: false,
-    dataNonCompareElize:payload.result,
     dataNonCompare: payload.data,
     countNonCompare: payload.count
   }),
