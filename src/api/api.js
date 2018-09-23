@@ -12,13 +12,14 @@ let addHeaders = (token) => {
   const tokenFromStore = "Token " + (store.getState().general.token || window.sessionStorage.getItem("token"));
 
   if (token) {
+
     api = axios.create({
-      baseURL: "http://63.142.251.65:8080", //63.142.251.65
+      baseURL: "http://63.142.251.65:8888", //63.142.251.65
       headers: {"Authorization": tokenFromStore}
     });
   } else {
     api = axios.create({
-      baseURL: "http://63.142.251.65:8080"
+      baseURL: "http://63.142.251.65:8888"
     });
   }
 
@@ -145,6 +146,10 @@ const compareElizeStart = (percent) => {
   addHeaders(false);
   return api.post("/compare?perc=" + percent);
 };
+const calculate = (title1, title2) => {
+  addHeaders(false);
+  return api.get("/calc?title1=" + title1+"&title2="+title2);
+};
 const stopCompareElize = () => {
   addHeaders(false);
   return api.get("/compare-stop");
@@ -159,6 +164,7 @@ const stopElize = () => {
 };
 
 export default {
+  calculate,
   compareElizeStart,
   stopCompareElize,
   startElize,

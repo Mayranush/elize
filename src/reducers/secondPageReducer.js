@@ -45,6 +45,7 @@ const defaultState = {
   exportType:'Сопоставление Продукты',
   statusData:[],
   statusAll:'1',
+  calculateScore:'',
   imageZoom:''
 };
 
@@ -223,6 +224,12 @@ export default handleActions({
     ...state,
     loaderAttached: false,
     statusAll: payload.data
+  }),
+  [ActionTypes.getDataRequestCalculate]: (state) => ({...state, loaderAttached: true}),
+  [ActionTypes.getDataResponseCalculate]: (state, {payload}) => ({
+    ...state,
+    loaderAttached: false,
+    calculateScore: payload.data
   }),
 
   [ActionTypes.getDataRequestCompare]: (state) => ({...state, loaderAttached: true}),

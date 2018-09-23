@@ -37,6 +37,11 @@ class About extends React.Component {
     let percent = this.refs.percentage.value;
      this.props.compareElizeStart(percent);
   }
+  calculate() {
+    let title1 = this.refs.title1.value;
+    let title2 = this.refs.title2.value;
+     this.props.calculate(title1,title2);
+  }
 
   stopCompareElize() {
     this.props.stopCompareElize();
@@ -75,8 +80,13 @@ class About extends React.Component {
         </form>
 
         <div className="status-all">
-
-
+          <input className="title-calc"  type="text" ref="title1" />
+          <input className="title-calc"  type="text" ref="title2" />
+          <button className="btn btn-primary update" type="button"
+                  onClick={() => this.calculate()}>Подсчитывать
+          </button>
+          - {this.props.data.calculateScore}
+<br/>
           <input className="percentage" id="percentage" type="text" ref="percentage" defaultValue="60"/>%
           <button className="btn btn-primary update" type="button"
                   onClick={() => this.compareElize()}>Сопоставить

@@ -555,6 +555,28 @@ export function compareElizeStart(percent) {
       .catch(error => dispatch(errorHandler(error)));
   };
 }
+
+/////////////////////////////////////////////     Calculate////////////////////////////////////////////////
+
+const getDataRequestCalculate = createAction(ActionTypes.getDataRequestCalculate );
+
+const responseResponseCalculate = createAction(ActionTypes.getDataResponseCalculate );
+
+export function getDataResponseCalculate (dataOld) {
+  return (dispatch) => {
+    let data = dataOld.perc;
+    return dispatch(responseResponseCalculate ({data}));
+  };
+}
+
+export function calculate(title1,title2) {
+  return (dispatch) => {
+    dispatch(getDataRequestCalculate());
+    return api.calculate(title1,title2)
+      .then(data => dispatch(getDataResponseCalculate(data.data)))
+      .catch(error => dispatch(errorHandler(error)));
+  };
+}
 /////////////////////////////////////////////     Stop ////////////////////////////////////////////////
 
 const getDataRequestStopCompareElize = createAction(ActionTypes.getDataRequestStopCompareElize);

@@ -105,12 +105,9 @@ class About extends React.Component {
     e.preventDefault();
 
     let obj = [];
-    console.log(obj, "obj 000");
     this.props.data.dataNonCompareProducts.map((item, index) => {
       let each = {};
       let productValue = this.props.data.inputValue[index];
-      console.log(productValue, "prodval");
-      console.log(index, "index");
       if (productValue) {
         each = {"elizeId": productValue, "productId": item.id};
         obj.push(each);
@@ -542,7 +539,7 @@ class About extends React.Component {
                     </a>
                     </td>
                     <td className="wraped-tbl">
-                      <a href={item.url} target="_blank">{item.id}</a>
+                      <a href={item.url} target="_blank">{item.fullTitle}</a>
                     </td>
                     <td title={item.brand}>{item.brand}</td>
                   </tr>);

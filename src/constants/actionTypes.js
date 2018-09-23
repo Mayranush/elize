@@ -130,6 +130,8 @@ const ActionTypes = {
 
   getDataRequestCompare: "GET_DATA_REQUEST_COMPARE",
   getDataResponseCompare: "GET_DATA_RESPONSE_COMPARE",
+  getDataRequestCalculate: "GET_DATA_REQUEST_CALCULATE",
+  getDataResponseCalculate: "GET_DATA_RESPONSE_CALCULATE",
   getDataRequestStopCompareElize: "GET_DATA_REQUEST_STOP_COMPARE_ELIZE",
   getDataResponseStopCompareElize: "GET_DATA_RESPONSE_STOP_COMPARE_ELIZE",
   getDataRequestStartElize: "GET_DATA_REQUEST_START_ELIZE",
