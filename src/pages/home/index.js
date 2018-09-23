@@ -17,10 +17,6 @@ class Home extends React.Component {
     };
   }
 
-  changeImageZoom(e) {
-    this.props.changeImageZoom(e.target.src);
-  }
-
   clickFunctionCompare = (item) => {
     this.props.statusAll();
     this.props.compareElize((this.props.data.filterBrand),
@@ -35,7 +31,8 @@ class Home extends React.Component {
   clickFunctionAttached = (item) => {
     this.props.statusAll();
     this.props.attachedElize((this.props.data.filterBrandAttached),
-      (this.props.data.attachedTitleElize),
+      (this.props.data.filterTitleAttached),
+      (this.props.data.filterSrcAttached),
       this.props.data.attachedSortBy,
       this.props.data.attachedSortDir,
       item - 1,
@@ -54,7 +51,8 @@ class Home extends React.Component {
           this.props.data.itemsInEachPageCompare,
           this.props.data.filterSource);
         this.props.attachedElize((this.props.data.filterBrandAttached),
-          (this.props.data.attachedTitleElize),
+          (this.props.data.filterTitleAttached),
+          (this.props.data.filterSrcAttached),
           this.props.data.attachedSortBy,
           this.props.data.attachedSortDir,
           this.currentPageAttached.value - 1,
@@ -74,7 +72,8 @@ class Home extends React.Component {
           this.props.data.itemsInEachPageCompare,
           this.props.data.filterSource);
         this.props.attachedElize((this.props.data.filterBrandAttached),
-          (this.props.data.attachedTitleElize),
+          (this.props.data.filterTitleAttached),
+          (this.props.data.filterSrcAttached),
           this.props.data.attachedSortBy,
           this.props.data.attachedSortDir,
           this.currentPageAttached.value - 1,
@@ -94,7 +93,8 @@ class Home extends React.Component {
           this.props.data.itemsInEachPageCompare,
           this.props.data.filterSource);
         this.props.attachedElize((this.props.data.filterBrandAttached),
-          (this.props.data.attachedTitleElize),
+          (this.props.data.filterTitleAttached),
+          (this.props.data.filterSrcAttached),
           this.props.data.attachedSortBy,
           this.props.data.attachedSortDir,
           this.currentPageAttached.value - 1,
@@ -121,7 +121,8 @@ class Home extends React.Component {
     this.props.changeItemsInEachPageAttachedFunc(e.target.value);
     if (e.target.value > 0) {
       this.props.attachedElize((this.props.data.filterBrandAttached),
-        (this.props.data.attachedTitleElize),
+        (this.props.data.filterTitleAttached),
+        (this.props.data.filterSrcAttached),
         this.props.data.attachedSortBy,
         this.props.data.attachedSortDir,
         this.currentPageAttached.value - 1,
@@ -133,7 +134,7 @@ class Home extends React.Component {
     this.props.statusAll();
     let brand = (e.target.value);
     this.props.filterByBrand(brand);
-    this.props.brandsElize(brand);
+    this.props.brandsElize(brand, this.props.data.filterSource);
   };
 
   filterByTitleFunc = (e) => {
@@ -147,7 +148,7 @@ class Home extends React.Component {
     this.props.statusAll();
     let brand = (e.target.value);
     this.props.filterByBrandAttached(brand);
-    this.props.brandsElizeAttached(brand);
+    this.props.brandsElizeAttached(brand, this.props.data.filterSrcAttached);
   };
 
   filterByTitleAttachedFunc = (e) => {
@@ -155,6 +156,12 @@ class Home extends React.Component {
     let title = (e.target.value);
     this.props.filterByTitleAttached(title);
     this.props.titleElizeAttached(this.props.data.filterBrandAttached, title);
+  };
+  filterBySrcAttachedFunc = (e) => {
+    this.props.statusAll();
+    let src = (e.target.value);
+    this.props.filterBySrcAttached(src);
+    this.props.srcElizeAttached(this.props.data.filterBrandAttached, src);
   };
 
   searchElizeOnEnter = (e) => {
@@ -186,6 +193,7 @@ class Home extends React.Component {
     this.props.statusAll();
     this.props.attachedElize((this.props.data.filterBrandAttached),
     (this.props.data.filterTitleAttached),
+    (this.props.data.filterSrcAttached),
     this.props.data.compareSortBy,
     this.props.data.compareSortDir,
     this.currentPageAttached.value - 1,
@@ -220,7 +228,8 @@ class Home extends React.Component {
     if (this.props.data.compareSortDir === "asc") {
       this.props.changeSortDir("desc");
       this.props.attachedElize((this.props.data.filterBrandAttached),
-        (this.props.data.attachedTitleElize),
+        (this.props.data.filterTitleAttached),
+        (this.props.data.filterSrcAttached),
         sortCol,
         "desc",
         this.currentPageAttached.value - 1,
@@ -228,7 +237,8 @@ class Home extends React.Component {
     } else {
       this.props.changeSortDir("asc");
       this.props.attachedElize((this.props.data.filterBrandAttached),
-        (this.props.data.attachedTitleElize),
+        (this.props.data.filterTitleAttached),
+        (this.props.data.filterSrcAttached),
         sortCol,
         "asc",
         this.currentPageAttached.value - 1,
@@ -247,7 +257,8 @@ class Home extends React.Component {
       this.props.data.itemsInEachPageCompare,
       this.props.data.filterSource);
     this.props.attachedElize((this.props.data.filterBrandAttached),
-      (this.props.data.attachedTitleElize),
+      (this.props.data.filterTitleAttached),
+      (this.props.data.filterSrcAttached),
       this.props.data.attachedSortBy,
       this.props.data.attachedSortDir,
       this.currentPageAttached.value - 1,
@@ -257,13 +268,20 @@ class Home extends React.Component {
     this.props.statusAll();
     let source = (e.target.value);
     this.props.filterBySourceElize(source);
-    this.props.sourceElize();
+    this.props.sourceElize(this.props.data.filterBrand, source);
   };
+  changeImageZoomHome(e) {
+    this.props.changeImageZoomHome(e.target.src);
+  }
  
   render() {
     return (
       <div className="main-content">
         <div className="table-title">Сопоставление Продукты</div>
+        <div className="lightbox-target" id="image">
+          <img src={this.props.data.imageZoom}/>
+          <a className="lightbox-close" href="#"></a>
+        </div>
         <div className="search-container">
           <input
             type="text" 
@@ -360,11 +378,11 @@ class Home extends React.Component {
                         {item.fullTitleElize}</a>
                     </td>
                     <td><a className="image-size lightbox" href="#image">
-                      <img className="image-size" onMouseOver={(e) => this.changeImageZoom(e)} src={item.imageElize}/>
+                      <img className="image-size" onMouseOver={(e) => this.changeImageZoomHome(e)} src={item.imageElize}/>
                     </a>
                     </td>
                     <td><a className="image-size lightbox" href="#image">
-                      <img className="image-size" onMouseOver={(e) => this.changeImageZoom(e)} src={item.image}/>
+                      <img className="image-size" onMouseOver={(e) => this.changeImageZoomHome(e)} src={item.image}/>
                     </a>
                     </td>
 
@@ -430,7 +448,9 @@ class Home extends React.Component {
           <input type="text" list="brandsAttached" placeholder="Filter by brand"
                  value={this.props.data.filterBrandAttached}
                  onChange={(e) => this.filterByBrandAttachedFunc(e)}
-                 onKeyUp={(e) => this.searchElizeAttachedOnEnter(e)}/>
+                 onClick={(e) => this.filterByBrandAttachedFunc(e)}
+                 onKeyUp={(e) => this.searchElizeAttachedOnEnter(e)}
+          />
           <datalist id="brandsAttached"
                     className={this.props.data.filterBrandAttachedData.length > 0 ? "dropdown-filter" : ""}>
             {this.props.data.filterBrandAttachedData &&
@@ -449,6 +469,21 @@ class Home extends React.Component {
                     className={this.props.data.filterTitleAttachedData.length > 0 ? "dropdown-filter" : ""}>
             {this.props.data.filterTitleAttachedData &&
             this.props.data.filterTitleAttachedData.map((item, index) => {
+              return (<option key={index} value={item}> {item} </option>);
+            })
+            }
+          </datalist>
+        </div>
+        <div className="search-container">
+          <input type="text" list="srcAttached" placeholder="Filter by source"
+                 value={this.props.data.filterSrcAttached}
+                 onChange={(e) => this.filterBySrcAttachedFunc(e)}
+                 onClick={(e) => this.filterBySrcAttachedFunc(e)}
+                 onKeyUp={(e) => this.searchElizeAttachedOnEnter(e)}/>
+          <datalist id="srcAttached"
+                    className={this.props.data.filterSrcAttachedData.length > 0 ? "dropdown-filter" : ""}>
+            {this.props.data.filterSrcAttachedData &&
+            this.props.data.filterSrcAttachedData.map((item, index) => {
               return (<option key={index} value={item}> {item} </option>);
             })
             }
@@ -497,12 +532,12 @@ class Home extends React.Component {
                   </td>
                   <td>
                     <a className="image-size lightbox" href="#image">
-                      <img className="image-size" onMouseOver={(e) => this.changeImageZoom(e)} src={item.imageElize}/>
+                      <img className="image-size" onMouseOver={(e) => this.changeImageZoomHome(e)} src={item.imageElize}/>
                     </a>
                   </td>
                   <td>
                     <a className="image-size lightbox" href="#image">
-                      <img className="image-size" onMouseOver={(e) => this.changeImageZoom(e)} src={item.image}/>
+                      <img className="image-size" onMouseOver={(e) => this.changeImageZoomHome(e)} src={item.image}/>
                     </a>
                   </td>
                   <td title={item.fullTitle}>

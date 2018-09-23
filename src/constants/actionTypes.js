@@ -15,6 +15,7 @@ const ActionTypes = {
   filterByBrandAttached:"FILTER_BY_BRAND_ATTACHED",
   filterByBrandattachedFunc:"FILTER_BY_BRAND_ATTACHED_FUNC",
   filterByTitleAttached:"FILTER_BY_TITLE_ATTACHED",
+  filterBySrcAttached:"FILTER_BY_SRC_ATTACHED",
 
 
   changeSortDir:"CHANGE_SORT_DIR",
@@ -23,6 +24,7 @@ const ActionTypes = {
   changeSortDirConAttached:"CHANGE_SORT_DIR_CON_ATTACHED",
 
   changeImageZoom:"CHANGE_IMAGE_ZOOM",
+  changeImageZoomHome:"CHANGE_IMAGE_ZOOM_HOME",
 
   changeSearchTextNonCompare: "CHANGE_SEARCH_TEXT_NON_COMPARE",
   changeSearchTextNonCompareProducts: "CHANGE_SEARCH_TEXT_NON_COMPARE_PRODUCTS",
@@ -50,6 +52,9 @@ const ActionTypes = {
   getDataRequestBrandElizeTitleAttached: "GET_DATA_REQUEST_BRAND_ELIZE_TITLE_ATTACHED",
   getDataResponseBrandElizeTitleAttached: "GET_DATA_RESPONSE_BRAND_ELIZE_TITLE_ATTACHED",
 
+  getDataRequestElizeSrcAttached: "GET_DATA_REQUEST_ELIZE_SRC_ATTACHED",
+  getDataResponseElizeSrcAttached: "GET_DATA_RESPONSE_ELIZE_SRC_ATTACHED",
+
   filterByBrandConElize:"FILTER_BY_BRAND_CON_ELIZE",
   filterByTitleConElize:"FILTER_BY_TITLE_CON_ELIZE",
   filterBySourceConElize:"FILTER_BY_SOURCE_CON_ELIZE",
@@ -61,6 +66,7 @@ const ActionTypes = {
 
   filterByBrandConAttached:"FILTER_BY_BRAND_CON_ATTACHED",
   filterByTitleConAttached:"FILTER_BY_TITLE_CON_ATTACHED",
+  filterBySrcConAttached:"FILTER_BY_SRC_CON_ATTACHED",
 
   getDataRequestBrandElizeConElize: "GET_DATA_REQUEST_BRAND_ELIZE_CON_ELIZE",
   getDataResponseBrandElizeConElize: "GET_DATA_RESPONSE_BRAND_ELIZE_CON_ELIZE",
@@ -88,6 +94,9 @@ const ActionTypes = {
 
   getDataRequestBrandElizeTitleConAttached: "GET_DATA_REQUEST_BRAND_ELIZE_TITLE_CON_ATTACHED",
   getDataResponseBrandElizeTitleConAttached: "GET_DATA_RESPONSE_BRAND_ELIZE_TITLE_CON_ATTACHED",
+
+  getDataRequestSrcElizeConAttached: "GET_DATA_REQUEST_SRC_ELIZE_CON_ATTACHED",
+  getDataResponseSrcElizeConAttached: "GET_DATA_RESPONSE_SRC_ELIZE_CON_ATTACHED",
 
   getDataRequestBrandProducts: "GET_DATA_REQUEST_BRAND_PRODUCTS",
   getDataResponseBrandProducts: "GET_DATA_RESPONSE_BRAND_PRODUCTS",

@@ -42,6 +42,21 @@ thead:last-child {
   padding: 0;
   text-align: center;
 }
+
+.lightbox-target:target {
+  opacity: 1;
+  top: 0;
+  bottom: 0;
+}
+
+.lightbox-target:target img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.lightbox-target:target a.lightbox-close {
+  top: 55px;
+}
 .table th{
   line-height: 65px !important;
 }

@@ -26,7 +26,9 @@ export const filterBySourceCon = createAction(ActionTypes.filterBySourceCon);
 export const exportType = createAction(ActionTypes.exportType);
 export const changeImageZoom = createAction(ActionTypes.changeImageZoom);
 
+
 export const filterByBrandConAttached = createAction(ActionTypes.filterByBrandConAttached);
+export const filterBySrcConAttached = createAction(ActionTypes.filterBySrcConAttached);
 export const filterByTitleConAttached = createAction(ActionTypes.filterByTitleConAttached);
 
 export const changeSortDirConElize = createAction(ActionTypes.changeSortDirConElize);
@@ -346,10 +348,10 @@ export function getDataResponseElizeSourceConElize(data) {
   };
 }
 
-export function sourceElizeConElize() {
+export function sourceElizeConElize(brand,src) {
   return (dispatch) => {
     dispatch(getDataRequestElizeSourceConElize());
-    return api.sourceElizeConElize()
+    return api.sourceElizeConElize(brand,src)
       .then(data => dispatch(getDataResponseElizeSourceConElize(data.data)))
       .catch(error => dispatch(errorHandler(error)));
   };
@@ -408,10 +410,10 @@ export function getDataResponseElizeSourceCon(data) {
   };
 }
 
-export function sourceElizeCon() {
+export function sourceElizeCon(brand,src) {
   return (dispatch) => {
     dispatch(getDataRequestElizeSourceCon());
-    return api.sourceElizeCon()
+    return api.sourceElizeCon(brand,src)
       .then(data => dispatch(getDataResponseElizeSourceCon(data.data)))
       .catch(error => dispatch(errorHandler(error)));
   };
@@ -428,10 +430,10 @@ export function getDataResponseBrandElizeConAttached(data) {
   };
 }
 
-export function brandsElizeConAttached(brand) {
+export function brandsElizeConAttached(brand,src) {
   return (dispatch) => {
     dispatch(getDataRequestBrandElizeConAttached());
-    return api.brandsElizeConAttached(brand)
+    return api.brandsElizeConAttached(brand,src)
       .then(data => dispatch(getDataResponseBrandElizeConAttached(data.data)))
       .catch(error => dispatch(errorHandler(error)));
   };
@@ -461,7 +463,26 @@ export function titleElizeConAttached(brand, title) {
 
 
 
+/////////////////////////////////////////////     src elize      Attached      ////////////////////////////////////////////////
 
+const getDataRequestSrcElizeConAttached = createAction(ActionTypes.getDataRequestSrcElizeConAttached);
+
+const responseResponseSrcElizeConAttached = createAction(ActionTypes.getDataResponseSrcElizeConAttached);
+
+export function getDataResponseSrcElizeConAttached(data) {
+  return (dispatch) => {
+    return dispatch(responseResponseSrcElizeConAttached({data}));
+  };
+}
+
+export function srcElizeConAttached(src,brand) {
+  return (dispatch) => {
+    dispatch(getDataRequestSrcElizeConAttached());
+    return api.srcElizeConAttached(src,brand)
+      .then(data => dispatch(getDataResponseSrcElizeConAttached(data.data)))
+      .catch(error => dispatch(errorHandler(error)));
+  };
+}
 
 
 

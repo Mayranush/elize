@@ -36,8 +36,10 @@ const defaultState = {
   compareSortDirCon: "asc",
   filterBrandConAttached: "",
   filterTitleConAttached: "",
+  filterSrcConAttached: "",
   filterBrandConAttachedData: [],
   filterTitleConAttachedData: [],
+  filterSrcConAttachedData: [],
   compareSortByConAttached: "id",
   compareSortDirConAttached: "asc",
   exportType:'Сопоставление Продукты',
@@ -170,10 +172,19 @@ export default handleActions({
     loaderAttached: false,
     filterTitleConAttachedData: payload.data
   }),
-
+  [ActionTypes.getDataRequestSrcElizeConAttached]: (state) => ({...state, loaderAttached: true}),
+  [ActionTypes.getDataResponseSrcElizeConAttached]: (state, {payload}) => ({
+    ...state,
+    loaderAttached: false,
+    filterSrcConAttachedData: payload.data
+  }),
   [ActionTypes.filterByBrandConAttached]: (state, {payload}) => ({
     ...state,
     filterBrandConAttached: payload
+  }),
+  [ActionTypes.filterBySrcConAttached]: (state, {payload}) => ({
+    ...state,
+    filterSrcConAttached: payload
   }),
   [ActionTypes.filterByTitleConAttached]: (state, {payload}) => ({
     ...state,

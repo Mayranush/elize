@@ -18,9 +18,11 @@ export const changeSearchText = createAction(ActionTypes.changeSearchText);
 export const filterByTitle = createAction(ActionTypes.filterByTitle);
 export const filterByBrandAttached = createAction(ActionTypes.filterByBrandAttached);
 export const filterByTitleAttached = createAction(ActionTypes.filterByTitleAttached);
+export const filterBySrcAttached = createAction(ActionTypes.filterBySrcAttached);
 export const changeSearchTextAttached = createAction(ActionTypes.changeSearchTextAttached);
 export const filterBySourceElize = createAction(ActionTypes.filterBySourceElize);
 
+export const changeImageZoomHome = createAction(ActionTypes.changeImageZoomHome);
 export const emailChange = createAction(ActionTypes.emailChange);
 export const passwordChange = createAction(ActionTypes.passwordChange);
 
@@ -34,7 +36,6 @@ export function errorHandler(error) {
     // return dispatch(changePopup(text, show, resetPassword, passwordErrorText));
   };
 }
-
 
 
 /////////////////////////////////////////////     compare elize            ////////////////////////////////////////////////
@@ -100,10 +101,10 @@ export function getDataResponseCompareElize(result) {
   };
 }
 
-export function compareElize(brand, title, sortBy, sortDir, page, limit,src) {
+export function compareElize(brand, title, sortBy, sortDir, page, limit, src) {
   return (dispatch) => {
     dispatch(getDataRequestCompareElize());
-    return api.compareElize(brand, title, sortBy, sortDir, page, limit,src)
+    return api.compareElize(brand, title, sortBy, sortDir, page, limit, src)
       .then(data => dispatch(getDataResponseCompareElize(data.data)))
       .catch(error => dispatch(errorHandler(error)));
   };
@@ -174,10 +175,11 @@ export function getDataResponseAttachedElize(result) {
   };
 }
 
-export function attachedElize(brand, title, sortBy, sortDir, page, limit) {
+export function attachedElize(brand, title, src, sortBy, sortDir, page, limit) {
   return (dispatch) => {
     dispatch(getDataRequestAttachedElize());
-    return api.attachedElize(brand, title, sortBy, sortDir, page, limit)
+   let a = " brand=" + encodeURIComponent(brand) + "&title=" + encodeURIComponent(title) + "&src=" + encodeURIComponent(src) + "&sortBy=" + sortBy + "&sortDir=" + sortDir + "&page=" + page + "&limit=" + limit;
+    return api.attachedElize(brand, title, src, sortBy, sortDir, page, limit)
       .then(data => dispatch(getDataResponseAttachedElize(data.data)))
       .catch(error => dispatch(errorHandler(error)));
   };
@@ -195,10 +197,10 @@ export function getDataResponseBrandElize(data) {
   };
 }
 
-export function brandsElize(brand) {
+export function brandsElize(brand, src) {
   return (dispatch) => {
     dispatch(getDataRequestBrandElize());
-    return api.brandsElize(brand)
+    return api.brandsElize(brand, src)
       .then(data => dispatch(getDataResponseBrandElize(data.data)))
       .catch(error => dispatch(errorHandler(error)));
   };
@@ -238,10 +240,10 @@ export function getDataResponseBrandElizeAttached(data) {
   };
 }
 
-export function brandsElizeAttached(brand) {
+export function brandsElizeAttached(brand, src) {
   return (dispatch) => {
     dispatch(getDataRequestBrandElizeAttached());
-    return api.brandsElizeAttached(brand)
+    return api.brandsElizeAttached(brand, src)
       .then(data => dispatch(getDataResponseBrandElizeAttached(data.data)))
       .catch(error => dispatch(errorHandler(error)));
   };
@@ -264,6 +266,28 @@ export function titleElizeAttached(brand, title) {
     dispatch(getDataRequestBrandElizeAttached());
     return api.titleElizeAttached(brand, title)
       .then(data => dispatch(getDataResponseBrandElizeTitleAttached(data.data)))
+      .catch(error => dispatch(errorHandler(error)));
+  };
+}
+
+
+/////////////////////////////////////////////     src elize      Attached      ////////////////////////////////////////////////
+
+const getDataRequestElizeSrcAttached = createAction(ActionTypes.getDataRequestElizeSrcAttached);
+
+const responseResponseElizeSrcAttached = createAction(ActionTypes.getDataResponseElizeSrcAttached);
+
+export function getDataResponseElizeSrcAttached(data) {
+  return (dispatch) => {
+    return dispatch(responseResponseElizeSrcAttached({data}));
+  };
+}
+
+export function srcElizeAttached(brand, src) {
+  return (dispatch) => {
+    dispatch(getDataRequestElizeSrcAttached());
+    return api.srcElizeAttached(brand, src)
+      .then(data => dispatch(getDataResponseElizeSrcAttached(data.data)))
       .catch(error => dispatch(errorHandler(error)));
   };
 }
@@ -320,10 +344,10 @@ export function getDataResponseElizeSource(data) {
   };
 }
 
-export function sourceElize() {
+export function sourceElize(brand,src) {
   return (dispatch) => {
     dispatch(getDataRequestElizeSource());
-    return api.sourceElize()
+    return api.sourceElize(brand,src)
       .then(data => dispatch(getDataResponseElizeSource(data.data)))
       .catch(error => dispatch(errorHandler(error)));
   };

@@ -35,7 +35,6 @@ class About extends React.Component {
 
   compareElize() {
     let percent = this.refs.percentage.value;
-    console.log(percent);
      this.props.compareElizeStart(percent);
   }
 

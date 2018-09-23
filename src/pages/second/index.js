@@ -54,6 +54,7 @@ class About extends React.Component {
     this.props.statusAll();
     this.props.attachedElize((this.props.data.filterBrandConAttached),
       (this.props.data.filterTitleConAttached),
+      (this.props.data.filterSrcConAttached),
       this.props.data.compareSortByConAttached,
       this.props.data.compareSortDirConAttached,
       item - 1, this.props.data.itemsInEachPageCompare);
@@ -92,6 +93,7 @@ class About extends React.Component {
     if (e.target.value > 0) {
       this.props.attachedElize((this.props.data.filterBrandConAttached),
         (this.props.data.filterTitleConAttached),
+        (this.props.data.filterSrcConAttached),
         this.props.data.compareSortByConAttached,
         this.props.data.compareSortDirConAttached,
         this.currentPageAttached.value - 1, e.target.value);
@@ -140,7 +142,7 @@ class About extends React.Component {
     this.props.statusAll();
     let source = (e.target.value);
     this.props.filterBySourceConElize(source);
-    this.props.sourceElizeConElize();
+    this.props.sourceElizeConElize(this.props.data.filterBrandConElize,source);
   };
 
   searchElizeConElize = () => {
@@ -176,7 +178,7 @@ class About extends React.Component {
     this.props.statusAll();
     let source = (e.target.value);
     this.props.filterBySourceCon(source);
-    this.props.sourceElizeCon();
+    this.props.sourceElizeCon(this.props.data.filterBrandCon, source);
   };
   searchElizeConOnEnter = (e) => {
     this.props.statusAll();
@@ -197,8 +199,16 @@ class About extends React.Component {
   filterByBrandConAttachedFunc = (e) => {
     this.props.statusAll();
     let brand = (e.target.value);
+    this.props.brandsElizeConAttached(brand, this.props.data.filterSrcConAttached);
     this.props.filterByBrandConAttached(brand);
-    this.props.brandsElizeConAttached(brand);
+
+  };
+  filterBySrcConAttachedFunc = (e) => {
+    this.props.statusAll();
+    let src = (e.target.value);
+    this.props.srcElizeConAttached(src, this.props.data.filterBrandConAttached);
+    this.props.filterBySrcConAttached(src);
+
   };
 
   filterByTitleConAttachedFunc = (e) => {
@@ -217,6 +227,7 @@ class About extends React.Component {
     this.props.statusAll();
     this.props.attachedElize((this.props.data.filterBrandConAttached),
       (this.props.data.filterTitleConAttached),
+      (this.props.data.filterSrcConAttached),
       this.props.data.compareSortByConAttached,
       this.props.data.compareSortDirConAttached,
       this.currentPageAttached.value - 1, this.props.data.itemsInEachPageCompare);
@@ -269,6 +280,7 @@ class About extends React.Component {
       this.props.changeSortDirConAttached("desc");
       this.props.attachedElize((this.props.data.filterBrandConAttached),
         (this.props.data.filterTitleConAttached),
+        (this.props.data.filterSrcConAttached),
         sortCol,
         "asc",
         this.currentPageAttached.value - 1,
@@ -277,6 +289,7 @@ class About extends React.Component {
       this.props.changeSortDirConAttached("asc");
       this.props.attachedElize((this.props.data.filterBrandConAttached),
         (this.props.data.filterTitleConAttached),
+        (this.props.data.filterSrcConAttached),
         sortCol,
         "desc",
         this.currentPageAttached.value - 1,
@@ -305,15 +318,16 @@ class About extends React.Component {
       this.props.data.itemsInEachPageNonCompareProducts);
     this.props.attachedElize((this.props.data.filterBrandConAttached),
       (this.props.data.filterTitleConAttached),
+      (this.props.data.filterSrcConAttached),
       this.props.data.compareSortByConAttached,
       this.props.data.compareSortDirConAttached,
       this.currentPageAttached.value - 1,
       this.props.data.itemsInEachPageCompare);
   };
-
   changeImageZoom(e) {
     this.props.changeImageZoom(e.target.src);
   }
+
 
   render() {
     return (
@@ -570,6 +584,7 @@ class About extends React.Component {
           <input type="text" list="brandsConAttached" placeholder="Filter by brand"
                  value={this.props.data.filterBrandConAttached}
                  onChange={(e) => this.filterByBrandConAttachedFunc(e)}
+                 onClick={(e) => this.filterByBrandConAttachedFunc(e)}
                  onKeyUp={(e) => this.searchElizeConAttachedOnEnter(e)}/>
           <datalist id="brandsConAttached"
                     className={this.props.data.filterBrandConAttachedData.length > 0 ? "dropdown-filter" : ""}>
@@ -589,6 +604,21 @@ class About extends React.Component {
                     className={this.props.data.filterTitleConAttachedData.length > 0 ? "dropdown-filter" : ""}>
             {this.props.data.filterTitleConAttachedData &&
             this.props.data.filterTitleConAttachedData.map((item) => {
+              return (<option value={item}> {item} </option>);
+            })
+            }
+          </datalist>
+        </div>
+        <div className="search-container">
+          <input type="text" list="srcConAttached" placeholder="Filter by source"
+                 value={this.props.data.filterSrcConAttached}
+                 onChange={(e) => this.filterBySrcConAttachedFunc(e)}
+                 onClick={(e) => this.filterBySrcConAttachedFunc(e)}
+                 onKeyUp={(e) => this.searchElizeConAttachedOnEnter(e)}/>
+          <datalist id="srcConAttached"
+                    className={this.props.data.filterSrcConAttachedData.length > 0 ? "dropdown-filter" : ""}>
+            {this.props.data.filterSrcConAttachedData &&
+            this.props.data.filterSrcConAttachedData.map((item) => {
               return (<option value={item}> {item} </option>);
             })
             }

@@ -17,8 +17,10 @@ const defaultState = {
   filterTitleData: [],
   filterBrandAttached: "",
   filterTitleAttached: "",
+  filterSrcAttached: "",
   filterBrandAttachedData: [],
   filterTitleAttachedData: [],
+  filterSrcAttachedData: [],
   filterSourceData: [],
   filterSource: "",
   compareSortBy: "id",
@@ -29,10 +31,15 @@ const defaultState = {
   attachedSortDir: "asc",
 
   searchTextAttached: "",
-  token: ""
+  token: "",
+  imageZoom: ''
 };
 
 export default handleActions({
+  [ActionTypes.changeImageZoomHome]: (state, {payload}) => ({
+    ...state,
+    imageZoom: payload
+  }),
   [ActionTypes.filterBySourceElize]: (state, {payload}) => ({
     ...state,
     filterSource: payload
@@ -82,6 +89,12 @@ export default handleActions({
     loaderAttached: false,
     filterTitleAttachedData: payload.data
   }),
+  [ActionTypes.getDataRequestElizeSrcAttached]: (state) => ({...state, loaderAttached: true}),
+  [ActionTypes.getDataResponseElizeSrcAttached]: (state, {payload}) => ({
+    ...state,
+    loaderAttached: false,
+    filterSrcAttachedData: payload.data
+  }),
   // [ActionTypes.getDataRequestBrandProducts]: (state) => ({...state, loaderAttached: true}),
   // [ActionTypes.getDataResponseBrandProducts]: (state, {payload}) => ({
   //   ...state,
@@ -115,6 +128,10 @@ export default handleActions({
   [ActionTypes.filterByTitleAttached]: (state, {payload}) => ({
     ...state,
     filterTitleAttached: payload
+  }),
+  [ActionTypes.filterBySrcAttached]: (state, {payload}) => ({
+    ...state,
+    filterSrcAttached: payload
   }),
   [ActionTypes.changeSearchTextAttached]: (state, {payload}) => ({
     ...state,
