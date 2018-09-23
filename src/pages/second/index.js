@@ -105,17 +105,24 @@ class About extends React.Component {
     e.preventDefault();
 
     let obj = [];
+    console.log(obj, "obj 000");
     this.props.data.dataNonCompareProducts.map((item, index) => {
       let each = {};
       let productValue = this.props.data.inputValue[index];
+      console.log(productValue, "prodval");
+      console.log(index, "index");
       if (productValue) {
         each = {"elizeId": productValue, "productId": item.id};
         obj.push(each);
+        this.props.updateInputValue("",index, this.props.data.inputValue);
+
       }
     });
+    console.log(obj, "obj 11111");
     this.props.attachMultiple(obj)
       .then(() => this.allCalls());
-
+    obj = [];
+    console.log(obj, "obj 22222");
   };
 
   detachSingle = (idElize, id) => {
@@ -142,7 +149,7 @@ class About extends React.Component {
     this.props.statusAll();
     let source = (e.target.value);
     this.props.filterBySourceConElize(source);
-    this.props.sourceElizeConElize(this.props.data.filterBrandConElize,source);
+    this.props.sourceElizeConElize(this.props.data.filterBrandConElize, source);
   };
 
   searchElizeConElize = () => {
@@ -324,6 +331,7 @@ class About extends React.Component {
       this.currentPageAttached.value - 1,
       this.props.data.itemsInEachPageCompare);
   };
+
   changeImageZoom(e) {
     this.props.changeImageZoom(e.target.src);
   }
@@ -526,7 +534,7 @@ class About extends React.Component {
                   return (<tr key={item.id}>
                     <td className="input-id">
                       <input type="number" className="form-control input-id"
-                             onChange={e => this.props.updateInputValue(e, index, this.props.data.inputValue)}/>
+                             onChange={e => this.props.updateInputValue(e.target.value, index, this.props.data.inputValue)}/>
                     </td>
 
                     <td><a className="image-size lightbox" href="#image">
@@ -534,7 +542,7 @@ class About extends React.Component {
                     </a>
                     </td>
                     <td className="wraped-tbl">
-                      <a href={item.url} target="_blank">{item.fullTitle}</a>
+                      <a href={item.url} target="_blank">{item.id}</a>
                     </td>
                     <td title={item.brand}>{item.brand}</td>
                   </tr>);
@@ -567,7 +575,7 @@ class About extends React.Component {
               {Math.ceil(this.props.data.countNonCompareProducts / this.props.data.itemsInEachPageNonCompareProducts) > 1 &&
               <Pagination
                 maxPageCount={Math.ceil(this.props.data.countNonCompareProducts / this.props.data.itemsInEachPageNonCompareProducts)}
-                currentPage={this.currentPageNonCompareProducts} 
+                currentPage={this.currentPageNonCompareProducts}
                 clickFunction={this.clickFunctionNonCompareProducts}
                 isProduct={false}
               />}

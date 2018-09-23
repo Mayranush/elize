@@ -48,9 +48,9 @@ export function errorHandler(error) {
 
 const updateInputValueFunc = createAction(ActionTypes.updateInputValue);
 
-export function updateInputValue(event, index, array) {
+export function updateInputValue(value, index, array) {
   return (dispatch) => {
-    let value = event.target.value;
+   // let value = event.target.value;
     array[index] = value;
     return dispatch(updateInputValueFunc(array));
   }
