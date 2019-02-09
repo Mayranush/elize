@@ -12,13 +12,13 @@ function loadRoute(cb) {
 }
 
 function requireAuth (nextState, replace, callback) {
-  const token = store.getState().general.token || window.sessionStorage.getItem("token");
+  const token = store.getState().matchingReducer.token || window.sessionStorage.getItem("token");
   if (!token) replace('/login');
   return callback()
 }
 
 function dontRequireAuth(nextState, replace, callback) {
-  const token = store.getState().general.token || window.sessionStorage.getItem("token");
+  const token = store.getState().matchingReducer.token || window.sessionStorage.getItem("token");
   if (token) replace('/');
   return callback()
 }
@@ -30,7 +30,7 @@ const routes = {
       path: '/',
       onEnter: requireAuth,
       getComponent(location, cb) {
-        System.import('pages/home')
+        System.import('pages/matching')
           .then(loadRoute(cb))
           .catch(errorLoading);
       }
@@ -39,7 +39,25 @@ const routes = {
       path: 'non-compared',
       onEnter: requireAuth,
       getComponent(location, cb) {
-        System.import('pages/second')
+        System.import('pages/nonMatching')
+          .then(loadRoute(cb))
+          .catch(errorLoading);
+      }
+    },
+    {
+      path: '/attached',
+      onEnter: requireAuth,
+      getComponent(location, cb) {
+        System.import('pages/attached')
+          .then(loadRoute(cb))
+          .catch(errorLoading);
+      }
+    },
+    {
+      path: '/detached',
+      onEnter: requireAuth,
+      getComponent(location, cb) {
+        System.import('pages/detached')
           .then(loadRoute(cb))
           .catch(errorLoading);
       }

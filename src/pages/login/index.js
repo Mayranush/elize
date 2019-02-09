@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {generalActions, signInActions} from "../../actions/index";
+import {matchingActions, signInActions} from "../../actions/index";
 import {Link} from "react-router/es6";
 import "./login.scss";
 import {push} from "react-router-redux";
@@ -12,7 +12,7 @@ export class Login extends React.Component {
     this.handleEmailChange = this.emailChange.bind(this);
     this.handlePasswordChange = this.passwordChange.bind(this);
     this.handlePasswordForget = this.loginUser.bind(this);
-    if (this.props.general.token !== null) {
+    if (this.props.matchingReducer.token !== null) {
       store.dispatch(push('/'));
     }
   }
@@ -82,9 +82,9 @@ export class Login extends React.Component {
 }
 
 export default connect(
-  state => ({data: state.signIn, general: state.general}),
+  state => ({data: state.signIn, matchingReducer: state.matchingReducer}),
   {
-    ...generalActions,
+    ...matchingActions,
     ...signInActions
   }
 )(Login);

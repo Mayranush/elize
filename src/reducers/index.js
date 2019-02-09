@@ -1,11 +1,15 @@
 import {combineReducers} from "redux";
-import general from "./generalReducer";
-import secondPage from "./secondPageReducer";
+import matchingReducer from "./matchingReducer";
+import nonMatchingReducer from "./nonMatchingReducer";
+import attachedReducer from "./attachedReducer";
+import detachedReducer from "./detachedReducer";
 import popup from "./popupReducer";
 
 const appReducer = combineReducers({
-  general,
-  secondPage,
+  matchingReducer,
+  nonMatchingReducer,
+  attachedReducer,
+  detachedReducer,
   popup
 });
 

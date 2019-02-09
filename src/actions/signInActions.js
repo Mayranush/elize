@@ -4,7 +4,7 @@ import store from "store";
 import {tools} from "../resources";
 import api from "../api/api";
 import {push} from "react-router-redux";
-import {errorHandler} from "./generalActions";
+import {errorHandler} from "./matchingActions";
 
 /////////////////////////////////////////////           sign in       ////////////////////////////////////////////////
 

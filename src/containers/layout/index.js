@@ -3,9 +3,9 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import "./style.scss";
 import {Menu} from "../../components/menu/menu";
-import {Header} from '../../components/header/header';
+import {Index} from '../../components/header';
 import {Footer} from "../../components/menu/footer";
-import {passwordForgetActions, generalActions, signUpActions, popupActions} from "../../actions/index";
+import {passwordForgetActions, matchingActions, signUpActions, popupActions} from "../../actions";
 import {Popup} from "../../components/popup/popup";
 
 class MainLayout extends React.Component {
@@ -33,7 +33,7 @@ class MainLayout extends React.Component {
             confirmChangeInPopup={this.props.confirmChangeInPopup}
             passwordChangeInPopup={this.props.passwordChangeInPopup}
             changeAndResetPassword={this.props.changeAndResetPassword} />}
-          <Header />
+          <Index />
             {this.props.children}
           <Footer />
       </main>
@@ -42,9 +42,9 @@ class MainLayout extends React.Component {
 }
 
 export default connect(
-  state => ({data: state.general, popup: state.popup}),
+  state => ({data: state.matchingReducer, popup: state.popup}),
   {
-    ...generalActions,
+    ...matchingActions,
     ...popupActions
   }
 )(MainLayout);

@@ -1,13 +1,13 @@
 import { createSelector } from "reselect";
 
-const getDataNonCompare = state => state.secondPage.dataNonCompare;
-const getSearchTextNonCompare = state => state.secondPage.searchTextNonCompare;
+const getDataNonCompare = state => state.nonMatchingReducer.dataNonCompare;
+const getSearchTextNonCompare = state => state.nonMatchingReducer.searchTextNonCompare;
 
-const getDataNonCompareProducts = state => state.secondPage.dataNonCompareProducts;
-const getSearchTextNonCompareProducts = state => state.secondPage.searchTextNonCompareProducts;
+const getDataNonCompareProducts = state => state.nonMatchingReducer.dataNonCompareProducts;
+const getSearchTextNonCompareProducts = state => state.nonMatchingReducer.searchTextNonCompareProducts;
 
-const getDataAttached = state => state.secondPage.dataAttached;
-const getSearchTextAttached = state => state.secondPage.searchTextAttached;
+const getDataAttached = state => state.nonMatchingReducer.dataAttached;
+const getSearchTextAttached = state => state.nonMatchingReducer.searchTextAttached;
 
 export const selectDataNoneCompare = createSelector(
   [getDataNonCompare, getSearchTextNonCompare],

@@ -256,4 +256,8 @@ export default handleActions({
     loaderAttached: false,
     statusAll: payload.data
   }),
+  [ActionTypes.clearInputValue]: (state, {payload}) => ({
+    ...state,
+    inputValue: [],
+  }),
 }, defaultState);

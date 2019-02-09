@@ -9,17 +9,17 @@ if (window && !window.api) {
 }
 
 let addHeaders = (token) => {
-  const tokenFromStore = "Token " + (store.getState().general.token || window.sessionStorage.getItem("token"));
+  const tokenFromStore = "Token " + (store.getState().matchingReducer.token || window.sessionStorage.getItem("token"));
 
   if (token) {
 
     api = axios.create({
-      baseURL: "http://63.142.251.65:8888", //63.142.251.65
+      baseURL: "http://63.142.251.65:5555", //63.142.251.65  //8888
       headers: {"Authorization": tokenFromStore}
     });
   } else {
     api = axios.create({
-      baseURL: "http://63.142.251.65:8888"
+      baseURL: "http://63.142.251.65:5555"      //5555
     });
   }
 
@@ -36,6 +36,13 @@ const attachedElize = (brand, title, src, sortBy, sortDir, page, limit) => {
   let a ="brand=" + encodeURIComponent(brand) + "&title=" + encodeURIComponent(title) + "&src=" + encodeURIComponent(src) + "&sortBy=" + sortBy + "&sortDir=" + sortDir + "&page=" + page + "&limit=" + limit;
   return api.get("/api/attached-elize?brand=" + encodeURIComponent(brand) + "&title=" + encodeURIComponent(title) + "&src=" + encodeURIComponent(src) + "&sortBy=" + sortBy + "&sortDir=" + sortDir + "&page=" + page + "&limit=" + limit);
 };
+
+const detachedElize = (brand, title, src, sortBy, sortDir, page, limit) => {
+  addHeaders(true);
+  let a ="brand=" + encodeURIComponent(brand) + "&title=" + encodeURIComponent(title) + "&src=" + encodeURIComponent(src) + "&sortBy=" + sortBy + "&sortDir=" + sortDir + "&page=" + page + "&limit=" + limit;
+  return api.get("/api/detached?brand=" + encodeURIComponent(brand) + "&title=" + encodeURIComponent(title) + "&src=" + encodeURIComponent(src) + "&sortBy=" + sortBy + "&sortDir=" + sortDir + "&page=" + page + "&limit=" + limit);
+};
+
 const brandsElize = (brand, src) => {
   addHeaders(true);
   return api.get("/api/compare-elize/brands?brand=" + encodeURIComponent(brand) + "&src=" + encodeURIComponent(src));
@@ -43,6 +50,10 @@ const brandsElize = (brand, src) => {
 const brandsElizeAttached = (brand, src) => {
   addHeaders(true);
   return api.get("/api/attached-elize/brands?brand=" + encodeURIComponent(brand) + "&src=" + encodeURIComponent(src));
+};
+const brandsElizeDetached = (brand, src, title) => {
+  addHeaders(true);
+  return api.get("/api/detached/brands?brand=" + encodeURIComponent(brand) + "&src=" + encodeURIComponent(src) + "&title=" + encodeURIComponent(title));
 };
 const brandsElizeConElize = (brand, src) => {
   addHeaders(true);
@@ -71,6 +82,14 @@ const titleElizeAttached = (brand, title) => {
 const srcElizeAttached = (brand, src) => {
   addHeaders(true);
   return api.get("/api/attached-elize/src?brand=" + encodeURIComponent(brand) + "&src=" + encodeURIComponent(src));
+};
+const titleElizeDetached = (brand, src, title) => {
+  addHeaders(true);
+  return api.get("/api/detached/titles?brand=" + encodeURIComponent(brand) + "&src=" + encodeURIComponent(src) + "&title=" + encodeURIComponent(title));
+};
+const srcElizeDetached = (brand, src, title) => {
+  addHeaders(true);
+  return api.get("/api/detached/src?brand=" + encodeURIComponent(brand) + "&src=" + encodeURIComponent(src) + "&title=" + encodeURIComponent(title));
 };
 const titleElizeConElize = (brand, title) => {
   addHeaders(true);
@@ -163,6 +182,22 @@ const stopElize = () => {
   return api.get("/stop");
 };
 
+const attachSingleBulk = (obj) => {
+  addHeaders(true);
+  return api.post("/api/attach-single-bulk", obj);
+};
+
+const unsimilarBulk = (obj) => {
+  addHeaders(true);
+  return api.post("/api/unsimilar-bulk", obj);
+};
+
+const detachedDelete = (obj) => {
+  addHeaders(true);
+  return api.post("/api/detached-delete", obj);
+};
+
+
 export default {
   calculate,
   compareElizeStart,
@@ -177,11 +212,15 @@ export default {
   signIn,
   compareElize,
   attachedElize,
+  detachedElize,
   brandsElize,
   titleElize,
   brandsElizeAttached,
   titleElizeAttached,
   srcElizeAttached,
+  brandsElizeDetached,
+  titleElizeDetached,
+  srcElizeDetached,
   brandsElizeConElize,
   titleElizeConElize,
   brandsElizeCon,
@@ -195,6 +234,10 @@ export default {
   nonCompareElize,
   nonCompareProducts,
   attachMultiple,
-  unsimilar
+  unsimilar,
+  attachSingleBulk,
+  unsimilarBulk,
+  detachedDelete
 };
+
 

@@ -4,7 +4,7 @@ import store from "store";
 import {tools} from "../resources";
 import api from "../api/api";
 import {changePopup} from "./popupActions";
-import {statusAll} from "./secondPageActions";
+import {statusAll} from "./nonMatchingActions";
 
 export const cleanData = createAction(ActionTypes.cleanData);
 export const changeItemsInEachPageCompareFunc = createAction(ActionTypes.changeItemsInEachPageCompareFunc);
@@ -350,5 +350,56 @@ export function sourceElize(brand,src) {
     return api.sourceElize(brand,src)
       .then(data => dispatch(getDataResponseElizeSource(data.data)))
       .catch(error => dispatch(errorHandler(error)));
+  };
+}
+
+/////////////////////////////////////////////     detached single            ////////////////////////////////////////////////
+export function getDataResponseAttachSingleBulk(result) {
+
+}
+
+export function attachSingleBulk(obj) {
+  return (dispatch) => {
+    return api.attachSingleBulk(obj)
+      .then(data => dispatch(getDataResponseAttachSingleBulk(data.data)))
+      .catch(error => dispatch(errorHandler(error)));
+  };
+}
+
+/////////////////////////////////////////////     detached single            ////////////////////////////////////////////////
+export function getDataResponseUnsimilarBulk(result) {
+
+}
+
+export function unsimilarBulk(obj) {
+  return (dispatch) => {
+    return api.unsimilarBulk(obj)
+      .then(data => dispatch(getDataResponseUnsimilarBulk(data.data)))
+      .catch(error => dispatch(errorHandler(error)));
+  };
+}
+
+///////////////////////////////////////////////////////////
+
+export const toggleCheckbox = createAction(ActionTypes.toggleCheckbox);
+
+export function toggleCheckboxAction(id) {
+  return (dispatch) => {
+    return dispatch(toggleCheckbox(id));
+  };
+}
+
+/////////////////////////////////////////////////////
+
+export const changeMatchingCheckboxes = createAction(ActionTypes.changeMatchingCheckboxes);
+
+export function changeMatchingCheckboxesAction(arr, val) {
+  return (dispatch) => {
+    let obj = {};
+    arr.map((item) => {
+      obj[item.id] = val;
+    });
+    obj['all'] = val;
+    return dispatch(changeMatchingCheckboxes(obj));
   };
 }

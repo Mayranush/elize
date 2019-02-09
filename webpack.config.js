@@ -29,7 +29,7 @@ const plugins = [
 
 const jsEntry = [
   'index',
-  'pages/home',
+  'pages/matching',
 ];
 
 if (isProd) {

@@ -4,24 +4,31 @@ const ActionTypes = {
   updateInputValue: "UPDATE_INPUT_VALUE",
   changeItemsInEachPageCompareFunc: "CHANGE_ITEMS_IN_EACH_PAGE_COMPARE_FUNC",
   changeItemsInEachPageAttachedFunc: "CHANGE_ITEMS_IN_EACH_PAGE_ATTACHED_FUNC",
+  changeItemsInEachPageDetachedFunc: "CHANGE_ITEMS_IN_EACH_PAGE_DETACHED_FUNC",
 
   changeSearchText: "CHANGE_SEARCH_TEXT",
   changeSearchTextAttached: "CHANGE_SEARCH_TEXT_ATTACHED",
+  changeSearchTextDetached: "CHANGE_SEARCH_TEXT_DETACHED",
 
   filterByBrand:"FILTER_BY_BRAND",
   filterByBrandFunc:"FILTER_BY_BRAND_FUNC",
   filterByTitle:"FILTER_BY_TITLE",
 
   filterByBrandAttached:"FILTER_BY_BRAND_ATTACHED",
-  filterByBrandattachedFunc:"FILTER_BY_BRAND_ATTACHED_FUNC",
+  filterByBrandAttachedFunc:"FILTER_BY_BRAND_ATTACHED_FUNC",
   filterByTitleAttached:"FILTER_BY_TITLE_ATTACHED",
   filterBySrcAttached:"FILTER_BY_SRC_ATTACHED",
 
+  filterByBrandDetached:"FILTER_BY_BRAND_DETACHED",
+  filterByBrandDetachedFunc:"FILTER_BY_BRAND_DETACHED_FUNC",
+  filterByTitleDetached:"FILTER_BY_TITLE_DETACHED",
+  filterBySrcDetached:"FILTER_BY_SRC_DETACHED",
 
   changeSortDir:"CHANGE_SORT_DIR",
   changeSortDirConElize:"CHANGE_SORT_DIR_CON_ELIZE",
   changeSortDirCon:"CHANGE_SORT_DIR_CON",
   changeSortDirConAttached:"CHANGE_SORT_DIR_CON_ATTACHED",
+  changeSortDirConDetached:"CHANGE_SORT_DIR_CON_DETACHED",
 
   changeImageZoom:"CHANGE_IMAGE_ZOOM",
   changeImageZoomHome:"CHANGE_IMAGE_ZOOM_HOME",
@@ -40,6 +47,10 @@ const ActionTypes = {
   getDataRequestAttachedElize: "GET_DATA_REQUEST_ATTACHED_ELIZE",
   getDataResponseAttachedElize: "GET_DATA_RESPONSE_ATTACHED_ELIZE",
 
+  getDataRequestDetachedElize: "GET_DATA_REQUEST_DETACHED_ELIZE",
+  getDataResponseDetachedElize: "GET_DATA_RESPONSE_DETACHED_ELIZE",
+
+
   getDataRequestBrandElize: "GET_DATA_REQUEST_BRAND_ELIZE",
   getDataResponseBrandElize: "GET_DATA_RESPONSE_BRAND_ELIZE",
 
@@ -55,6 +66,15 @@ const ActionTypes = {
   getDataRequestElizeSrcAttached: "GET_DATA_REQUEST_ELIZE_SRC_ATTACHED",
   getDataResponseElizeSrcAttached: "GET_DATA_RESPONSE_ELIZE_SRC_ATTACHED",
 
+  getDataRequestBrandElizeDetached: "GET_DATA_REQUEST_BRAND_ELIZE_DETACHED",
+  getDataResponseBrandElizeDetached: "GET_DATA_RESPONSE_BRAND_ELIZE_DETACHED",
+
+  getDataRequestBrandElizeTitleDetached: "GET_DATA_REQUEST_BRAND_ELIZE_TITLE_DETACHED",
+  getDataResponseBrandElizeTitleDetached: "GET_DATA_RESPONSE_BRAND_ELIZE_TITLE_DETACHED",
+
+  getDataRequestElizeSrcDetached: "GET_DATA_REQUEST_ELIZE_SRC_DETACHED",
+  getDataResponseElizeSrcDetached: "GET_DATA_RESPONSE_ELIZE_SRC_DETACHED",
+
   filterByBrandConElize:"FILTER_BY_BRAND_CON_ELIZE",
   filterByTitleConElize:"FILTER_BY_TITLE_CON_ELIZE",
   filterBySourceConElize:"FILTER_BY_SOURCE_CON_ELIZE",
@@ -67,6 +87,10 @@ const ActionTypes = {
   filterByBrandConAttached:"FILTER_BY_BRAND_CON_ATTACHED",
   filterByTitleConAttached:"FILTER_BY_TITLE_CON_ATTACHED",
   filterBySrcConAttached:"FILTER_BY_SRC_CON_ATTACHED",
+
+  filterByBrandConDetached:"FILTER_BY_BRAND_CON_DETACHED",
+  filterByTitleConDetached:"FILTER_BY_TITLE_CON_DETACHED",
+  filterBySrcConDetached:"FILTER_BY_SRC_CON_DETACHED",
 
   getDataRequestBrandElizeConElize: "GET_DATA_REQUEST_BRAND_ELIZE_CON_ELIZE",
   getDataResponseBrandElizeConElize: "GET_DATA_RESPONSE_BRAND_ELIZE_CON_ELIZE",
@@ -97,6 +121,16 @@ const ActionTypes = {
 
   getDataRequestSrcElizeConAttached: "GET_DATA_REQUEST_SRC_ELIZE_CON_ATTACHED",
   getDataResponseSrcElizeConAttached: "GET_DATA_RESPONSE_SRC_ELIZE_CON_ATTACHED",
+
+  getDataRequestBrandElizeConDetached: "GET_DATA_REQUEST_BRAND_ELIZE_CON_DETACHED",
+  getDataResponseBrandElizeConDetached: "GET_DATA_RESPONSE_BRAND_ELIZE_CON_DETACHED",
+
+  getDataRequestBrandElizeTitleConDetached: "GET_DATA_REQUEST_BRAND_ELIZE_TITLE_CON_DETACHED",
+  getDataResponseBrandElizeTitleConDetached: "GET_DATA_RESPONSE_BRAND_ELIZE_TITLE_CON_DETACHED",
+
+  getDataRequestSrcElizeConDetached: "GET_DATA_REQUEST_SRC_ELIZE_CON_DETACHED",
+  getDataResponseSrcElizeConDetached: "GET_DATA_RESPONSE_SRC_ELIZE_CON_DETACHED",
+
 
   getDataRequestBrandProducts: "GET_DATA_REQUEST_BRAND_PRODUCTS",
   getDataResponseBrandProducts: "GET_DATA_RESPONSE_BRAND_PRODUCTS",
@@ -138,6 +172,11 @@ const ActionTypes = {
   getDataResponseStartElize: "GET_DATA_RESPONSE_START_ELIZE",
   getDataRequestStopElize: "GET_DATA_REQUEST_STOP_ELIZE",
   getDataResponseStopElize: "GET_DATA_RESPONSE_STOP_ELIZE",
+
+  clearInputValue: "CLEAR_INPUT_VALUE",
+
+  toggleCheckbox: "TOOGLE_CHECKBOX_ACTION",
+  changeMatchingCheckboxes: "CHANGE_MATCHING_CHECKBOXES",
 };
 
 export default ActionTypes;

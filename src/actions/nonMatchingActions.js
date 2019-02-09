@@ -35,6 +35,8 @@ export const changeSortDirConElize = createAction(ActionTypes.changeSortDirConEl
 export const changeSortDirCon = createAction(ActionTypes.changeSortDirCon);
 export const changeSortDirConAttached = createAction(ActionTypes.changeSortDirConAttached);
 
+export const clearInputValue = createAction(ActionTypes.clearInputValue);
+
 export function errorHandler(error) {
   return (dispatch) => {
     // if (error.length != 0) {

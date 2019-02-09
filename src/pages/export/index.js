@@ -1,13 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {generalActions, secondPageActions,} from "../../actions";
-import {
-  selectDataNoneCompare,
-  selectDataNoneCompareProducts,
-  selectDataCompareAttached
-} from "../../selectors/secondPageSelectors";
-import "./export.scss";
-
+import {matchingActions, nonMatchingActions,} from "../../actions";
+import "./index.scss";
 
 class About extends React.Component {
   constructor(props) {
@@ -15,7 +9,7 @@ class About extends React.Component {
   }
 
   exportData = (e) => {
-    let host = "http://63.142.251.65:8888"
+    let host = "http://63.142.251.65:8888";
     let exportType = this.props.data.exportType;
     if (exportType === "Сопоставление Продукты") {
       window.open(host + "/compare-elize-export");
@@ -132,10 +126,7 @@ class About extends React.Component {
 
 export default connect(
   state => ({
-    data: state.secondPage,
-    // dataFilteredNoneCompare: selectDataNoneCompare(state),
-    // dataFilteredNoneCompareProducts: selectDataNoneCompareProducts(state),
-    // dataFilteredAttached: selectDataCompareAttached(state)
+    data: state.nonMatchingReducer,
   }),
-  {...secondPageActions}
+  {...nonMatchingActions}
 )(About);

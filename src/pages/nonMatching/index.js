@@ -1,13 +1,13 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {generalActions, secondPageActions} from "../../actions";
+import {matchingActions, nonMatchingActions} from "../../actions";
 import {Pagination} from "../../components/pagination/pagination";
 import {
   selectDataNoneCompare,
   selectDataNoneCompareProducts,
   selectDataCompareAttached
-} from "../../selectors/secondPageSelectors";
-import "./second.scss";
+} from "../../selectors/nonMatchingSelectors";
+import "./index.scss";
 
 class About extends React.Component {
   constructor(props) {
@@ -47,6 +47,7 @@ class About extends React.Component {
       this.props.data.compareSortDirCon,
       item - 1,
       this.props.data.itemsInEachPageNonCompareProducts);
+    this.props.clearInputValue();
   };
 
   clickFunctionCompare = (item) => {
@@ -112,14 +113,11 @@ class About extends React.Component {
         each = {"elizeId": productValue, "productId": item.id};
         obj.push(each);
         this.props.updateInputValue("",index, this.props.data.inputValue);
-
       }
     });
-    console.log(obj, "obj 11111");
     this.props.attachMultiple(obj)
       .then(() => this.allCalls());
     obj = [];
-    console.log(obj, "obj 22222");
   };
 
   detachSingle = (idElize, id) => {
@@ -579,144 +577,6 @@ class About extends React.Component {
             </div>
           </div>
         </div>
-
-        <div className="table-title">Прикрепление Продукты</div>
-        {/*<div className="search-container">*/}
-        {/*<input type="text" placeholder="Search by name" value={this.props.data.searchTextAttached}*/}
-        {/*onChange={(e) => this.props.changeSearchTextAttachedSec(e.target.value)}/>*/}
-        {/*</div>*/}
-        <div className="search-container">
-          <input type="text" list="brandsConAttached" placeholder="Filter by brand"
-                 value={this.props.data.filterBrandConAttached}
-                 onChange={(e) => this.filterByBrandConAttachedFunc(e)}
-                 onClick={(e) => this.filterByBrandConAttachedFunc(e)}
-                 onKeyUp={(e) => this.searchElizeConAttachedOnEnter(e)}/>
-          <datalist id="brandsConAttached"
-                    className={this.props.data.filterBrandConAttachedData.length > 0 ? "dropdown-filter" : ""}>
-            {this.props.data.filterBrandConAttachedData &&
-            this.props.data.filterBrandConAttachedData.map((item) => {
-              return (<option value={item}> {item} </option>);
-            })
-            }
-          </datalist>
-        </div>
-        <div className="search-container">
-          <input type="text" list="titlesConAttached" placeholder="Filter by title"
-                 value={this.props.data.filterTitleConAttached}
-                 onChange={(e) => this.filterByTitleConAttachedFunc(e)}
-                 onKeyUp={(e) => this.searchElizeConAttachedOnEnter(e)}/>
-          <datalist id="titlesConAttached"
-                    className={this.props.data.filterTitleConAttachedData.length > 0 ? "dropdown-filter" : ""}>
-            {this.props.data.filterTitleConAttachedData &&
-            this.props.data.filterTitleConAttachedData.map((item) => {
-              return (<option value={item}> {item} </option>);
-            })
-            }
-          </datalist>
-        </div>
-        <div className="search-container">
-          <input type="text" list="srcConAttached" placeholder="Filter by source"
-                 value={this.props.data.filterSrcConAttached}
-                 onChange={(e) => this.filterBySrcConAttachedFunc(e)}
-                 onClick={(e) => this.filterBySrcConAttachedFunc(e)}
-                 onKeyUp={(e) => this.searchElizeConAttachedOnEnter(e)}/>
-          <datalist id="srcConAttached"
-                    className={this.props.data.filterSrcConAttachedData.length > 0 ? "dropdown-filter" : ""}>
-            {this.props.data.filterSrcConAttachedData &&
-            this.props.data.filterSrcConAttachedData.map((item) => {
-              return (<option value={item}> {item} </option>);
-            })
-            }
-          </datalist>
-        </div>
-        <div className=" search-button">
-          <button className="btn btn-primary " type="button" onClick={this.searchElizeConAttached}><i
-            className="fa fa-search"></i></button>
-        </div>
-        {/*  <button className="btn btn-primary export-to-excel" type="button" onClick={this.exportDataAttached}>Export
-        </button>*/}
-        {this.props.dataFilteredAttached &&
-        <div className="table-body">
-          <table className="table">
-            <thead className="thead-inverse">
-            <tr>
-              <th></th>
-              <th onClick={() => this.setSortByConAttached("brand")}>Бренд-Elize</th>
-              <th onClick={() => this.setSortByConAttached("fullTitle")}>Название-Elize</th>
-              <th>Фото-Elize</th>
-              <th>Фото</th>
-              <th onClick={() => this.setSortByConAttached("fullTitle")}>Название</th>
-              <th onClick={() => this.setSortByConAttached("brand")}>Бренд</th>
-              <th onClick={() => this.setSortByConAttached("price")}>Цена-Elize</th>
-              <th onClick={() => this.setSortByConAttached("price")}>Цена</th>
-            </tr>
-            </thead>
-            <tbody>
-            {
-              this.props.data.dataAttached.map((item) => {
-                return (<tr key={item.idElize + " " + item.id}>
-                  <td>
-
-                    {item.idElize && item.id &&
-                    <button className={(this.props.data.statusAll === 'IDLE') ? "btn " : "btn disabled-btn"}
-                            onClick={() => this.detachSingle({
-                              elizeId: item.idElize,
-                              productId: item.id
-                            })}>
-                      Открепить
-                    </button>}
-                  </td>
-                  <td title={item.brandElize}>{item.brandElize}</td>
-                  <td title={item.fullTitleElize}>
-                    <a href={item.urlElize} target="_blank">{item.fullTitleElize}</a>
-                  </td>
-                  <td><a className="image-size lightbox" href="#image">
-                    <img className="image-size" onMouseOver={(e) => this.changeImageZoom(e)} src={item.imageElize}/>
-                  </a>
-                  </td>
-                  <td><a className="image-size lightbox" href="#image">
-                    <img className="image-size" onMouseOver={(e) => this.changeImageZoom(e)} src={item.image}/>
-                  </a>
-                  </td>
-                  <td title={item.fullTitle}>
-                    <a href={item.url} target="_blank">{item.fullTitle}</a>
-                  </td>
-                  <td title={item.brand}>{item.brand}</td>
-                  <td title={item.priceElize}>{item.priceElize}</td>
-                  <td title={item.price}>{item.price}</td>
-                </tr>);
-              })
-            }
-            </tbody>
-          </table>
-        </div>}
-        <div>
-
-          <div className="products-count-first">
-            <span className="desc-text">Продукты: </span>
-            <span className="count-val">{this.props.data.countAttached}</span>
-          </div>
-          <div className="in-any-page">
-            <span className="desc-text">В каждом странице: </span>
-
-            <select className="count-input" defaultValue={this.props.data.itemsInEachPageCompare}
-                    onChange={this.changeItemsInEachPageCompare}>
-              <option value="5">5</option>
-              <option value="50">50</option>
-              <option value="100">100</option>
-              <option value="200">200</option>
-            </select>
-          </div>
-          <div className="pagination-block">
-            {Math.ceil(this.props.data.countAttached / this.props.data.itemsInEachPageCompare) > 1 &&
-            <Pagination
-              maxPageCount={Math.ceil(this.props.data.countAttached / this.props.data.itemsInEachPageCompare)}
-              currentPage={this.currentPageAttached}
-              clickFunction={this.clickFunctionCompare}
-              isProduct={true}
-            />}
-          </div>
-        </div>
       </div>
     )
   }
@@ -724,10 +584,10 @@ class About extends React.Component {
 
 export default connect(
   state => ({
-    data: state.secondPage,
+    data: state.nonMatchingReducer,
     dataFilteredNoneCompare: selectDataNoneCompare(state),
     dataFilteredNoneCompareProducts: selectDataNoneCompareProducts(state),
     dataFilteredAttached: selectDataCompareAttached(state)
   }),
-  {...secondPageActions, ...generalActions}
+  {...nonMatchingActions, ...matchingActions}
 )(About);
